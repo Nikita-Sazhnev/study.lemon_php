@@ -37,18 +37,16 @@ if (is_null($actionName)) {
 try {
     $fileName = 'core/' . $controller . '.class.php';
     if (!file_exists($fileName)) {
-        throw new library\HttpException('Page not found', 404);
+        throw new library\HttpException('Not Found', 404);
     }
 
     $controller = new $controller;
 
     if (!method_exists($controller, $action)) {
-        throw new Exception('Not found', 404);
+        throw new library\HttpException('Not Found', 404);
     }
     $controller->$action();
 } catch (library\HttpException $e) {
-    header("HTML/1.1 $e->getCode() $e->getMessage()");
-    exit('Page not found');
-} catch (Exception $e) {
-    die("$e->getMessage");
+    header("HTML/1.1 " . $e->getCode() . ' ' . $e->getMessage());
+    exit('Page not found ' . $e->getMessage());
 }
