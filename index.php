@@ -45,6 +45,7 @@ try {
     if (!method_exists($controller, $action)) {
         throw new Exception('Not found', 404);
     }
+    $controller->$action();
 } catch (library\HttpException $e) {
     header("HTML/1.1 $e->getCode() $e->getMessage()");
     exit('Page not found');
