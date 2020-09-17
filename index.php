@@ -1,4 +1,5 @@
 <?php
+session_start();
 use library\Url;
 //Проверка сущесвования файла
 function checkFile($fileName)

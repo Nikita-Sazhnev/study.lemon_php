@@ -43,4 +43,9 @@ class Db
         }
         return $result->fetchAll();
     }
+    public function getSafeData($data)
+    {
+        $data = trim(preg_replace('/[\'\\\*\"\s\/]/', '', $data));
+        return $data;
+    }
 }
