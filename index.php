@@ -50,5 +50,5 @@ try {
     $controller->$action();
 } catch (Exception $e) {
     header("HTTP/1.1 " . $e->getCode() . " " . $e->getMessage());
-    exit('Page not found ' . $e->getMessage());
+    exit($e->getMessage());
 }
