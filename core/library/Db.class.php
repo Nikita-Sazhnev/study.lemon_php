@@ -38,7 +38,7 @@ class Db
     {
         $result = $this->_link->prepare($sql);
         $result->execute();
-        if (!$result) {
+        if (!$result->execute()) {
             throw new Exception('Ошибка исполнения екзекъюта');
         }
         return $result->fetchAll();
