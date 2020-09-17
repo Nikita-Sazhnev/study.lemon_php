@@ -19,7 +19,7 @@ class Url
             unset($segments[count($segments) - 1]);
         }
         $segments = array_map(function ($v) {
-            return preg_replace('/[\'\\\*]/', '', $v);
+            return preg_replace('/[\'\\\*\"\s\/]/', '', $v);
         }, $segments);
 
         return $segments;
@@ -31,7 +31,7 @@ class Url
      */
     public static function getParam($paramName)
     {
-        return addslashes($_GET[$paramName]);
+        return preg_replace('/[\'\\\*\"\s\/]/', '', $_GET[$paramName]);
     }
 
     /** Возвращает сегмент ссылки по её номеру

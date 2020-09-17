@@ -1,12 +1,16 @@
 <?php
 use library\Url;
-
+//Проверка сущесвования файла
+function checkFile($fileName)
+{
+    $fileName = 'core/' . str_replace('\\', '/', $fileName) . '.class.php';
+    return file_exists($fileName);
+}
 //Автоподключение классов
 spl_autoload_register(function ($className) {
-    $className = str_replace('\\', '/', $className);
     try
     {
-        if (file_exists('core/' . $className . '.class.php')) {
+        if (checkFile($className)) {
             require_once ('core/' . $className . '.class.php');
             return true;
         }
@@ -16,7 +20,6 @@ spl_autoload_register(function ($className) {
         exit();
     }
 });
-
 //Роутинг
 $controllerName = Url::getSegmentByNumber(0);
 $actionName = Url::getSegmentByNumber(1);
@@ -35,18 +38,17 @@ if (is_null($actionName)) {
 
 // Проверка существования Controler и Action
 try {
-    $fileName = 'core/' . $controller . '.class.php';
-    if (!file_exists($fileName)) {
-        throw new library\HttpException('Not Found', 404);
+    if (!checkFile($controller)) {
+        throw new Exception('Controller Not Found', 404);
     }
 
     $controller = new $controller;
 
     if (!method_exists($controller, $action)) {
-        throw new library\HttpException('Not Found', 404);
+        throw new Exception('Action Not Found', 404);
     }
     $controller->$action();
-} catch (library\HttpException $e) {
-    header("HTML/1.1 " . $e->getCode() . ' ' . $e->getMessage());
+} catch (Exception $e) {
+    header("HTTP/1.1 " . $e->getCode() . " " . $e->getMessage());
     exit('Page not found ' . $e->getMessage());
 }
