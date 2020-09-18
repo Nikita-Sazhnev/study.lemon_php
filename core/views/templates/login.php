@@ -1,4 +1,4 @@
-<div class="login__form col-9 col-md-5 col-sm-7 col-lg-3 my-2 mx-5 bg-white py-3 px-4 shadow__box">
+<div class="login__form col-9 col-md-5 col-sm-7 col-lg-3 my-4 mx-auto bg-white py-3 px-4 shadow__box">
     <h6 class="underline font-italic">Login</h6>
     <p class="mt-3 font-weight-light">Login for LEMON</p>
     <form>
