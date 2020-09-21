@@ -34,10 +34,10 @@ class Db
         }
         return $result->fetchAll();
     }
-    public function execPdo($sql)
+    public function execPdo($sql, $data = '')
     {
         $result = $this->_link->prepare($sql);
-        $result->execute();
+        $result->execute($data);
         if (!$result->execute()) {
             throw new Exception('Ошибка исполнения екзекъюта');
         }

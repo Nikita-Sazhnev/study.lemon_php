@@ -18,7 +18,9 @@ class View
 
     public function render($tplName, $data)
     {
+        $action = \library\Url::getSegmentByNumber(1);
         include $this->_layout;
+
     }
 
     public function setTitle($title)

@@ -1,6 +1,3 @@
-<?php
-$action = \library\Url::getSegmentByNumber(1);
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,7 +33,7 @@ $action = \library\Url::getSegmentByNumber(1);
             <?php endif;?>
             <nav class="navbar navbar-expand-lg navbar-light scrolling-navbar shadow__box">
                 <div class="container menu__nav">
-                    <a href="#" class="navbar-brand p-0 col-6 col-md-2 ml-1 ml-lg-3 mr-0">
+                    <a href="/" class="navbar-brand p-0 col-6 col-md-2 ml-1 ml-lg-3 mr-0">
                         <img class="ml-md-4" src="/assets/img/Lemon Logo small.png" alt="">
                     </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent"

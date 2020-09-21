@@ -2,6 +2,7 @@
 namespace controllers;
 
 use base\Controller;
+use library\Auth;
 
 class ControllerMain extends Controller
 {
@@ -17,7 +18,7 @@ class ControllerMain extends Controller
     }
     public function actionLogout()
     {
-
+        Auth::logout();
     }
     public function actionReg()
     {
