@@ -1,23 +1,35 @@
 <?php
 namespace models;
 
+use library\Auth;
+
 class LoginForm extends \base\BaseForm
 {
     public $login;
     public $password;
 
-    public $rules = [
-        'login' => ['required'],
-        'password' => ['required'],
-    ];
-    public function validate()
+    public function getRules()
     {
-        // $validator = new Validator();
+        return [
+            'login' => ['requaired'],
+            'password' => ['requaired'],
+        ];
     }
 
-    public function load($data)
+    public function doLogin()
     {
-        $this->login = $this->_db->getSafeData($data['login']);
-        $this->password = $this->_db->getSafeData($data['password']);
+        $password = md5($this->password);
+        $sql = "SELECT `id`,`role` FROM `users` WHERE `login` = '$this->login' AND `pass` = '$password'";
+
+        $result = $this->_db->sendQuery($sql);
+        if ($result->rowCount() == 0) {
+            $user = $result->fetch();
+
+            Auth::login($user['id'], $user['role']);
+            return true;
+        } else {
+            return false;
+        }
+
     }
 }

@@ -32,7 +32,6 @@ class Db
         if (!$result) {
             throw new Exception('Не верный запрос');
         }
-        return $result->fetchAll();
     }
     public function execPdo($sql, $data = '')
     {
