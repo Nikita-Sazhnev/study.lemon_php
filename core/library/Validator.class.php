@@ -32,6 +32,10 @@ class Validartor
     {
         return $this->_errors[$field];
     }
+    public function getErrors()
+    {
+        return $this->_errors;
+    }
 
     public function valdateThis()
     {
