@@ -32,4 +32,10 @@ class LoginForm extends \base\BaseForm
         }
 
     }
+
+    public function load($data)
+    {
+        $this->login = $this->_db->getSafeData($data['login']);
+        $this->password = $this->_db->getSafeData($data['password']);
+    }
 }

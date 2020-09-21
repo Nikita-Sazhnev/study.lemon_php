@@ -3,13 +3,29 @@ namespace controllers;
 
 use base\Controller;
 use library\Auth;
+use library\Request;
+use models\LoginForm;
 
 class ControllerMain extends Controller
 {
     public function actionIndex()
     {
-        $this->view->setTitle('Lemon');
-        $this->view->render('home', []);
+        if (Auth::isGuest()) {
+            $model = new LoginForm();
+            if (Request::isPost()) {
+                if ($model->load(Request::getPost()) and $model->validate()) {
+                    if ($model->doLogin()) {
+                        header("Location: /");
+                    }
+                }
+            }
+            $this->view->setTitle('Lemon');
+            $this->view->render('home', []);
+        } else {
+            throw new \Exception("Forbiden", 403);
+
+        }
+
     }
     public function actionLogin()
     {
@@ -18,11 +34,26 @@ class ControllerMain extends Controller
     }
     public function actionLogout()
     {
-        Auth::logout();
+        if (!Auth::isGuest()) {
+            Auth::logout();
+            header("Location: /");
+        } else {
+            throw new \Exception("Forbiden", 403);
+
+        }
     }
     public function actionReg()
     {
-        $this->view->setTitle(['Registration']);
-        $this->view->render('reg', []);
+        if (Auth::isGuest()) {
+            $model = new \models\RegisterForm();
+            if (Request::isPost()) {
+                if ($model->load(Request::getPost()) && $model->validate()) {
+
+                }
+            }
+            $this->view->setTitle('Registration');
+            $this->view->render('reg', ['mode' => $model]);
+        }
+
     }
 }

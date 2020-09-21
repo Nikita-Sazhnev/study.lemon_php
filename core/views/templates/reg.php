@@ -2,7 +2,7 @@
 <div class="singin__form col-9 col-md-5 col-sm-7 col-lg-3 my-4 col-3 bg-white py-3 px-4 shadow__box mx-auto">
     <h6 class="underline font-italic">Sing in</h6>
     <p class="mt-3 font-weight-light">Sing in for LEMON</p>
-    <form>
+    <form method="POST">
         <div class="form-group">
             <input type="email" class="form-control form__input btn-outline-light" id="exampleInputEmail"
                 aria-describedby="emailHelp" placeholder="emailn">

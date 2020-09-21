@@ -1,7 +1,7 @@
 <div class="login__form col-9 col-md-5 col-sm-7 col-lg-3 my-4 mx-auto bg-white py-3 px-4 shadow__box">
     <h6 class="underline font-italic">Login</h6>
     <p class="mt-3 font-weight-light">Login for LEMON</p>
-    <form>
+    <form method="POST">
         <div class="form-group">
             <input type="email" class="form-control form__input btn-outline-light" id="exampleInputEmail2"
                 aria-describedby="emailHelp" placeholder="email or login">
