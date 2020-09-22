@@ -1,6 +1,9 @@
 <?php
 session_start();
+
 use library\Url;
+use models\RegisterForm;
+
 //Проверка сущесвования файла
 function checkFile($fileName)
 {
@@ -21,6 +24,7 @@ spl_autoload_register(function ($className) {
         exit();
     }
 });
+
 //Роутинг
 $controllerName = Url::getSegmentByNumber(0);
 $actionName = Url::getSegmentByNumber(1);

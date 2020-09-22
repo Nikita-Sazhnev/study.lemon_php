@@ -19,8 +19,8 @@ class RegisterForm extends \base\BaseForm
     public function doRegister()
     {
         $password = md5($this->password);
-        $sql = "INSERT INTO `user` (`login`,`pass`) VALUES (?,?)";
-        $exec = array($this->login, $password);
+        $sql = "INSERT INTO `users` (`login`,`email`,`pass`) VALUES (?,?,?)";
+        $exec = array('etst', 'test', 'test');
         $this->_db->execPdo($sql, $exec);
     }
 }

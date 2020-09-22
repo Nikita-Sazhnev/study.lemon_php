@@ -39,7 +39,6 @@ class ControllerMain extends Controller
             header("Location: /");
         } else {
             throw new \Exception("Forbiden", 403);
-
         }
     }
     public function actionReg()
@@ -47,11 +46,8 @@ class ControllerMain extends Controller
         if (Auth::isGuest()) {
             $model = new \models\RegisterForm();
             if (Request::isPost()) {
-                if ($model->load(Request::getPost()) && $model->validate()) {
-                    if ($model->doRegister()) {
-                        header("Location: /");
-                    }
-                }
+                $model->doRegister();
+                header("Location: /");
             }
             $this->view->setTitle('Registration');
             $this->view->render('reg', ['mode' => $model]);
