@@ -30,7 +30,7 @@ class Validartor
 
     protected function unique($field)
     {
-        $sql = "SELECT * FROM `users` WHERE {$field} = {$this->_data[$field]}";
+        $sql = "SELECT * FROM `users` WHERE '{$field}' = '{$this->_data[$field]}'";
         $res = Db::getDb()->sendQuery($sql);
         if ($res->rowCount > 0) {
             $this->addError($field, $field . 'not unique');

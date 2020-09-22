@@ -10,7 +10,7 @@ class RegisterForm extends \base\BaseForm
     public function getRules()
     {
         return [
-            'login' => ['required', 'email', 'unique'],
+            'login' => ['required', 'unique'],
             'password' => ['required', 'confirm'],
 
         ];
