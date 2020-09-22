@@ -3,7 +3,7 @@
     <p class="mt-3 font-weight-light">Login for LEMON</p>
     <form method="POST">
         <div class="form-group">
-            <input type="email" class="form-control form__input btn-outline-light" id="exampleInputEmail2"
+            <input type="text" class="form-control form__input btn-outline-light" id="exampleInputEmail2"
                 aria-describedby="emailHelp" placeholder="email or login">
         </div>
         <div class="form-group">

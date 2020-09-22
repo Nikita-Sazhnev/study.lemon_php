@@ -48,7 +48,9 @@ class ControllerMain extends Controller
             $model = new \models\RegisterForm();
             if (Request::isPost()) {
                 if ($model->load(Request::getPost()) && $model->validate()) {
-
+                    if ($model->doRegister()) {
+                        header("Location: /");
+                    }
                 }
             }
             $this->view->setTitle('Registration');

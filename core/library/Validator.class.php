@@ -28,6 +28,22 @@ class Validartor
         $this->_errors[$field] = $error;
     }
 
+    protected function unique($field)
+    {
+        $sql = "SELECT * FROM `users` WHERE {$field} = {$this->_data[$field]}";
+        $res = Db::getDb()->sendQuery($sql);
+        if ($res->rowCount > 0) {
+            $this->addError($field, $field . 'not unique');
+        }
+    }
+
+    protected function confirm($field)
+    {
+        if ($this->_data[$field] != $this->_data[$field . '_confirm']) {
+            $this->addError($field, $field . "Не совпадает");
+        }
+    }
+
     public function getError($field)
     {
         return $this->_errors[$field];
