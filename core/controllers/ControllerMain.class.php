@@ -46,11 +46,13 @@ class ControllerMain extends Controller
         if (Auth::isGuest()) {
             $model = new \models\RegisterForm();
             if (Request::isPost()) {
+                $model->load(Request::getPost());
                 $model->doRegister();
-                header("Location: /");
+                // header("Location: /");
             }
+
             $this->view->setTitle('Registration');
-            $this->view->render('reg', ['mode' => $model]);
+            $this->view->render('reg', ['model' => $model]);
         }
 
     }

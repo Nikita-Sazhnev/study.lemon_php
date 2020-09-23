@@ -2,7 +2,6 @@
 session_start();
 
 use library\Url;
-use models\RegisterForm;
 
 //Проверка сущесвования файла
 function checkFile($fileName)

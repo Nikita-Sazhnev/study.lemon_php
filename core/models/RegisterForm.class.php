@@ -4,6 +4,7 @@ namespace models;
 class RegisterForm extends \base\BaseForm
 {
     public $login;
+    public $email;
     public $password;
     public $password_confirm;
 
@@ -12,15 +13,15 @@ class RegisterForm extends \base\BaseForm
         return [
             'login' => ['required', 'unique'],
             'password' => ['required', 'confirm'],
-
         ];
     }
 
     public function doRegister()
     {
-        $password = md5($this->password);
+        $password = md5($this->_data['password']);
         $sql = "INSERT INTO `users` (`login`,`email`,`pass`) VALUES (?,?,?)";
-        $exec = array('etst', 'test', 'test');
+        $exec = array($this->_data['login'], $this->_data['email'], $password);
+        // $exec = array('test', 'test', 'test');
         $this->_db->execPdo($sql, $exec);
     }
 }

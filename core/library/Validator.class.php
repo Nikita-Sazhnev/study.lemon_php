@@ -1,7 +1,7 @@
 <?php
 namespace library;
 
-class Validartor
+class Validator
 {
     protected $_errors = [];
     protected $_rules = [];
@@ -30,7 +30,7 @@ class Validartor
 
     protected function unique($field)
     {
-        $sql = "SELECT * FROM `users` WHERE '{$field}' = '{$this->_data[$field]}'";
+        $sql = "SELECT * FROM `users` WHERE '$field' = '$this->_data[$field]'";
         $res = Db::getDb()->sendQuery($sql);
         if ($res->rowCount > 0) {
             $this->addError($field, $field . 'not unique');
@@ -59,7 +59,7 @@ class Validartor
             foreach ($rules as $rule) {
                 if (method_exists($this, $rule)) {
                     if (is_null($this->getError($field))) {
-                        $this - $rule($field);
+                        $this->$rule($field);
                     }
                 } else {
                     throw new \Exception("Не известное правило " . $rule);
