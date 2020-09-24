@@ -35,7 +35,6 @@ abstract class BaseForm
             } else {
                 return false;
             }
-
         }
     }
 

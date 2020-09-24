@@ -28,20 +28,21 @@ class Validator
         $this->_errors[$field] = $error;
     }
 
-    protected function unique($field)
+    public static function unique($field, $value)
     {
-        $sql = "SELECT * FROM `users` WHERE '$field' = '$this->_data[$field]'";
+        $sql = "SELECT * FROM `users` WHERE $field = '$value'";
         $res = Db::getDb()->sendQuery($sql);
-        if ($res->rowCount > 0) {
-            $this->addError($field, $field . 'not unique');
+        if ($res->rowCount() > 0) {
+            return false;
+        } else {
+            return true;
         }
+
     }
 
-    protected function confirm($field)
+    public static function confirm($pass, $pass_confirm)
     {
-        if ($this->_data[$field] != $this->_data[$field . '_confirm']) {
-            $this->addError($field, $field . "Не совпадает");
-        }
+        return $pass == $pass_confirm;
     }
 
     public function getError($field)

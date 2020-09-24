@@ -1,12 +1,3 @@
-<?php
-?>
-<pre>
- <?php print_r($_SERVER['REQUEST_METHOD']);?>
- </pre>
-<pre>
- <?php print_r($_POST);?>
- </pre>
-
 <?
 ?>
 <div class="singin__form col-9 col-md-5 col-sm-7 col-lg-3 my-4 col-3 bg-white py-3 px-4 shadow__box mx-auto">

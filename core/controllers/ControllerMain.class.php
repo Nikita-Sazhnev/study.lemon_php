@@ -4,6 +4,7 @@ namespace controllers;
 use base\Controller;
 use library\Auth;
 use library\Request;
+use library\Validator;
 use models\LoginForm;
 
 class ControllerMain extends Controller
@@ -47,8 +48,16 @@ class ControllerMain extends Controller
             $model = new \models\RegisterForm();
             if (Request::isPost()) {
                 $model->load(Request::getPost());
-                $model->doRegister();
-                // header("Location: /");
+                if (Validator::unique('email', $_POST['email']) && Validator::unique('login', $_POST['login'])) {
+                    if (Validator::confirm($_POST['password'], $_POST['password_confirm'])) {
+                        $model->doRegister();
+                        // header("Location: /");
+                    } else {
+                        echo 'Пароли не совпадают';
+                    }
+                } else {
+                    echo 'Пользователь с таким данными уже сущестюует';
+                }
             }
 
             $this->view->setTitle('Registration');

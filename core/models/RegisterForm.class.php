@@ -21,7 +21,6 @@ class RegisterForm extends \base\BaseForm
         $password = md5($this->_data['password']);
         $sql = "INSERT INTO `users` (`login`,`email`,`pass`) VALUES (?,?,?)";
         $exec = array($this->_data['login'], $this->_data['email'], $password);
-        // $exec = array('test', 'test', 'test');
         $this->_db->execPdo($sql, $exec);
     }
 }
