@@ -17,9 +17,9 @@ class Auth
         }
         return false;
     }
-    public static function login($id, $role)
+    public static function login($login, $role)
     {
-        $_SESSION['user']['id'] = $id;
+        $_SESSION['user']['login'] = $login;
         $_SESSION['user']['role'] = $role;
     }
     public static function logout()
