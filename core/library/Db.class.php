@@ -32,15 +32,15 @@ class Db
         if (!$result) {
             throw new Exception('Не верный запрос');
         }
+        return $result;
     }
-    public function execPdo($sql, $data = '')
+    public function execPdo($sql, $data)
     {
         $result = $this->_link->prepare($sql);
-        $result->execute($data);
-        if (!$result->execute()) {
+        if (!$result->execute($data)) {
             throw new Exception('Ошибка исполнения екзекъюта');
         }
-        return $result->fetchAll();
+
     }
     public function getSafeData($data)
     {

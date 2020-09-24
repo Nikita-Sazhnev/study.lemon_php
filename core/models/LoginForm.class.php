@@ -18,14 +18,15 @@ class LoginForm extends \base\BaseForm
 
     public function doLogin()
     {
-        $password = md5($this->password);
-        $sql = "SELECT `id`,`role` FROM `users` WHERE `login` = '$this->login' AND `pass` = '$password'";
+        $password = md5($this->_data['password']);
+        $login = $this->_data['login'];
 
+        $sql = "SELECT `login`,`role` FROM `users` WHERE `login` = '$login' AND `pass` = '$password'";
         $result = $this->_db->sendQuery($sql);
-        if ($result->rowCount() == 0) {
-            $user = $result->fetch();
+        $user = $result->fetch();
 
-            Auth::login($user['id'], $user['role']);
+        if ($result->rowCount() != 0) {
+            Auth::login($user['login'], $user['role']);
             return true;
         } else {
             return false;
@@ -33,9 +34,4 @@ class LoginForm extends \base\BaseForm
 
     }
 
-    public function load($data)
-    {
-        $this->login = $this->_db->getSafeData($data['login']);
-        $this->password = $this->_db->getSafeData($data['password']);
-    }
 }
