@@ -1,6 +1,7 @@
 <?php
-$previews = new \library\Content;
-$previews = $previews->previewArticle();
+$content = new \library\Content;
+$previews = $content->getConent('*', 'posts', 3);
+$slider = $content->getConent('*', 'slider', 5);
 ?>
 <main>
     <div class="bd-example shadow__box ">
@@ -83,7 +84,6 @@ $previews = $previews->previewArticle();
     <div class="main__preview shadow__box">
         <div class="row pt-3">
             <div class="container d-flex justify-content-lg-around flex-wrap">
-
                 <?php foreach ($previews as $preview): ?>
                 <div class="card col-12 col-lg-4 d-inline-block px-4 pt-3 border-white" style="width: 18rem;">
                     <a data-fancybox="gallery" href="/assets/img/big-image/Photo-mail-small1_photos_v2_x4.png">

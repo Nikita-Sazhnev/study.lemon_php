@@ -9,10 +9,12 @@ class Content
         $this->db = Db::getDb();
     }
 
-    public function previewArticle()
+    public function getConent($values, $table, $limit)
     {
-        $sql = "SELECT `id`,`title`,`url`,`img`,`views` FROM `posts` ORDER BY `id` DESC LIMIT 3";
-        $result = $this->db->sendQuery($sql);
-        return $result->fetchAll();
+        $sql = "SELECT $values FROM `$table` ORDER BY `id` DESC LIMIT $limit";
+        $result = $this->db->sendQuery($sql)->fetchAll();
+        return $result;
+
     }
+
 }
