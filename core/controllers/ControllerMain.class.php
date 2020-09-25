@@ -63,7 +63,7 @@ class ControllerMain extends Controller
             $this->view->setTitle('Registration');
             $this->view->render('reg', ['model' => $model]);
         } else {
-            header("Location: /");
+            throw new \Exception("Forbiden", 403);
         }
 
     }

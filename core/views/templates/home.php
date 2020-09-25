@@ -1,3 +1,7 @@
+<?php
+$previews = new \library\Content;
+$previews = $previews->previewArticle();
+?>
 <main>
     <div class="bd-example shadow__box ">
         <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
@@ -74,46 +78,28 @@
                 <span class="sr-only">Next</span>
             </a>
         </div>
-
     </div>
+
     <div class="main__preview shadow__box">
         <div class="row pt-3">
             <div class="container d-flex justify-content-lg-around flex-wrap">
+
+                <?php foreach ($previews as $preview): ?>
                 <div class="card col-12 col-lg-4 d-inline-block px-4 pt-3 border-white" style="width: 18rem;">
                     <a data-fancybox="gallery" href="/assets/img/big-image/Photo-mail-small1_photos_v2_x4.png">
                         <img src="/assets/img/Photo-mail-small1.png" class="card-img-top" alt="preview">
                     </a>
                     <div class="card-body px-0 pt-2">
-                        <a href="#" class="card-text text-decoration-none">Rasbery & Cream Frozen Yougurt
-                            Pie.</a>
+                        <a href="#" class="card-text text-decoration-none"><?=$preview['title'];?></a>
                         <p><i class="fa fa-clock-o" aria-hidden="true"></i> 20mins | <i class="fa fa-comment"
                                 aria-hidden="true"></i> 3 <i class="fa fa-eye" aria-hidden="true"></i> 465</p>
                     </div>
                 </div>
-                <div class="card col-12 col-lg-4 d-inline-block px-4 pt-3 border-white" style="width: 18rem;">
-                    <a data-fancybox="gallery" href="/assets/img/big-image/Photo-mail-small2_photos_v2_x4.png">
-                        <img src="/assets/img/Photo-mail-small2.png" class="card-img-top" alt="preview">
-                    </a>
-                    <div class="card-body px-0 pt-2">
-                        <a href="#" class="card-text text-decoration-none">Gigant Ice Cream Sandwich</a>
-                        <p><i class="fa fa-clock-o" aria-hidden="true"></i> 20mins | <i class="fa fa-comment"
-                                aria-hidden="true"></i> 3 <i class="fa fa-eye" aria-hidden="true"></i> 465</p>
-                    </div>
-                </div>
-                <div class="card col-12 col-lg-4 d-inline-block px-4 pt-3 border-white" style="width: 18rem;">
-                    <a data-fancybox="gallery" href="/assets/img/big-image/Photo-mail-small3_photos_v2_x4.png">
-                        <img src="/assets/img/Photo-mail-small3.png" class="card-img-top" alt="preview">
-                    </a>
-                    <div class="card-body px-0 pt-2">
-                        <a href="#" class="card-text text-decoration-none">Dark Chocolate Crunch Ice Cream
-                            Sandwich Cake</a>
-                        <p> <i class="fa fa-clock-o" aria-hidden="true"></i> 20mins | <i class="fa fa-comment"
-                                aria-hidden="true"></i> 3 <i class="fa fa-eye" aria-hidden="true"></i> 465</p>
-                    </div>
-                </div>
+                <?php endforeach;?>
             </div>
         </div>
     </div>
+
     <div class="main__article mb-5 d-flex flex-wrap shadow__box">
         <div class="main__article-image col-12 col-lg-6 bg-white pl-lg-0 position-relative">
             <a data-fancybox="gallery" href="/assets/img/article-main.png" class="main_article">
