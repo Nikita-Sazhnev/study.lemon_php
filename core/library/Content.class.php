@@ -9,7 +9,7 @@ class Content
         $this->db = Db::getDb();
     }
 
-    public function getConent($values, $table, $limit)
+    public function getContent($values, $table, $limit)
     {
         $sql = "SELECT $values FROM `$table` ORDER BY `id` DESC LIMIT $limit";
         $result = $this->db->sendQuery($sql)->fetchAll();

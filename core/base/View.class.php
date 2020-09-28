@@ -6,6 +6,7 @@ class View
     public $basePath = __DIR__ . '/../views/templates/';
 
     protected $title;
+    protected $content;
     protected $seo = [];
     protected $css = [];
     protected $js = [];
@@ -19,6 +20,7 @@ class View
     public function render($tplName, $data)
     {
         $action = \library\Url::getSegmentByNumber(1);
+        $content = new \library\Content;
         include $this->_layout;
 
     }

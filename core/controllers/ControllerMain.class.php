@@ -10,7 +10,6 @@ class ControllerMain extends Controller
 {
     public function actionIndex()
     {
-
         $this->view->setTitle('Lemon');
         $this->view->render('home', []);
 
@@ -28,6 +27,7 @@ class ControllerMain extends Controller
                     echo 'Wrong login or password';
                 }
             }
+
             $this->view->setTitle('login');
             $this->view->render('login', []);
         } else {

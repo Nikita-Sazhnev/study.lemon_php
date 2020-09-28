@@ -1,68 +1,25 @@
 <?php
-$content = new \library\Content;
-$previews = $content->getConent('*', 'posts', 3);
-$slider = $content->getConent('*', 'slider', 5);
+$previews = $content->getContent('*', 'previews', 3);
+$slider = $content->getContent('*', 'slider', 5);
+$lastArticle = $content->getContent('*', 'posts', 1);
+$lastArticle = $lastArticle[0];
 ?>
 <main>
     <div class="bd-example shadow__box ">
         <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
-                <div class="carousel-item active" data-interval="3000">
+                <?php foreach ($slider as $slide): ?>
+                <div class="carousel-item <?=$slide['active'];?>" data-interval="3000">
                     <img src="/assets/img/Photo-main-big.png" class="d-block w-100" alt="...">
                     <div class="carousel-caption col-5  d-md-block">
-                        <img class="" src="/assets/img/Logo.png" alt="">
-                        <h5 class="my-4">Banans Forest Ice Cream Cake</h5>
-                        <p>If you're looking for decadence, look no further — you've found the Holy Grail of
-                            desserts. Honestly, this cake makes us wonder why Bananas Foster hasn't always
-                            been served on top of ice cream cake.</p>
-                        <a href="#" class="btn btn-s btn-outline-dark">Get it recipe</a>
+                        <img class="" src="/assets/img/<?=$slide['img_src']?>" alt="">
+                        <h5 class="my-4"><?=$slide['title'];?></h5>
+                        <p><?=$slide['description'];?></p>
+                        <a href="<?=$slider['url']?>" class="btn btn-s btn-outline-dark">Get it recipe</a>
                     </div>
                 </div>
+                <?php endforeach;?>
 
-                <div class="carousel-item" data-interval="3000">
-                    <img src="/assets/img/Photo-main-big.png" class="d-block w-100" alt="...">
-                    <div class="carousel-caption  col-5 d-md-block">
-                        <img src="/assets/img/Logo.png" alt="">
-                        <h5 class="my-4">Banans Forest Ice Cream Cake 2 Super Cake</h5>
-                        <p>If you're looking for decadence, look no further — you've found the Holy Grail of
-                            desserts. Honestly, this cake makes us wonder why Bananas Foster hasn't always
-                            been served on top of ice cream cake.</p>
-                        <a mt-5 href="#" class="btn btn-s btn-outline-dark">Get it recipe</a>
-                    </div>
-                </div>
-                <div class="carousel-item" data-interval="3000">
-                    <img src="/assets/img/Photo-main-big.png" class="d-block w-100" alt="...">
-                    <div class="carousel-caption  col-5 d-md-block">
-                        <img src="/assets/img/Logo.png" alt="">
-                        <h5 class="my-4">Banans Forest Ice Cream Cake 3</h5>
-                        <p>If you're looking for decadence, look no further — you've found the Holy Grail of
-                            desserts. Honestly, this cake makes us wonder why Bananas Foster hasn't always
-                            been served on top of ice cream cake.</p>
-                        <a mt-5 href="#" class="btn btn-s btn-outline-dark">Get it recipe</a>
-                    </div>
-                </div>
-                <div class="carousel-item" data-interval="3000">
-                    <img src="/assets/img/Photo-main-big.png" class="d-block w-100" alt="...">
-                    <div class="carousel-caption  col-5 d-md-block">
-                        <img src="/assets/img/Logo.png" alt="">
-                        <h5 class="my-4">Banans Forest Ice Cream Cake 4</h5>
-                        <p>If you're looking for decadence, look no further — you've found the Holy Grail of
-                            desserts. Honestly, this cake makes us wonder why Bananas Foster hasn't always
-                            been served on top of ice cream cake.</p>
-                        <a mt-5 href="#" class="btn btn-s btn-outline-dark">Get it recipe</a>
-                    </div>
-                </div>
-                <div class="carousel-item" data-interval="3000">
-                    <img src="/assets/img/Photo-main-big.png" class="d-block w-100" alt="...">
-                    <div class="carousel-caption  col-5 d-md-block">
-                        <img src="/assets/img/Logo.png" alt="">
-                        <h5 class="my-4">Banans Forest Ice Cream Cake 5</h5>
-                        <p>If you're looking for decadence, look no further — you've found the Holy Grail of
-                            desserts. Honestly, this cake makes us wonder why Bananas Foster hasn't always
-                            been served on top of ice cream cake.</p>
-                        <a mt-5 href="#" class="btn btn-s btn-outline-dark">Get it recipe</a>
-                    </div>
-                </div>
                 <ol class="carousel-indicators indicators-style">
                     <li data-target="#carouselExampleCaptions" data-slide-to="0"></li>
                     <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
@@ -86,13 +43,14 @@ $slider = $content->getConent('*', 'slider', 5);
             <div class="container d-flex justify-content-lg-around flex-wrap">
                 <?php foreach ($previews as $preview): ?>
                 <div class="card col-12 col-lg-4 d-inline-block px-4 pt-3 border-white" style="width: 18rem;">
-                    <a data-fancybox="gallery" href="/assets/img/big-image/Photo-mail-small1_photos_v2_x4.png">
-                        <img src="/assets/img/Photo-mail-small1.png" class="card-img-top" alt="preview">
+                    <a data-fancybox="gallery" href="/assets/img/big-image/<?=$preview['img_src']?>">
+                        <img src="/assets/img/<?=$preview['img_src']?>" class="card-img-top" alt="preview">
                     </a>
                     <div class="card-body px-0 pt-2">
                         <a href="#" class="card-text text-decoration-none"><?=$preview['title'];?></a>
-                        <p><i class="fa fa-clock-o" aria-hidden="true"></i> 20mins | <i class="fa fa-comment"
-                                aria-hidden="true"></i> 3 <i class="fa fa-eye" aria-hidden="true"></i> 465</p>
+                        <p><i class="fa fa-clock-o" aria-hidden="true"></i> <?=$preview['read_time']?> | <i
+                                class="fa fa-comment" aria-hidden="true"></i> 3 <i class="fa fa-eye"
+                                aria-hidden="true"></i> <?=$preview['views']?></p>
                     </div>
                 </div>
                 <?php endforeach;?>
@@ -102,50 +60,29 @@ $slider = $content->getConent('*', 'slider', 5);
 
     <div class="main__article mb-5 d-flex flex-wrap shadow__box">
         <div class="main__article-image col-12 col-lg-6 bg-white pl-lg-0 position-relative">
-            <a data-fancybox="gallery" href="/assets/img/article-main.png" class="main_article">
-                <img src="/assets/img/article-main.png" alt="Торт" class="w-100 h-100">
+            <a data-fancybox="gallery" href="/assets/img/<?=$lastArticle['img']?>" class="main_article">
+                <img src="/assets/img/<?=$lastArticle['img']?>" alt="Торт" class="w-100 h-100">
             </a>
             <img src="/assets/img/Icon-fav.png" alt="favorite-icon" class="icon-favorite position-absolute"
                 id="favorite">
         </div>
         <div class="main__article-body col-12 col-lg-6 bg-white pl-3 pl-lg-0" style="height: 450px">
-            <h1 class="article-heading-string mt-4"><a href="#" class="article-heading">Bananas Foster Ice
-                    Cream Cake</a></h1>
+            <h1 class="article-heading-string mt-4"><a href="#" class="article-heading"><?=$lastArticle['title']?></a>
+            </h1>
             <div class="row d-flex justify-content-between align-items-baseline ml-1 mr-2 mr-lg-5 mt-3">
                 <p style="font-size: 18px; font-weight: 300; cursor: default;"><i class="fa fa-clock-o"
-                        aria-hidden="true"></i> 15mins <i class="fa fa-signal" aria-hidden="true"></i> Easy
+                        aria-hidden="true"></i> <?=$lastArticle['read_time']?>mins <i class="fa fa-signal"
+                        aria-hidden="true"></i> <?=$lastArticle['difficult']?>
                 </p>
                 <button class="btn btn-sm btn-outline-dark text-uppercase">Save Recipe</button>
             </div>
             <div class="inner-scrolling mt-4">
                 <p class=" mb-0">
-                    1 (8 ounce) container frozen whipped topping, thawed <br>
-                    20 chocolate round wafers, divided <br>
-                    1 (7 1/4 ounce) bottle Smucker's® Hot Dark Chocolate Microwaveable Topping, divide <br>
+                    <?=$lastArticle['summary'];?>
                 </p>
                 <h2 class="my-3">Directions</h2>
                 <p>
-                    ARRANGE 8 to 9 ice cream sandwiches in 9-inch square pan, cutting to form an even layer.
-                    Spread with half of whipped topping. Break or crush chocolate wafers and sprinkle over
-                    the whipped cream. Microwave 1 cup of chocolate topping into small microwave-safe bowl
-                    on HIGH for 30 seconds. Drizzle evenly over wafers.
-                    TOP with remaining 8 to 9 ice cream sandwiches to form an even layer. Spread with
-                    remaining whipped topping. Freeze 3 hours or overnight
-                    <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi dignissimos
-                        dolores quia laborum commodi quibusdam facere odio? Praesentium error, quasi at, eos
-                        voluptate provident placeat maiores eius, asperiores autem fugit.</span>
-                    <span>Facilis reprehenderit, tempore natus libero ducimus culpa odit nemo voluptatum
-                        quae quidem excepturi vitae repudiandae sequi sint hic molestias reiciendis incidunt
-                        a. Quibusdam enim ratione hic veritatis distinctio veniam quia!</span>
-                    <span>At assumenda a quos, ab eius quod voluptatibus voluptate et asperiores, quidem,
-                        omnis iste aperiam similique. Atque est odio quidem quas illo quibusdam ullam at,
-                        laboriosam animi provident, fuga totam?</span>
-                    <span>Fuga maxime, voluptates, quasi quod autem dolor soluta aspernatur. Molestiae
-                        blanditiis beatae dicta veritatis iusto odit ullam quae tempore quasi repudiandae!
-                        Distinctio asperiores quisquam laudantium fugiat nesciunt tenetur in commodi!</span>
-                    <span>Voluptatem quia non accusamus laborum libero voluptatum delectus quam illum nobis
-                        dolores, minus, molestiae numquam, possimus consectetur sed, optio repellendus quos
-                        autem sint voluptatibus tempore unde facilis deserunt. Nihil, inventore?</span>
+                    <?=$lastArticle['body'];?>
                 </p>
             </div>
         </div>
