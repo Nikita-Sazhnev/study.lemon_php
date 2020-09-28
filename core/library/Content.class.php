@@ -16,5 +16,11 @@ class Content
         return $result;
 
     }
+    public function getArticleByDiff($diff)
+    {
+        $sql = "SELECT * FROM `posts` WHERE `difficult` = '$diff' ORDER BY `id` DESC LIMIT 3";
+        $result = $this->db->sendQuery($sql)->fetchAll();
+        return $result;
+    }
 
 }

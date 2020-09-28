@@ -1,8 +1,10 @@
 <?php
 $previews = $content->getContent('*', 'previews', 3);
 $slider = $content->getContent('*', 'slider', 5);
+$tags = $content->getContent('*', 'tags', 30);
 $lastArticle = $content->getContent('*', 'posts', 1);
 $lastArticle = $lastArticle[0];
+
 ?>
 <main>
     <div class="bd-example shadow__box ">
@@ -48,7 +50,7 @@ $lastArticle = $lastArticle[0];
                     </a>
                     <div class="card-body px-0 pt-2">
                         <a href="#" class="card-text text-decoration-none"><?=$preview['title'];?></a>
-                        <p><i class="fa fa-clock-o" aria-hidden="true"></i> <?=$preview['read_time']?> | <i
+                        <p><i class="fa fa-clock-o" aria-hidden="true"></i> <?=$preview['read_time']?> mins | <i
                                 class="fa fa-comment" aria-hidden="true"></i> 3 <i class="fa fa-eye"
                                 aria-hidden="true"></i> <?=$preview['views']?></p>
                     </div>
@@ -187,6 +189,11 @@ $lastArticle = $lastArticle[0];
         </div>
     </div>
     <div class="second__mcolum d-flex flex-column">
+        <?php
+$articlesEasy = $content->getArticleByDiff('Easy');
+$articlesMiddle = $content->getArticleByDiff('Middle');
+$articlesHard = $content->getArticleByDiff('Hard');
+?>
         <div class="recipe__modul modul__width shadow__box bg-white my-2 px-3 py-4">
             <div class="recepi__modul-title d-flex justify-content-between border-bottom">
                 <h6 class="font-italic" style="font-size: 1.3rem;">Recipe</h6>
@@ -212,139 +219,57 @@ $lastArticle = $lastArticle[0];
                 </div>
             </div>
             <div class="recipe__preview-main tabcontent" id="easy">
+                <?php foreach ($articlesEasy as $easy): ?>
                 <div class="recipe__modul-inner mt-2 mb-4 d-flex">
                     <div class="col-3 p-0">
-                        <a data-fancybox="gallery" href="/assets/img/big-image/Photo-mail-small1_photos_v2_x4.png">
-                            <img src="/assets/img/Photo-mail-small1.png" class="w-100" alt="">
+                        <a data-fancybox="gallery" href="/assets/img/big-image/<?=$easy['img'];?>">
+                            <img src="/assets/img/<?=$easy['img'];?>" class="w-100" alt="">
                         </a>
                     </div>
                     <div class="article__modul-name px-2">
                         <p class="mb-0"><span>by</span> <a href="#"
-                                style="font-size: 0.9rem; color: black;"><strong>Smuckerger
-                                    Toppings</strong></a></p>
+                                style="font-size: 0.9rem; color: black;"><strong><?=$easy['author']?></strong></a></p>
                         <p class="mb-0 font-weight-bold" style="letter-spacing: -1px; line-height: 1;"><a
-                                style="color: black;" href="#">Thank you for the Recipe Lorem ipsum dolor
-                                sit amet natus.</a></p>
+                                style="color: black;" href="#"><?=$easy['title']?>.</a></p>
                     </div>
                 </div>
-                <div class="recipe__modul-inner mt-2 mb-4 d-flex">
-                    <div class="col-3 p-0">
-                        <a data-fancybox="gallery" href="/assets/img/big-image/Photo-mail-small2_photos_v2_x4.png">
-                            <img src="/assets/img/Photo-mail-small2.png" class="w-100" alt="">
-                        </a>
-                    </div>
-                    <div class="article__modul-name px-2">
-                        <p class="mb-0"><span>by</span> <a href="#"
-                                style="font-size: 0.9rem; color: black;"><strong>Smuckerger
-                                    Toppings</strong></a></p>
-                        <p class="mb-0 font-weight-bold" style="letter-spacing: -1px; line-height: 1;"><a
-                                style="color: black;" href="#">Thank you for the Recipe.</a></p>
-                    </div>
-                </div>
-                <div class="recipe__modul-inner mt-2 mb-4 d-flex">
-                    <div class="col-3 p-0">
-                        <a data-fancybox="gallery" href="/assets/img/big-image/Photo-mail-small3_photos_v2_x4.png">
-                            <img src="/assets/img/Photo-mail-small3.png" class="w-100" alt="">
-                        </a>
-                    </div>
-                    <div class="article__modul-name px-2">
-                        <p class="mb-0"><span>by</span> <a href="#"
-                                style="font-size: 0.9rem; color: black;"><strong>Smuckerger
-                                    Toppings</strong></a></p>
-                        <p class="mb-0 font-weight-bold" style="letter-spacing: -1px; line-height: 1;"><a
-                                style="color: black;" href="#">Thank you for the Recipe.</a></p>
-                    </div>
-                </div>
+                <?php endforeach;?>
             </div>
             <div class="recipe__preview-main tabcontent id" id="middle">
+
+                <?php foreach ($articlesMiddle as $middle): ?>
                 <div class="recipe__modul-inner mt-2 mb-4 d-flex">
                     <div class="col-3 p-0">
-                        <a data-fancybox="gallery" href="/assets/img/big-image/Photo-mail-small2_photos_v2_x4.png">
-                            <img src="/assets/img/Photo-mail-small2.png" class="w-100" alt="">
+                        <a data-fancybox="gallery" href="/assets/img/big-image/<?=$middle['img'];?>">
+                            <img src="/assets/img/<?=$middle['img'];?>" class="w-100" alt="">
                         </a>
                     </div>
                     <div class="article__modul-name px-2">
                         <p class="mb-0"><span>by</span> <a href="#"
-                                style="font-size: 0.9rem; color: black;"><strong>Smuckerger
-                                    Toppings</strong></a></p>
+                                style="font-size: 0.9rem; color: black;"><strong><?=$middle['author']?></strong></a></p>
                         <p class="mb-0 font-weight-bold" style="letter-spacing: -1px; line-height: 1;"><a
-                                style="color: black;" href="#">Thank you for the Recipe Lorem ipsum dolor
-                                sit amet natus.</a></p>
+                                style="color: black;" href="#"><?=$middle['title']?>.</a></p>
                     </div>
                 </div>
-                <div class="recipe__modul-inner mt-2 mb-4 d-flex">
-                    <div class="col-3 p-0">
-                        <a data-fancybox="gallery" href="/assets/img/big-image/Photo-mail-small2_photos_v2_x4.png">
-                            <img src="/assets/img/Photo-mail-small2.png" class="w-100" alt="">
-                        </a>
-                    </div>
-                    <div class="article__modul-name px-2">
-                        <p class="mb-0"><span>by</span> <a href="#"
-                                style="font-size: 0.9rem; color: black;"><strong>Smuckerger
-                                    Toppings</strong></a></p>
-                        <p class="mb-0 font-weight-bold" style="letter-spacing: -1px; line-height: 1;"><a
-                                style="color: black;" href="#">Thank you for the Recipe.</a></p>
-                    </div>
-                </div>
-                <div class="recipe__modul-inner mt-2 mb-4 d-flex">
-                    <div class="col-3 p-0">
-                        <a data-fancybox="gallery" href="/assets/img/big-image/Photo-mail-small2_photos_v2_x4.png">
-                            <img src="/assets/img/Photo-mail-small2.png" class="w-100" alt="">
-                        </a>
-                    </div>
-                    <div class="article__modul-name px-2">
-                        <p class="mb-0"><span>by</span> <a href="#"
-                                style="font-size: 0.9rem; color: black;"><strong>Smuckerger
-                                    Toppings</strong></a></p>
-                        <p class="mb-0 font-weight-bold" style="letter-spacing: -1px; line-height: 1;"><a
-                                style="color: black;" href="#">Thank you for the Recipe.</a></p>
-                    </div>
-                </div>
+                <?php endforeach;?>
+
             </div>
             <div class="recipe__preview-main tabcontent id" id="long">
+                <?php foreach ($articlesHard as $hard): ?>
                 <div class="recipe__modul-inner mt-2 mb-4 d-flex">
                     <div class="col-3 p-0">
-                        <a data-fancybox="gallery" href="/assets/img/big-image/Photo-mail-small3_photos_v2_x4.png">
-                            <img src="/assets/img/Photo-mail-small3.png" class="w-100" alt="">
+                        <a data-fancybox="gallery" href="/assets/img/big-image/<?=$hard['img'];?>">
+                            <img src="/assets/img/<?=$hard['img'];?>" class="w-100" alt="">
                         </a>
                     </div>
                     <div class="article__modul-name px-2">
                         <p class="mb-0"><span>by</span> <a href="#"
-                                style="font-size: 0.9rem; color: black;"><strong>Smuckerger
-                                    Toppings</strong></a></p>
+                                style="font-size: 0.9rem; color: black;"><strong><?=$hard['author']?></strong></a></p>
                         <p class="mb-0 font-weight-bold" style="letter-spacing: -1px; line-height: 1;"><a
-                                style="color: black;" href="#">Thank you for the Recipe Lorem ipsum dolor
-                                sit amet natus.</a></p>
+                                style="color: black;" href="#"><?=$hard['title']?>.</a></p>
                     </div>
                 </div>
-                <div class="recipe__modul-inner mt-2 mb-4 d-flex">
-                    <div class="col-3 p-0">
-                        <a data-fancybox="gallery" href="/assets/img/big-image/Photo-mail-small3_photos_v2_x4.png">
-                            <img src="/assets/img/Photo-mail-small3.png" class="w-100" alt="">
-                        </a>
-                    </div>
-                    <div class="article__modul-name px-2">
-                        <p class="mb-0"><span>by</span> <a href="#"
-                                style="font-size: 0.9rem; color: black;"><strong>Smuckerger
-                                    Toppings</strong></a></p>
-                        <p class="mb-0 font-weight-bold" style="letter-spacing: -1px; line-height: 1;"><a
-                                style="color: black;" href="#">Thank you for the Recipe.</a></p>
-                    </div>
-                </div>
-                <div class="recipe__modul-inner mt-2 mb-4 d-flex">
-                    <div class="col-3 p-0">
-                        <a data-fancybox="gallery" href="/assets/img/big-image/Photo-mail-small3_photos_v2_x4.png">
-                            <img src="/assets/img/Photo-mail-small3.png" class="w-100" alt="">
-                        </a>
-                    </div>
-                    <div class="article__modul-name px-2">
-                        <p class="mb-0"><span>by</span> <a href="#"
-                                style="font-size: 0.9rem; color: black;"><strong>Smuckerger
-                                    Toppings</strong></a></p>
-                        <p class="mb-0 font-weight-bold" style="letter-spacing: -1px; line-height: 1;"><a
-                                style="color: black;" href="#">Thank you for the Recipe.</a></p>
-                    </div>
-                </div>
+                <?php endforeach;?>
             </div>
             <button class="btn btn-sm btn-outline-dark text-uppercase float-right my-1">View More</button>
         </div>
@@ -353,17 +278,9 @@ $lastArticle = $lastArticle[0];
                 <h6 class="font-italic" style="font-size: 1.3rem;">Tags</h6>
             </div>
             <div class="hashtags text-uppercase mt-3" style="font-size: .8rem; line-height: 2;">
-                <a href="#">#Yummy</a>
-                <a href="#">#Sweet</a>
-                <a href="#">#Dinner</a>
-                <a href="#">#Lunch</a>
-                <a href="#">#Breackfast</a>
-                <a href="#">#Fresh</a>
-                <a href="#">#Tasty</a>
-                <a href="#">#Deish</a>
-                <a href="#">#Delishious</a>
-                <a href="#">#Eating</a>
-                <a href="#">#Eating</a>
+                <?php foreach ($tags as $tag): ?>
+                <a href="#">#<?=$tag['tag']?></a>
+                <?php endforeach;?>
             </div>
         </div>
         <div class="calendar__modul modul__width shadow__box bg-white my-2 px-3 py-4" style="min-height: 20rem">
