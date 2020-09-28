@@ -235,8 +235,8 @@ $articlesHard = $content->getArticleByDiff('Hard');
                 </div>
                 <?php endforeach;?>
             </div>
-            <div class="recipe__preview-main tabcontent id" id="middle">
 
+            <div class="recipe__preview-main tabcontent id" id="middle">
                 <?php foreach ($articlesMiddle as $middle): ?>
                 <div class="recipe__modul-inner mt-2 mb-4 d-flex">
                     <div class="col-3 p-0">
@@ -337,7 +337,7 @@ $articlesHard = $content->getArticleByDiff('Hard');
                 </ul>
             </div>
             <div class="target__modul-inner px-3">
-                <h4 class="mt-4" style=" font-family:'Playfair Display', serif; color: #055555; font-weight: 600;">Time
+                <h4 class="mt-4" style="font-family:'Playfair Display', serif; color: #055555; font-weight: 600;">Time
                     line</h4>
                 <div class="rotate__box border-left pl-3" style="transform: rotate(-90deg);">
                     <div class="time__graph mb-5">
