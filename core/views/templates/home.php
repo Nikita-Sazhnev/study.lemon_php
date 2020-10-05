@@ -1,4 +1,7 @@
 <?php
+
+use library\Comments;
+
 $previews = $content->getContent('*', 'previews', 3);
 $slider = $content->getContent('*', 'slider', 5);
 $tags = $content->getContent('*', 'tags', 30);
@@ -227,8 +230,13 @@ $articlesHard = $content->getArticleByDiff('Hard');
                         </a>
                     </div>
                     <div class="article__modul-name px-2">
-                        <p class="mb-0"><span>by</span> <a href="#"
-                                style="font-size: 0.9rem; color: black;"><strong><?=$easy['author']?></strong></a></p>
+                        <p class="mb-0"><span>by</span>
+                            <a href="#" style="font-size: 0.9rem; color: black;">
+                                <strong>
+                                    <?=$content->getInfoById('login', $easy['author_id']);?>
+                                </strong>
+                            </a>
+                        </p>
                         <p class="mb-0 font-weight-bold" style="letter-spacing: -1px; line-height: 1;"><a
                                 style="color: black;" href="#"><?=$easy['title']?>.</a></p>
                     </div>
@@ -245,8 +253,13 @@ $articlesHard = $content->getArticleByDiff('Hard');
                         </a>
                     </div>
                     <div class="article__modul-name px-2">
-                        <p class="mb-0"><span>by</span> <a href="#"
-                                style="font-size: 0.9rem; color: black;"><strong><?=$middle['author']?></strong></a></p>
+                        <p class="mb-0"><span>by</span>
+                            <a href="#" style="font-size: 0.9rem; color: black;">
+                                <strong>
+                                    <?=$content->getInfoById('login', $middle['author_id']);?>
+                                </strong>
+                            </a>
+                        </p>
                         <p class="mb-0 font-weight-bold" style="letter-spacing: -1px; line-height: 1;"><a
                                 style="color: black;" href="#"><?=$middle['title']?>.</a></p>
                     </div>
@@ -263,8 +276,13 @@ $articlesHard = $content->getArticleByDiff('Hard');
                         </a>
                     </div>
                     <div class="article__modul-name px-2">
-                        <p class="mb-0"><span>by</span> <a href="#"
-                                style="font-size: 0.9rem; color: black;"><strong><?=$hard['author']?></strong></a></p>
+                        <p class="mb-0"><span>by</span>
+                            <a href="#" style="font-size: 0.9rem; color: black;">
+                                <strong>
+                                    <?=$content->getInfoById('login', $hard['author_id']);?>
+                                </strong>
+                            </a>
+                        </p>
                         <p class="mb-0 font-weight-bold" style="letter-spacing: -1px; line-height: 1;"><a
                                 style="color: black;" href="#"><?=$hard['title']?>.</a></p>
                     </div>
@@ -279,7 +297,7 @@ $articlesHard = $content->getArticleByDiff('Hard');
             </div>
             <div class="hashtags text-uppercase mt-3" style="font-size: .8rem; line-height: 2;">
                 <?php foreach ($tags as $tag): ?>
-                <a href="#">#<?=$tag['tag']?></a>
+                <a href="/main/search?r=<?=mb_strtolower($tag['tag']);?>">#<?=$tag['tag']?></a>
                 <?php endforeach;?>
             </div>
         </div>
@@ -369,6 +387,7 @@ $articlesHard = $content->getArticleByDiff('Hard');
         </div>
     </div>
 </div>
+
 <div class="comment__post bg-white my-1 py-3 py-lg-4 px-2 px-md-5 shadow__box">
     <div class="ahead__string d-flex justify-content-between">
         <h3 class="font-italic">Post a Comment</h3>
@@ -385,8 +404,12 @@ $articlesHard = $content->getArticleByDiff('Hard');
         </a>
         <form class="form" action="#" name="post__comment" method="POST">
             <div class="input-group-append w-100" style="margin-top: 0.3rem;">
-                <input type="text" class="comment__input-text px-2" style="min-height: 2.7rem;">
-                <input type="submit" value="Post" class="px-4 ml-1 bg-dark text-white text-uppercase"></input>
+                <input id="comment-input" name="body" type="text" class="comment__input-text px-2"
+                    style="min-height: 2.7rem;">
+                <input type="hidden" name="parent_id" id="parent_id" value="0">
+                <input type="hidden" name="author_id" value="<?=$_SESSION['user']['id']?>">
+                <input type="submit" name="success" value="Post"
+                    class="px-4 ml-1 bg-dark text-white text-uppercase "></input>
             </div>
         </form>
     </div>
@@ -395,7 +418,12 @@ $articlesHard = $content->getArticleByDiff('Hard');
     <div class="comments__view-heading underline py-4 px-3 px-lg-5">
         <h3 class="font-italic">Comments</h3>
     </div>
-    <div class="comment__shell px-3 px-lg-5 pb-3 pb-lg-5">
+    <?php
+$comments = new Comments;
+$commentsMain = $comments->getComments(0, 100);
+?>
+    <div class="comment__shell px-3 px-lg-5 pb-3 pb-lg-5 mb-3">
+        <?php foreach ($commentsMain as $comment): ?>
         <div class="comment__body row">
             <div class="avatar__place col-auto col-lg-1 ml-1 m-lg-0 pr-3 pr-lg-0 d-flex justify-content-end">
                 <a href="#">
@@ -406,27 +434,20 @@ $articlesHard = $content->getArticleByDiff('Hard');
                 <p class="m-0">post by</p>
                 <div class="name__info-string d-flex justify-content-between">
                     <div class="name__reply d-flex">
-                        <h4 class="font-weight-bold comment__name" style="font-size: 1.1rem;">Smuckerger
-                            Topping</h4>
-                        <button class="reply__btn btn-sm mx-2">Reply</button>
+                        <h4 class="font-weight-bold comment__name" style="font-size: 1.1rem;">
+                            <?=$content->getInfoById('login', $comment['author_id']);?></h4>
+                        <a href="#comment-input" class="reply__btn btn-sm mx-2">Reply</a>
+                        <p class="parent_id"><?=$comment['id']?></p>
                     </div>
                     <p class="mr-3 d-inline-block"><i class="fa fa-share-alt" aria-hidden="true"
-                            style="cursor: pointer;"></i> 465 <i class="fa fa-thumbs-o-up" aria-hidden="true"
-                            style="cursor: pointer;"></i> 640</p>
+                            style="cursor: pointer;"></i> 5 <i class="fa fa-thumbs-o-up" aria-hidden="true"
+                            style="cursor: pointer;"></i> 7</p>
                 </div>
-                <data class="comment__data d-block">6/10/2014</data>
-                <div class="image__comment mt-3 mb-2 d-inline-block position-relative">
-                    <a data-fancybox="gallery" href="/assets/img/big-image/Photo-mail-small1_photos_v2_x4.png">
-                        <img src="/assets/img/Photo-mail-small1.png" alt="">
-                    </a>
-                    <div class="pintres__comment-link d-inline-block position-absolute">
-                        <a target="_blank" href="https://pinterest.com">
-                            <i class="fa fa-pinterest mx-2 my-2" aria-hidden="true"
-                                style="color: black; font-size: 23px;"></i>
-                        </a>
-                    </div>
-                </div>
-                <p class="comment-sense underline mb-1">Thank you for the recipe1!</p>
+                <data class="comment__data d-block"><?=$comment['date']?></data>
+
+                <p class="comment-sense underline mb-1"><?=$comment['body']?></p>
+                <?php $commentsNested = $comments->getComments($comment['id'], 3);?>
+                <?php foreach ($commentsNested as $commentNested): ?>
                 <div class="comment__body row">
                     <div class="avatar__place col-auto col-lg-1 ml-1 m-lg-0 pr-3 pr-lg-0 d-flex justify-content-end">
                         <a href="#">
@@ -438,44 +459,32 @@ $articlesHard = $content->getArticleByDiff('Hard');
                         <div class="name__info-string d-flex justify-content-between">
                             <div class="name__reply d-flex">
                                 <h4 class="font-weight-bold comment__name" style="font-size: 1.1rem;">
-                                    Smuckerger Topping</h4>
-                                <button class="reply__btn btn-sm mx-2">Reply</button>
+                                    <?=$content->getInfoById('login', $commentNested['author_id']);?>
+                                </h4>
+                                <a href="#comment-input" class="reply__btn btn-sm mx-2">Reply</a>
+                                <p class="parent_id"><?=$comment['id']?></p>
                             </div>
                             <p class="mr-3 d-inline-block"><i class="fa fa-share-alt" aria-hidden="true"
-                                    style="cursor: pointer;"></i> 465 <i class="fa fa-thumbs-o-up" aria-hidden="true"
-                                    style="cursor: pointer;"></i> 640</p>
+                                    style="cursor: pointer;"></i> 3 <i class="fa fa-thumbs-o-up" aria-hidden="true"
+                                    style="cursor: pointer;"></i> 4</p>
                         </div>
                         <data class="comment__data d-block">6/10/2014</data>
-                        <p class="comment-sense mb-1 font-weight-bold">Thank you for the recipe! Lorem ipsum
-                            dolor sit amet, consectetur adipisicing elit.</p>
+                        <p class="comment-sense mb-1 font-weight-bold"><?=$commentNested['body'];?></p>
                     </div>
-                    <button class="w-100 border-0 font-weight-light underline my-1 my-lg-2"
-                        style="outline: none; background: none;">24 more comments</button>
+
                 </div>
+                <?php endforeach;?>
+                <!-- Второй уровень вложености -->
+                <?php if (count($commentsNested) > 2): ?>
+                <button class="w-100 border-0 font-weight-light underline my-1 my-lg-2"
+                    style="outline: none; background: none;">24 more comments</button>
+                <?php endif;?>
             </div>
         </div>
-        <div class="comment__body row">
-            <div class="avatar__place col-auto col-lg-1 ml-1 m-lg-0 pr-3 pr-lg-0 d-flex justify-content-end">
-                <a href="#">
-                    <img src="/assets/img/comment-avatar.png" class="mb-2" alt="">
-                </a>
-            </div>
-            <div class="comment__body-place col-auto col-lg-11 pl-3 pl-lg-5">
-                <p class="m-0">post by</p>
-                <div class="name__info-string d-flex justify-content-between">
-                    <div class="name__reply d-flex">
-                        <h4 class="font-weight-bold comment__name" style="font-size: 1.1rem;">Smuckerger
-                            Topping</h4>
-                        <button class="reply__btn btn-sm mx-2">Reply</button>
-                    </div>
-                    <p class="mr-3 d-inline-block"><i class="fa fa-share-alt" aria-hidden="true"
-                            style="cursor: pointer;"></i> 465 <i class="fa fa-thumbs-o-up" aria-hidden="true"
-                            style="cursor: pointer;"></i> 640</p>
-                </div>
-                <data class="comment__data d-block">6/10/2014</data>
-                <p class="comment-sense mb-1">Thank you for the recipe!.</p>
-            </div>
-        </div>
+        <?php endforeach;?>
+
+
+
     </div>
 </div>
 <div class="page__navigation d-flex justify-content-center bg-white py-2 py-lg-4 shadow__box mb-5">

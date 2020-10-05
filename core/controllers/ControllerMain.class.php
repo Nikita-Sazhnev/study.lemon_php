@@ -10,9 +10,18 @@ class ControllerMain extends Controller
 {
     public function actionIndex()
     {
+        if (!Auth::isGuest()) {
+            $model = new \models\CommentForm;
+            if (Request::isPost()) {
+                $model->load(Request::getPost());
+                $model->postComment();
+            } else {
+
+            }
+        }
+
         $this->view->setTitle('Lemon');
         $this->view->render('home', []);
-
     }
     public function actionLogin()
     {

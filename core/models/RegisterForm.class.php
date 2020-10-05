@@ -13,6 +13,7 @@ class RegisterForm extends \base\BaseForm
         return [
             'login' => ['required', 'unique'],
             'password' => ['required', 'confirm'],
+            'email' => ['required'],
         ];
     }
 

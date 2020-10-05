@@ -23,4 +23,10 @@ class Content
         return $result;
     }
 
+    public function getInfoById($col, $id)
+    {
+        $sql = "SELECT `$col` FROM `users` WHERE `id` = $id LIMIT 1";
+        $result = $this->db->sendQuery($sql)->fetch();
+        return $result[$col];
+    }
 }

@@ -1,3 +1,16 @@
+$(() => {
+  $(".comments__view .underline:last").removeClass("underline");
+});
+
+$(() => {
+  $(".reply__btn").click(function () {
+    let name = $(this).siblings(".comment__name").html();
+    let parent = $(this).siblings(".parent_id").html();
+    $("#comment-input").val(name.trim() + ", ");
+    $("#parent_id").val(parent);
+  });
+});
+
 // Get the element with id="defaultOpen" and click on it
 document.getElementById("defaultOpen").click();
 
