@@ -11,6 +11,20 @@ $(() => {
   });
 });
 
+$(document).ready(function () {
+  $(".more-btn").click(function () {
+    $(this).siblings(".comment-nested").toggleClass("hide");
+
+    if ($(this).html() == "More comments") {
+      $(this).html("Close");
+    } else {
+      $(this).html("More comments");
+    }
+    let parent = $(this).parents(".comment__body");
+    $("html,body").scrollTop(parent.offset().top);
+  });
+});
+
 // Get the element with id="defaultOpen" and click on it
 document.getElementById("defaultOpen").click();
 

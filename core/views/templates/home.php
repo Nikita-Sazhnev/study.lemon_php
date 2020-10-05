@@ -420,7 +420,7 @@ $articlesHard = $content->getArticleByDiff('Hard');
     </div>
     <?php
 $comments = new Comments;
-$commentsMain = $comments->getComments(0, 100);
+$commentsMain = $comments->getComments(0);
 ?>
     <div class="comment__shell px-3 px-lg-5 pb-3 pb-lg-5 mb-3">
         <?php foreach ($commentsMain as $comment): ?>
@@ -446,39 +446,42 @@ $commentsMain = $comments->getComments(0, 100);
                 <data class="comment__data d-block"><?=$comment['date']?></data>
 
                 <p class="comment-sense underline mb-1"><?=$comment['body']?></p>
-                <?php $commentsNested = $comments->getComments($comment['id'], 3);?>
-                <?php foreach ($commentsNested as $commentNested): ?>
-                <div class="comment__body row">
-                    <div class="avatar__place col-auto col-lg-1 ml-1 m-lg-0 pr-3 pr-lg-0 d-flex justify-content-end">
-                        <a href="#">
-                            <img src="/assets/img/comment-avatar.png" class="mb-2" alt="">
-                        </a>
-                    </div>
-                    <div class="comment__body-place col-auto col-lg-11 pl-3 pl-lg-5">
-                        <p class="m-0">post by</p>
-                        <div class="name__info-string d-flex justify-content-between">
-                            <div class="name__reply d-flex">
-                                <h4 class="font-weight-bold comment__name" style="font-size: 1.1rem;">
-                                    <?=$content->getInfoById('login', $commentNested['author_id']);?>
-                                </h4>
-                                <a href="#comment-input" class="reply__btn btn-sm mx-2">Reply</a>
-                                <p class="parent_id"><?=$comment['id']?></p>
-                            </div>
-                            <p class="mr-3 d-inline-block"><i class="fa fa-share-alt" aria-hidden="true"
-                                    style="cursor: pointer;"></i> 3 <i class="fa fa-thumbs-o-up" aria-hidden="true"
-                                    style="cursor: pointer;"></i> 4</p>
+                <div class="answers">
+                    <?php $commentsNested = $comments->getComments($comment['id']);?>
+                    <?php foreach ($commentsNested as $commentNested): ?>
+                    <div class="comment__body row comment-nested hide">
+                        <div
+                            class="avatar__place col-auto col-lg-1 ml-1 m-lg-0 pr-3 pr-lg-0 d-flex justify-content-end">
+                            <a href="#">
+                                <img src="/assets/img/comment-avatar.png" class="mb-2" alt="">
+                            </a>
                         </div>
-                        <data class="comment__data d-block">6/10/2014</data>
-                        <p class="comment-sense mb-1 font-weight-bold"><?=$commentNested['body'];?></p>
-                    </div>
+                        <div class="comment__body-place col-auto col-lg-11 pl-3 pl-lg-5">
+                            <p class="m-0">post by</p>
+                            <div class="name__info-string d-flex justify-content-between">
+                                <div class="name__reply d-flex">
+                                    <h4 class="font-weight-bold comment__name" style="font-size: 1.1rem;">
+                                        <?=$content->getInfoById('login', $commentNested['author_id']);?>
+                                    </h4>
+                                    <a href="#comment-input" class="reply__btn btn-sm mx-2">Reply</a>
+                                    <p class="parent_id"><?=$comment['id']?></p>
+                                </div>
+                                <p class="mr-3 d-inline-block"><i class="fa fa-share-alt" aria-hidden="true"
+                                        style="cursor: pointer;"></i> 3 <i class="fa fa-thumbs-o-up" aria-hidden="true"
+                                        style="cursor: pointer;"></i> 4</p>
+                            </div>
+                            <data class="comment__data d-block">6/10/2014</data>
+                            <p class="comment-sense mb-1 font-weight-bold"><?=$commentNested['body'];?></p>
+                        </div>
 
+                    </div>
+                    <?php endforeach;?>
+                    <!-- Второй уровень вложености -->
+                    <?php if (count($commentsNested) > 2): ?>
+                    <button class="more-btn w-100 border-0 font-weight-light underline my-1 my-lg-2"
+                        style="outline: none; background: none;">More comments</button>
+                    <?php endif;?>
                 </div>
-                <?php endforeach;?>
-                <!-- Второй уровень вложености -->
-                <?php if (count($commentsNested) > 2): ?>
-                <button class="w-100 border-0 font-weight-light underline my-1 my-lg-2"
-                    style="outline: none; background: none;">24 more comments</button>
-                <?php endif;?>
             </div>
         </div>
         <?php endforeach;?>
@@ -487,18 +490,4 @@ $commentsMain = $comments->getComments(0, 100);
 
     </div>
 </div>
-<div class="page__navigation d-flex justify-content-center bg-white py-2 py-lg-4 shadow__box mb-5">
-    <div class="btn-group" role="group" aria-label="Basic example">
-        <button type="button" class="btn btn-white ">&#60;</button>
-        <button type="button" class="btn btn-white active_btn">1</button>
-        <button type="button" class="btn btn-white">2</button>
-        <button type="button" class="btn btn-white">3</button>
-        <button type="button" class="btn btn-white">4</button>
-        <button type="button" class="btn btn-white">5</button>
-        <button type="button" class="btn btn-white">6</button>
-        <button type="button" class="btn btn-white">&#62;</button>
-    </div>
-</div>
-
-
 </div>

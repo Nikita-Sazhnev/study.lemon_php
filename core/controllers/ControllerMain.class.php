@@ -15,8 +15,6 @@ class ControllerMain extends Controller
             if (Request::isPost()) {
                 $model->load(Request::getPost());
                 $model->postComment();
-            } else {
-
             }
         }
 

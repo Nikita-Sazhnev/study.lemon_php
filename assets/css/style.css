@@ -263,6 +263,19 @@ footer {
 .comment__data {
   font-size: 0.85rem;
 }
+
+.answers .comment-nested {
+  height: 84px;
+  overflow: hidden;
+  transition: all 0.3s ease-in;
+}
+.hide:not(:nth-child(-n + 3)) {
+  height: 0 !important;
+}
+.answers .comment-nested:nth-child(-n + 3) {
+  height: 84px;
+}
+
 .btn-group button {
   font-size: 1.3rem;
 }
