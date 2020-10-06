@@ -80,10 +80,10 @@ class ControllerMain extends Controller
         if (!Request::isSearchEmpty()) {
             $respond = Search::doSearch(Request::getSearch());
             if (empty($respond)) {
-                $this->view->setMessage("Нет подходящих резульататов поиска");
+                $this->view->setMessage('No matches');
             }
         } else {
-            $this->view->setMessage('Введите поисковый запрос');
+            $this->view->setMessage('Enter your search request');
         }
         $this->view->setTitle('Search');
         $this->view->render('search', ['search' => $respond]);

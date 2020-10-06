@@ -6,7 +6,7 @@ class View
     public $basePath = __DIR__ . '/../views/templates/';
 
     protected $title;
-    protected $message = "Результаты: ";
+    protected $message = "Results: ";
     protected $content;
     protected $seo = [];
     protected $css = [];

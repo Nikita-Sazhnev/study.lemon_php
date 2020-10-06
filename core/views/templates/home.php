@@ -43,7 +43,7 @@ $lastArticle = $lastArticle[0];
         </div>
     </div>
 
-    <div class="main__preview shadow__box">
+    <div class="main__preview mt-5 shadow__box">
         <div class="row pt-3">
             <div class="container d-flex justify-content-lg-around flex-wrap">
                 <?php foreach ($previews as $preview): ?>
@@ -387,7 +387,7 @@ $articlesHard = $content->getArticleByDiff('Hard');
         </div>
     </div>
 </div>
-
+<?php if (!\library\Auth::isGuest()): ?>
 <div class="comment__post bg-white my-1 py-3 py-lg-4 px-2 px-md-5 shadow__box">
     <div class="ahead__string d-flex justify-content-between">
         <h3 class="font-italic">Post a Comment</h3>
@@ -414,6 +414,7 @@ $articlesHard = $content->getArticleByDiff('Hard');
         </form>
     </div>
 </div>
+<?php endif;?>
 <div class="comments__view my-3 my-lg-5 bg-white shadow__box">
     <div class="comments__view-heading underline py-4 px-3 px-lg-5">
         <h3 class="font-italic">Comments</h3>
@@ -485,9 +486,6 @@ $commentsMain = $comments->getComments(0);
             </div>
         </div>
         <?php endforeach;?>
-
-
-
     </div>
 </div>
 </div>
