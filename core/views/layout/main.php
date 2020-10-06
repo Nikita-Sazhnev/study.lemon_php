@@ -1,4 +1,4 @@
-<?php $navbar = $content->getContent('*', 'navbar', 5);?>
+<?php $navbar = $content->getContent('navbar', 5);?>
 <!DOCTYPE html>
 <html lang="en">
 

@@ -2,10 +2,10 @@
 
 use library\Comments;
 
-$previews = $content->getContent('*', 'previews', 3);
-$slider = $content->getContent('*', 'slider', 5);
-$tags = $content->getContent('*', 'tags', 30);
-$lastArticle = $content->getContent('*', 'posts', 1);
+$previews = $content->getContent('previews', 3);
+$slider = $content->getContent('slider', 5);
+$tags = $content->getContent('tags', 30);
+$lastArticle = $content->getContent('posts', 1);
 $lastArticle = $lastArticle[0];
 
 ?>
