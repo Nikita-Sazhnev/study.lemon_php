@@ -1,0 +1,1 @@
+<h2 class="text-center my-3"><?=$this->message?></h2>

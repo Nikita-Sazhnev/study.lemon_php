@@ -42,7 +42,7 @@ class Db
         }
 
     }
-    public function getSafeData($data)
+    public static function getSafeData($data)
     {
         $data = htmlspecialchars(trim(preg_replace('/[\'\\\*\"\/]/', '', $data)));
         return $data;

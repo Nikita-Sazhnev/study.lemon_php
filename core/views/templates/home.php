@@ -297,7 +297,7 @@ $articlesHard = $content->getArticleByDiff('Hard');
             </div>
             <div class="hashtags text-uppercase mt-3" style="font-size: .8rem; line-height: 2;">
                 <?php foreach ($tags as $tag): ?>
-                <a href="/main/search?r=<?=mb_strtolower($tag['tag']);?>">#<?=$tag['tag']?></a>
+                <a href="/main/search/?search_string=<?=mb_strtolower($tag['tag']);?>">#<?=$tag['tag']?></a>
                 <?php endforeach;?>
             </div>
         </div>

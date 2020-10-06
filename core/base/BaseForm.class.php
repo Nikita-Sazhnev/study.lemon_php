@@ -30,7 +30,7 @@ abstract class BaseForm
     {
         foreach ($data as $propName => $propValue) {
             if (property_exists(static::class, $propName)) {
-                $propValue = $this->_db->getSafeData($propValue);
+                $propValue = $this->_db::getSafeData($propValue);
                 $this->_data[$propName] = $propValue;
             } else {
                 return false;

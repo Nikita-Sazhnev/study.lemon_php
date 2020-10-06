@@ -4,8 +4,8 @@ $(() => {
 
 $(() => {
   $(".reply__btn").click(function () {
-    let name = $(this).siblings(".comment__name").html();
-    let parent = $(this).siblings(".parent_id").html();
+    const name = $(this).siblings(".comment__name").html();
+    const parent = $(this).siblings(".parent_id").html();
     $("#comment-input").val(name.trim() + ", ");
     $("#parent_id").val(parent);
   });
@@ -20,7 +20,7 @@ $(document).ready(function () {
     } else {
       $(this).html("More comments");
     }
-    let parent = $(this).parents(".comment__body");
+    const parent = $(this).parents(".comment__body");
     $("html,body").scrollTop(parent.offset().top);
   });
 });

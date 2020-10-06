@@ -4,6 +4,7 @@ namespace controllers;
 use base\Controller;
 use library\Auth;
 use library\Request;
+use library\Search;
 use library\Validator;
 
 class ControllerMain extends Controller
@@ -73,5 +74,18 @@ class ControllerMain extends Controller
             throw new \Exception("Forbiden", 403);
         }
 
+    }
+    public function actionSearch()
+    {
+        if (!Request::isSearchEmpty()) {
+            $respond = Search::doSearch(Request::getSearch());
+            if (empty($respond)) {
+                $this->view->setMessage("Нет подходящих резульататов поиска");
+            }
+        } else {
+            $this->view->setMessage('Введите поисковый запрос');
+        }
+        $this->view->setTitle('Search');
+        $this->view->render('search', ['search' => $respond]);
     }
 }

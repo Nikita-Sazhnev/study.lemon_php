@@ -52,8 +52,9 @@
                             </ul>
                         </div>
                         <div class="form__search col-12 col-lg-2 p-0 mr-lg-5 position-relative">
-                            <form action="#" name="search" class="">
-                                <input class="input__search" type="text" placeholder="FIND A RECIPE">
+                            <form action="/main/search/" name="search" method="Get">
+                                <input name="search_string" class="input__search" type="text"
+                                    placeholder="FIND A RECIPE">
                                 <span class="search__icon"><img src="/assets/img/search-icon.png" alt=""></span>
                             </form>
                         </div>

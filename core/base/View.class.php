@@ -6,6 +6,7 @@ class View
     public $basePath = __DIR__ . '/../views/templates/';
 
     protected $title;
+    protected $message = "Результаты: ";
     protected $content;
     protected $seo = [];
     protected $css = [];
@@ -28,6 +29,10 @@ class View
     public function setTitle($title)
     {
         $this->title = $title;
+    }
+    public function setMessage($message)
+    {
+        $this->message = $message;
     }
 
     public function setCss($css)
