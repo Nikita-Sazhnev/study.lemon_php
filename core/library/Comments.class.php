@@ -9,4 +9,5 @@ class Comments extends Content
         $result = $this->db->sendQuery($sql)->fetchAll();
         return $result;
     }
+
 }

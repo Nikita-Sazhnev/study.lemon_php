@@ -14,17 +14,29 @@ $(() => {
 $(document).ready(function () {
   $(".more-btn").click(function () {
     $(this).siblings(".comment-nested").toggleClass("hide");
-
-    if ($(this).html() == "More comments") {
-      $(this).html("Close");
-    } else {
-      $(this).html("More comments");
-    }
+    let t1 = "More comments";
+    let t2 = "Close";
+    $(this).html() == t1 ? $(this).html(t2) : $(this).html(t1);
     const parent = $(this).parents(".comment__body");
     $("html,body").scrollTop(parent.offset().top);
   });
 });
 
+$(".fa-thumbs-o-up").click(function () {
+  let userId = $("#userId").val();
+  let commentId = $(this).attr("data-id");
+  let like = $(this);
+  let likeAmount = $(this).siblings(".like-amount");
+  $.ajax({
+    type: "POST",
+    url: "Likes.php",
+    data: { userId: userId, commentId: commentId },
+    success: function (res) {
+      like.toggleClass("active-like");
+      likeAmount.html(res);
+    },
+  });
+});
 // Get the element with id="defaultOpen" and click on it
 document.getElementById("defaultOpen").click();
 
@@ -246,9 +258,9 @@ window.Chart = function (context) {
         );
       return (
         a *
-          Math.pow(2, -10 * (t -= 1)) *
-          Math.sin(((t * 1 - s) * (2 * Math.PI)) / p) *
-          0.5 +
+        Math.pow(2, -10 * (t -= 1)) *
+        Math.sin(((t * 1 - s) * (2 * Math.PI)) / p) *
+        0.5 +
         1
       );
     },
@@ -604,9 +616,9 @@ window.Chart = function (context) {
               ), //X
               Math.round(
                 height / 2 -
-                  scaleHop * (i + 1) -
-                  config.scaleFontSize * 0.5 -
-                  config.scaleBackdropPaddingY
+                scaleHop * (i + 1) -
+                config.scaleFontSize * 0.5 -
+                config.scaleBackdropPaddingY
               ), //Y
               Math.round(textWidth + config.scaleBackdropPaddingX * 2), //Width
               Math.round(
@@ -641,7 +653,7 @@ window.Chart = function (context) {
           width / 2,
           height / 2,
           scaleAnimation *
-            calculateOffset(data[i].value, calculatedScale, scaleHop),
+          calculateOffset(data[i].value, calculatedScale, scaleHop),
           startAngle,
           startAngle + rotateAnimation * angleStep,
           false
@@ -746,24 +758,24 @@ window.Chart = function (context) {
         ctx.moveTo(
           0,
           animationDecimal *
-            (-1 *
-              calculateOffset(
-                data.datasets[i].data[0],
-                calculatedScale,
-                scaleHop
-              ))
+          (-1 *
+            calculateOffset(
+              data.datasets[i].data[0],
+              calculatedScale,
+              scaleHop
+            ))
         );
         for (var j = 1; j < data.datasets[i].data.length; j++) {
           ctx.rotate(rotationDegree);
           ctx.lineTo(
             0,
             animationDecimal *
-              (-1 *
-                calculateOffset(
-                  data.datasets[i].data[j],
-                  calculatedScale,
-                  scaleHop
-                ))
+            (-1 *
+              calculateOffset(
+                data.datasets[i].data[j],
+                calculatedScale,
+                scaleHop
+              ))
           );
         }
         ctx.closePath();
@@ -784,12 +796,12 @@ window.Chart = function (context) {
             ctx.arc(
               0,
               animationDecimal *
-                (-1 *
-                  calculateOffset(
-                    data.datasets[i].data[k],
-                    calculatedScale,
-                    scaleHop
-                  )),
+              (-1 *
+                calculateOffset(
+                  data.datasets[i].data[k],
+                  calculatedScale,
+                  scaleHop
+                )),
               config.pointDotRadius,
               2 * Math.PI,
               false
@@ -852,8 +864,8 @@ window.Chart = function (context) {
               Math.round(-textWidth / 2 - config.scaleBackdropPaddingX), //X
               Math.round(
                 -scaleHop * (i + 1) -
-                  config.scaleFontSize * 0.5 -
-                  config.scaleBackdropPaddingY
+                config.scaleFontSize * 0.5 -
+                config.scaleBackdropPaddingY
               ), //Y
               Math.round(textWidth + config.scaleBackdropPaddingX * 2), //Width
               Math.round(
@@ -1123,12 +1135,12 @@ window.Chart = function (context) {
         ctx.moveTo(
           yAxisPosX,
           xAxisPosY -
-            animPc *
-              calculateOffset(
-                data.datasets[i].data[0],
-                calculatedScale,
-                scaleHop
-              )
+          animPc *
+          calculateOffset(
+            data.datasets[i].data[0],
+            calculatedScale,
+            scaleHop
+          )
         );
 
         for (var j = 1; j < data.datasets[i].data.length; j++) {
@@ -1167,12 +1179,12 @@ window.Chart = function (context) {
             ctx.arc(
               yAxisPosX + valueHop * k,
               xAxisPosY -
-                animPc *
-                  calculateOffset(
-                    data.datasets[i].data[k],
-                    calculatedScale,
-                    scaleHop
-                  ),
+              animPc *
+              calculateOffset(
+                data.datasets[i].data[k],
+                calculatedScale,
+                scaleHop
+              ),
               config.pointDotRadius,
               0,
               Math.PI * 2,
@@ -1188,11 +1200,11 @@ window.Chart = function (context) {
         return (
           xAxisPosY -
           animPc *
-            calculateOffset(
-              data.datasets[dataSet].data[iteration],
-              calculatedScale,
-              scaleHop
-            )
+          calculateOffset(
+            data.datasets[dataSet].data[iteration],
+            calculatedScale,
+            scaleHop
+          )
         );
       }
       function xPos(iteration) {
@@ -1443,24 +1455,24 @@ window.Chart = function (context) {
           ctx.lineTo(
             barOffset,
             xAxisPosY -
-              animPc *
-                calculateOffset(
-                  data.datasets[i].data[j],
-                  calculatedScale,
-                  scaleHop
-                ) +
-              config.barStrokeWidth / 2
+            animPc *
+            calculateOffset(
+              data.datasets[i].data[j],
+              calculatedScale,
+              scaleHop
+            ) +
+            config.barStrokeWidth / 2
           );
           ctx.lineTo(
             barOffset + barWidth,
             xAxisPosY -
-              animPc *
-                calculateOffset(
-                  data.datasets[i].data[j],
-                  calculatedScale,
-                  scaleHop
-                ) +
-              config.barStrokeWidth / 2
+            animPc *
+            calculateOffset(
+              data.datasets[i].data[j],
+              calculatedScale,
+              scaleHop
+            ) +
+            config.barStrokeWidth / 2
           );
           ctx.lineTo(barOffset + barWidth, xAxisPosY);
           if (config.barShowStroke) {
@@ -1658,12 +1670,12 @@ window.Chart = function (context) {
 
   function animationLoop(config, drawScale, drawData, ctx) {
     var animFrameAmount = config.animation
-        ? 1 / CapValue(config.animationSteps, Number.MAX_VALUE, 1)
-        : 1,
+      ? 1 / CapValue(config.animationSteps, Number.MAX_VALUE, 1)
+      : 1,
       easingFunction = animationOptions[config.animationEasing],
       percentAnimComplete = config.animation ? 0 : 1;
 
-    if (typeof drawScale !== "function") drawScale = function () {};
+    if (typeof drawScale !== "function") drawScale = function () { };
 
     requestAnimFrame(animLoop);
 
@@ -1861,29 +1873,29 @@ window.Chart = function (context) {
     // load the template - and be sure to cache the result.
     var fn = !/\W/.test(str)
       ? (cache[str] =
-          cache[str] || tmpl(document.getElementById(str).innerHTML))
+        cache[str] || tmpl(document.getElementById(str).innerHTML))
       : // Generate a reusable function that will serve as a template
-        // generator (and which will be cached).
-        new Function(
-          "obj",
-          "var p=[],print=function(){p.push.apply(p,arguments);};" +
-            // Introduce the data as local variables using with(){}
-            "with(obj){p.push('" +
-            // Convert the template into pure JavaScript
-            str
-              .replace(/[\r\t\n]/g, " ")
-              .split("<%")
-              .join("\t")
-              .replace(/((^|%>)[^\t]*)'/g, "$1\r")
-              .replace(/\t=(.*?)%>/g, "',$1,'")
-              .split("\t")
-              .join("');")
-              .split("%>")
-              .join("p.push('")
-              .split("\r")
-              .join("\\'") +
-            "');}return p.join('');"
-        );
+      // generator (and which will be cached).
+      new Function(
+        "obj",
+        "var p=[],print=function(){p.push.apply(p,arguments);};" +
+        // Introduce the data as local variables using with(){}
+        "with(obj){p.push('" +
+        // Convert the template into pure JavaScript
+        str
+          .replace(/[\r\t\n]/g, " ")
+          .split("<%")
+          .join("\t")
+          .replace(/((^|%>)[^\t]*)'/g, "$1\r")
+          .replace(/\t=(.*?)%>/g, "',$1,'")
+          .split("\t")
+          .join("');")
+          .split("%>")
+          .join("p.push('")
+          .split("\r")
+          .join("\\'") +
+        "');}return p.join('');"
+      );
 
     // Provide some basic currying to the user
     return data ? fn(data) : fn;

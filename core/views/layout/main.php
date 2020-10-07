@@ -1,4 +1,6 @@
-<?php $navbar = $content->getContent('navbar', 5);?>
+<?php $navbar = $content->getContent('navbar', 5);
+$userId = $_SESSION['user']['id'];?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -56,6 +58,7 @@
                                 <input name="search_string" class="input__search" type="text"
                                     placeholder="FIND A RECIPE">
                                 <span class="search__icon"><img src="/assets/img/search-icon.png" alt=""></span>
+                                <input type="hidden" id="userId" value="<?=$userId?>">
                             </form>
                         </div>
                     </div>

@@ -440,11 +440,12 @@ $commentsMain = $comments->getComments(0);
                         <a href="#comment-input" class="reply__btn btn-sm mx-2">Reply</a>
                         <p class="parent_id"><?=$comment['id']?></p>
                     </div>
-                    <p class="mr-3 d-inline-block"><i class="fa fa-share-alt" aria-hidden="true"
-                            style="cursor: pointer;"></i> 5 <i class="fa fa-thumbs-o-up" aria-hidden="true"
-                            style="cursor: pointer;"></i> 7</p>
+                    <p class="mr-3 d-inline-block"> <i
+                            class="fa fa-thumbs-o-up <?php $comments->isActiveLike($userId, $comment['id'])?>"
+                            aria-hidden="true" style="cursor: pointer;" data-id="<?=$comment['id']?>"></i> <span
+                            class="like-amount"><?php $comments->likeAmount($comment['id']);?></span> </p>
                 </div>
-                <data class="comment__data d-block"><?=$comment['date']?></data>
+                <date class="comment__data d-block"><?=$comment['date']?></date>
 
                 <p class="comment-sense underline mb-1"><?=$comment['body']?></p>
                 <div class="answers">
@@ -467,11 +468,14 @@ $commentsMain = $comments->getComments(0);
                                     <a href="#comment-input" class="reply__btn btn-sm mx-2">Reply</a>
                                     <p class="parent_id"><?=$comment['id']?></p>
                                 </div>
-                                <p class="mr-3 d-inline-block"><i class="fa fa-share-alt" aria-hidden="true"
-                                        style="cursor: pointer;"></i> 3 <i class="fa fa-thumbs-o-up" aria-hidden="true"
-                                        style="cursor: pointer;"></i> 4</p>
+                                <p class="mr-3 d-inline-block"><i
+                                        class="fa fa-thumbs-o-up <?php $comments->isActiveLike($userId, $commentNested['id'])?>"
+                                        aria-hidden="true" style="cursor: pointer;"
+                                        data-id="<?=$commentNested['id']?>"></i> <span
+                                        class="like-amount"><?php $comments->likeAmount($commentNested['id']);?></span>
+                                </p>
                             </div>
-                            <data class="comment__data d-block">6/10/2014</data>
+                            <date class="comment__data d-block"><?=$commentNested['date'];?></date>
                             <p class="comment-sense mb-1 font-weight-bold"><?=$commentNested['body'];?></p>
                         </div>
 

@@ -29,4 +29,20 @@ class Content
         $result = $this->db->sendQuery($sql)->fetch();
         return $result[$col];
     }
+    public function isActiveLike($user, $id)
+    {
+        if (!empty($user)) {
+            $sql = "SELECT * FROM `likes` WHERE `user_id` = $user AND `comment_id` = $id";
+            $result = $this->db->sendQuery($sql);
+            if ($result->fetch() > 0) {
+                echo "active-like";
+            }}
+    }
+    public function likeAmount($id)
+    {
+
+        $sql = "SELECT * FROM `likes` WHERE `comment_id` = $id";
+        $result = $this->db->sendQuery($sql);
+        echo $result->rowCount();
+    }
 }

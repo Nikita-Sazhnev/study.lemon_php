@@ -344,6 +344,12 @@ h6 {
 .tabcontent {
   display: none;
 }
+.fa-thumbs-o-up {
+  transition: all 0.5s ease;
+}
+.active-like {
+  color: red;
+}
 
 @media (max-width: 1200px) {
   .comment__input-text {
