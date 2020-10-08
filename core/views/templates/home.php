@@ -20,7 +20,9 @@ $lastArticle = $lastArticle[0];
                         <img class="" src="/assets/img/<?=$slide['img_src']?>" alt="">
                         <h5 class="my-4"><?=$slide['title'];?></h5>
                         <p><?=$slide['description'];?></p>
-                        <a href="<?=$slider['url']?>" class="btn btn-s btn-outline-dark">Get it recipe</a>
+                        <a href="/main/article/?id=<?=$slide['article_url']?>" class="btn btn-s btn-outline-dark">Get
+                            it
+                            recipe</a>
                     </div>
                 </div>
                 <?php endforeach;?>
@@ -52,7 +54,8 @@ $lastArticle = $lastArticle[0];
                         <img src="/assets/img/<?=$preview['img_src']?>" class="card-img-top" alt="preview">
                     </a>
                     <div class="card-body px-0 pt-2">
-                        <a href="#" class="card-text text-decoration-none"><?=$preview['title'];?></a>
+                        <a href="/main/article/?id=<?=$preview['url'];?>"
+                            class="card-text text-decoration-none"><?=$preview['title'];?></a>
                         <p><i class="fa fa-clock-o" aria-hidden="true"></i> <?=$preview['read_time']?> mins | <i
                                 class="fa fa-comment" aria-hidden="true"></i> 3 <i class="fa fa-eye"
                                 aria-hidden="true"></i> <?=$preview['views']?></p>
@@ -231,14 +234,16 @@ $articlesHard = $content->getArticleByDiff('Hard');
                     </div>
                     <div class="article__modul-name px-2">
                         <p class="mb-0"><span>by</span>
-                            <a href="#" style="font-size: 0.9rem; color: black;">
+                            <a href="/main/author/?id=<?=$easy['author_id'];?>"
+                                style="font-size: 0.9rem; color: black;">
                                 <strong>
                                     <?=$content->getInfoById('login', $easy['author_id']);?>
                                 </strong>
                             </a>
                         </p>
                         <p class="mb-0 font-weight-bold" style="letter-spacing: -1px; line-height: 1;"><a
-                                style="color: black;" href="#"><?=$easy['title']?>.</a></p>
+                                style="color: black;"
+                                href="/main/article/?id=<?=$easy['id'];?>"><?=$easy['title']?>.</a></p>
                     </div>
                 </div>
                 <?php endforeach;?>
@@ -261,7 +266,8 @@ $articlesHard = $content->getArticleByDiff('Hard');
                             </a>
                         </p>
                         <p class="mb-0 font-weight-bold" style="letter-spacing: -1px; line-height: 1;"><a
-                                style="color: black;" href="#"><?=$middle['title']?>.</a></p>
+                                style="color: black;"
+                                href="/main/article/?id=<?=$middle['id'];?>"><?=$middle['title']?>.</a></p>
                     </div>
                 </div>
                 <?php endforeach;?>
@@ -284,7 +290,8 @@ $articlesHard = $content->getArticleByDiff('Hard');
                             </a>
                         </p>
                         <p class="mb-0 font-weight-bold" style="letter-spacing: -1px; line-height: 1;"><a
-                                style="color: black;" href="#"><?=$hard['title']?>.</a></p>
+                                style="color: black;"
+                                href="/main/article/?id=<?=$hard['id'];?>"><?=$hard['title']?>.</a></p>
                     </div>
                 </div>
                 <?php endforeach;?>

@@ -3,6 +3,7 @@ namespace controllers;
 
 use base\Controller;
 use library\Auth;
+use library\Content;
 use library\Request;
 use library\Search;
 use library\Validator;
@@ -87,5 +88,36 @@ class ControllerMain extends Controller
         }
         $this->view->setTitle('Search');
         $this->view->render('search', ['search' => $respond]);
+    }
+
+    public function actionArticle()
+    {
+        if (!Request::isIdEmpty()) {
+            $content = new Content;
+            $post = $content->getAllInfoById('posts', Request::getArticleByUserId());
+            $this->view->setTitle("Blog");
+            $this->view->render('blog', ['post' => $post]);
+        } else {
+            header("Location: /main/404", 404);
+        }
+
+    }
+    public function actionAuthor()
+    {
+        if (!Request::isIdEmpty()) {
+            $content = new Content;
+            $author = $content->getAllInfoById('users', Request::getArticleByUserId());
+            $this->view->setTitle("Profile");
+            $this->view->render('author', ['author' => $author]);
+        } else {
+            header("Location: /main/404", 404);
+        }
+
+    }
+
+    public function action404()
+    {
+        $this->view->setTitle("404");
+        $this->view->render('404', []);
     }
 }

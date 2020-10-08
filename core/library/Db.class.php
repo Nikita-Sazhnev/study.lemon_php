@@ -18,6 +18,7 @@ class Db
         $dbname = $config['dbname'];
         $this->_link = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $config['user'], $config['pass']);
     }
+
     public static function getDb()
     {
         if (is_null(self::$_db)) {
@@ -34,6 +35,7 @@ class Db
         }
         return $result;
     }
+
     public function execPdo($sql, $data)
     {
         $result = $this->_link->prepare($sql);

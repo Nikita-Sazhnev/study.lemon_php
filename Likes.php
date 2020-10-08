@@ -13,14 +13,14 @@ switch ($_POST) {
         $param = $_POST['postId'];
         break;
     default:
-        throw new Exception("Error");
+        throw new Exception("Unfamiliar type of content");
         break;
 }
 
 $params = [$_POST['userId'], $param];
 
 if (!empty($_POST['userId'])) {
-    $sql = "SELECT * FROM `likes` WHERE `user_id` = $params[0] AND `" . $type . "` = $params[1]";
+    $sql = "SELECT * FROM `likes` WHERE `user_id` = $params[0] AND `" . $type . "` = $param";
     $result = $db->sendQuery($sql);
     if ($result->fetch() > 0) {
         $delete = "DELETE FROM `likes` WHERE `user_id` =? AND `" . $type . "` =?";

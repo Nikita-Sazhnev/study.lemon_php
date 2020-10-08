@@ -9,7 +9,8 @@
                     <img src="/assets/img/<?=$preview['img']?>" class="card-img-top" alt="preview">
                 </a>
                 <div class="card-body px-0 pt-2">
-                    <a href="#" class="card-text text-decoration-none"><?=$preview['title'];?></a>
+                    <a href="/main/article/?id=<?=$preview['id'];?>"
+                        class="card-text text-decoration-none"><?=$preview['title'];?></a>
                     <p><i class="fa fa-clock-o" aria-hidden="true"></i> <?=$preview['read_time']?> mins | <i
                             class="fa fa-comment" aria-hidden="true"></i> 3 <i class="fa fa-eye" aria-hidden="true"></i>
                         <?=$preview['views']?></p>

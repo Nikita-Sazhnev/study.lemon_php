@@ -16,6 +16,7 @@ class Content
         return $result;
 
     }
+
     public function getArticleByDiff($diff)
     {
         $sql = "SELECT * FROM `posts` WHERE `difficult` = '$diff' ORDER BY `id` DESC LIMIT 3";
@@ -29,6 +30,19 @@ class Content
         $result = $this->db->sendQuery($sql)->fetch();
         return $result[$col];
     }
+
+    public function getAllInfoById($from, $id)
+    {
+        $sql = "SELECT * FROM `$from` WHERE `id` = $id LIMIT 1";
+        $result = $this->db->sendQuery($sql)->fetch();
+        if ($result == 0) {
+            header("Location: /main/404", 404);
+        } else {
+            return $result;
+        }
+
+    }
+
     public function isActiveLike($user, $id)
     {
         if (!empty($user)) {
@@ -38,9 +52,9 @@ class Content
                 echo "active-like";
             }}
     }
+
     public function likeAmount($id)
     {
-
         $sql = "SELECT * FROM `likes` WHERE `comment_id` = $id";
         $result = $this->db->sendQuery($sql);
         echo $result->rowCount();
