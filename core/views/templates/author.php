@@ -17,14 +17,26 @@
                 <p class="mt-1 mt-lg-3">United States</p>
                 <div class="social__list">
                     <ul class="social__links social__links__author list-unstyled d-flex justify-content-start">
-                        <li><a target="_blank" href="https://www.google.com"><i class="fa fa-google-plus mr-3"
-                                    aria-hidden="true"></i></a></li>
-                        <li><a target="_blank" href="https://twitter.com/home"><i class="fa fa-twitter mr-3"
-                                    aria-hidden="true"></i></a></li>
-                        <li><a target="_blank" href="https://facebook.com"><i class="fa fa-facebook mr-3"
-                                    aria-hidden="true"></i></a></li>
-                        <li><a target="_blank" href="https://pinterest.com"><i class="fa fa-pinterest"
-                                    aria-hidden="true"></i></a></li>
+                        <li>
+                            <a target="_blank" href="https://www.google.com">
+                                <i class="fa fa-google-plus mr-3" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a target="_blank" href="https://twitter.com/home">
+                                <i class="fa fa-twitter mr-3" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a target="_blank" href="https://facebook.com"><i class="fa fa-facebook mr-3"
+                                    aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a target="_blank" href="https://pinterest.com"><i class="fa fa-pinterest"
+                                    aria-hidden="true"></i>
+                            </a>
+                        </li>
                     </ul>
                 </div>
                 <h3 class="my-3 my-lg-5 font-italic">About Lemon</h3>
@@ -40,5 +52,4 @@
                 </div>
             </div>
         </div>
-
 </main>

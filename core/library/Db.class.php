@@ -42,7 +42,6 @@ class Db
         if (!$result->execute($data)) {
             throw new Exception('Ошибка исполнения екзекъюта');
         }
-
     }
 
     public static function getSafeData($data)

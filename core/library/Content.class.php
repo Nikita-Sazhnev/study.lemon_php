@@ -43,19 +43,19 @@ class Content
 
     }
 
-    public function isActiveLike($user, $id)
+    public function isActiveLike($user, $id, $type)
     {
         if (!empty($user)) {
-            $sql = "SELECT * FROM `likes` WHERE `user_id` = $user AND `comment_id` = $id";
+            $sql = "SELECT * FROM `likes` WHERE `user_id` = $user AND `like_id` = $id AND `type` = '$type'";
             $result = $this->db->sendQuery($sql);
             if ($result->fetch() > 0) {
                 echo "active-like";
             }}
     }
 
-    public function likeAmount($id)
+    public function likeAmount($id, $type)
     {
-        $sql = "SELECT * FROM `likes` WHERE `comment_id` = $id";
+        $sql = "SELECT * FROM `likes` WHERE `like_id` = $id AND `type` = '$type'";
         $result = $this->db->sendQuery($sql);
         echo $result->rowCount();
     }

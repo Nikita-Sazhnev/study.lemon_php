@@ -24,13 +24,16 @@ $(document).ready(function () {
 
 $(".fa-thumbs-o-up").click(function () {
   let userId = $("#userId").val();
-  let commentId = $(this).attr("data-id");
+  let likeId = $(this).attr("data-id");
+  let dataType = $(this).attr("data-type");
   let like = $(this);
   let likeAmount = $(this).siblings(".like-amount");
   $.ajax({
     type: "POST",
     url: "Likes.php",
-    data: { userId: userId, commentId: commentId },
+    data: {
+      userId: userId, likeId: likeId, dataType: dataType,
+    },
     success: function (res) {
       like.toggleClass("active-like");
       likeAmount.html(res);

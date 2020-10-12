@@ -259,7 +259,8 @@ $articlesHard = $content->getArticleByDiff('Hard');
                     </div>
                     <div class="article__modul-name px-2">
                         <p class="mb-0"><span>by</span>
-                            <a href="#" style="font-size: 0.9rem; color: black;">
+                            <a href="/main/author/?id=<?=$easy['author_id'];?>"
+                                style="font-size: 0.9rem; color: black;">
                                 <strong>
                                     <?=$content->getInfoById('login', $middle['author_id']);?>
                                 </strong>
@@ -283,7 +284,8 @@ $articlesHard = $content->getArticleByDiff('Hard');
                     </div>
                     <div class="article__modul-name px-2">
                         <p class="mb-0"><span>by</span>
-                            <a href="#" style="font-size: 0.9rem; color: black;">
+                            <a href="/main/author/?id=<?=$easy['author_id'];?>"
+                                style="font-size: 0.9rem; color: black;">
                                 <strong>
                                     <?=$content->getInfoById('login', $hard['author_id']);?>
                                 </strong>
@@ -448,9 +450,10 @@ $commentsMain = $comments->getComments(0);
                         <p class="parent_id"><?=$comment['id']?></p>
                     </div>
                     <p class="mr-3 d-inline-block"> <i
-                            class="fa fa-thumbs-o-up <?php $comments->isActiveLike($userId, $comment['id'])?>"
-                            aria-hidden="true" style="cursor: pointer;" data-id="<?=$comment['id']?>"></i> <span
-                            class="like-amount"><?php $comments->likeAmount($comment['id']);?></span> </p>
+                            class="fa fa-thumbs-o-up <?php $comments->isActiveLike($userId, $comment['id'], 'comment')?>"
+                            aria-hidden="true" style="cursor: pointer;" data-id="<?=$comment['id'];?>"
+                            data-type="comment"></i> <span
+                            class="like-amount"><?php $comments->likeAmount($comment['id'], 'comment');?></span> </p>
                 </div>
                 <date class="comment__data d-block"><?=$comment['date']?></date>
 
@@ -476,10 +479,10 @@ $commentsMain = $comments->getComments(0);
                                     <p class="parent_id"><?=$comment['id']?></p>
                                 </div>
                                 <p class="mr-3 d-inline-block"><i
-                                        class="fa fa-thumbs-o-up <?php $comments->isActiveLike($userId, $commentNested['id'])?>"
-                                        aria-hidden="true" style="cursor: pointer;"
-                                        data-id="<?=$commentNested['id']?>"></i> <span
-                                        class="like-amount"><?php $comments->likeAmount($commentNested['id']);?></span>
+                                        class="fa fa-thumbs-o-up <?php $comments->isActiveLike($userId, $commentNested['id'], 'comment')?>"
+                                        aria-hidden="true" style="cursor: pointer;" data-id="<?=$commentNested['id']?>"
+                                        data-type="comment"></i> <span
+                                        class="like-amount"><?php $comments->likeAmount($commentNested['id'], 'comment');?></span>
                                 </p>
                             </div>
                             <date class="comment__data d-block"><?=$commentNested['date'];?></date>
