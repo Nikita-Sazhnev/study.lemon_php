@@ -92,11 +92,20 @@ class ControllerMain extends Controller
 
     public function actionArticle()
     {
+
         if (!Request::isIdEmpty()) {
+            if (!Auth::isGuest()) {
+                $model = new \models\CommentForm;
+                if (Request::isPost()) {
+                    $model->load(Request::getPost());
+                    $model->postComment();
+                }
+            }
             $content = new Content;
             $post = $content->getAllInfoById('posts', Request::getArticleByUserId());
             $this->view->setTitle("Blog");
             $this->view->render('blog', ['post' => $post]);
+
         } else {
             header("Location: /main/404", 404);
         }

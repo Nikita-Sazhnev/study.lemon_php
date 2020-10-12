@@ -30,7 +30,7 @@ $(".fa-thumbs-o-up").click(function () {
   let likeAmount = $(this).siblings(".like-amount");
   $.ajax({
     type: "POST",
-    url: "Likes.php",
+    url: "/Likes.php",
     data: {
       userId: userId, likeId: likeId, dataType: dataType,
     },

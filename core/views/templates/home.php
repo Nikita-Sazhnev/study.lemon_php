@@ -417,6 +417,7 @@ $articlesHard = $content->getArticleByDiff('Hard');
                     style="min-height: 2.7rem;">
                 <input type="hidden" name="parent_id" id="parent_id" value="0">
                 <input type="hidden" name="author_id" value="<?=$_SESSION['user']['id']?>">
+                <input type="hidden" name="place_id" value="0">
                 <input type="submit" name="success" value="Post"
                     class="px-4 ml-1 bg-dark text-white text-uppercase "></input>
             </div>
@@ -430,7 +431,7 @@ $articlesHard = $content->getArticleByDiff('Hard');
     </div>
     <?php
 $comments = new Comments;
-$commentsMain = $comments->getComments(0);
+$commentsMain = $comments->getComments(0, 0);
 ?>
     <div class="comment__shell px-3 px-lg-5 pb-3 pb-lg-5 mb-3">
         <?php foreach ($commentsMain as $comment): ?>
@@ -459,7 +460,7 @@ $commentsMain = $comments->getComments(0);
 
                 <p class="comment-sense underline mb-1"><?=$comment['body']?></p>
                 <div class="answers">
-                    <?php $commentsNested = $comments->getComments($comment['id']);?>
+                    <?php $commentsNested = $comments->getComments($comment['id'], 0);?>
                     <?php foreach ($commentsNested as $commentNested): ?>
                     <div class="comment__body row comment-nested hide">
                         <div
