@@ -18,6 +18,7 @@ class Db
         $dbname = $config['dbname'];
         $this->_link = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $config['user'], $config['pass']);
     }
+
     public static function getDb()
     {
         if (is_null(self::$_db)) {
@@ -34,17 +35,18 @@ class Db
         }
         return $result;
     }
+
     public function execPdo($sql, $data)
     {
         $result = $this->_link->prepare($sql);
         if (!$result->execute($data)) {
             throw new Exception('Ошибка исполнения екзекъюта');
         }
-
     }
-    public function getSafeData($data)
+
+    public static function getSafeData($data)
     {
-        $data = trim(preg_replace('/[\'\\\*\"\s\/]/', '', $data));
+        $data = htmlspecialchars(trim(preg_replace('/[\'\\\*\"\/]/', '', $data)));
         return $data;
     }
 }

@@ -21,12 +21,12 @@ class LoginForm extends \base\BaseForm
         $password = md5($this->_data['password']);
         $login = $this->_data['login'];
 
-        $sql = "SELECT `login`,`role` FROM `users` WHERE `login` = '$login' AND `pass` = '$password'";
+        $sql = "SELECT `login`,`role`,`id` FROM `users` WHERE `login` = '$login' AND `pass` = '$password'";
         $result = $this->_db->sendQuery($sql);
         $user = $result->fetch();
 
         if ($result->rowCount() != 0) {
-            Auth::login($user['login'], $user['role']);
+            Auth::login($user['id'], $user['role']);
             return true;
         } else {
             return false;

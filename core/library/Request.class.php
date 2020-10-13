@@ -15,5 +15,22 @@ class Request
     {
         return $_POST;
     }
+    public static function getSearch()
+    {
+        return Db::getSafeData(($_GET['search_string']));
+    }
+    public static function getArticleByUserId()
+    {
+        return Db::getSafeData(($_GET['id']));
+    }
+
+    public static function isSearchEmpty()
+    {
+        return empty($_GET['search_string']);
+    }
+    public static function isIdEmpty()
+    {
+        return empty($_GET['id']);
+    }
 
 }

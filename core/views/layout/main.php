@@ -1,3 +1,6 @@
+<?php $navbar = $content->getContent('navbar', 5);
+$userId = $_SESSION['user']['id'];?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -43,34 +46,19 @@
                     <div class="collapse navbar-collapse d-lg-flex justify-content-between" id="navbarContent">
                         <div class="nav__string">
                             <ul class="navbar-nav col-auto">
+                                <?php foreach ($navbar as $item): ?>
                                 <li class="nav-item">
-                                    <a href="/" class="nav-link px-lg-0 px-xl-2">Home</a>
+                                    <a href="<?=$item['url']?>" class="nav-link px-lg-0 px-xl-2"><?=$item['name'];?></a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link px-lg-0 px-xl-2">Recipes</a>
-                                    <ul class="drop__menu">
-                                        <li><a href="#">Recomended</a></li>
-                                        <li><a href="#">Popular</a></li>
-                                        <li><a href="#">Quick & Easy</a></li>
-                                        <li><a href="#">Healthy</a></li>
-                                        <li><a href="#">Newest</a></li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link px-lg-0 px-xl-2">Photo Gallery</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link px-lg-0 px-xl-2">Videos</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link px-lg-0 px-xl-2">All Categories</a>
-                                </li>
+                                <?php endforeach;?>
                             </ul>
                         </div>
                         <div class="form__search col-12 col-lg-2 p-0 mr-lg-5 position-relative">
-                            <form action="#" name="search" class="">
-                                <input class="input__search" type="text" placeholder="FIND A RECIPE">
+                            <form action="/main/search/" name="search" method="Get">
+                                <input name="search_string" class="input__search" type="text"
+                                    placeholder="FIND A RECIPE">
                                 <span class="search__icon"><img src="/assets/img/search-icon.png" alt=""></span>
+                                <input type="hidden" id="userId" value="<?=$userId?>">
                             </form>
                         </div>
                     </div>

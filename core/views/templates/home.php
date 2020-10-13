@@ -1,63 +1,32 @@
+<?php
+
+use library\Comments;
+
+$previews = $content->getContent('previews', 3);
+$slider = $content->getContent('slider', 5);
+$tags = $content->getContent('tags', 30);
+$main = $content->getContent('posts', 1);
+$main = $main[0];
+
+?>
 <main>
     <div class="bd-example shadow__box ">
         <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
-                <div class="carousel-item active" data-interval="3000">
+                <?php foreach ($slider as $slide): ?>
+                <div class="carousel-item <?=$slide['active'];?>" data-interval="3000">
                     <img src="/assets/img/Photo-main-big.png" class="d-block w-100" alt="...">
                     <div class="carousel-caption col-5  d-md-block">
-                        <img class="" src="/assets/img/Logo.png" alt="">
-                        <h5 class="my-4">Banans Forest Ice Cream Cake</h5>
-                        <p>If you're looking for decadence, look no further — you've found the Holy Grail of
-                            desserts. Honestly, this cake makes us wonder why Bananas Foster hasn't always
-                            been served on top of ice cream cake.</p>
-                        <a href="#" class="btn btn-s btn-outline-dark">Get it recipe</a>
+                        <img class="" src="/assets/img/<?=$slide['img_src']?>" alt="">
+                        <h5 class="my-4"><?=$slide['title'];?></h5>
+                        <p><?=$slide['description'];?></p>
+                        <a href="/main/article/?id=<?=$slide['article_url']?>" class="btn btn-s btn-outline-dark">Get
+                            it
+                            recipe</a>
                     </div>
                 </div>
+                <?php endforeach;?>
 
-                <div class="carousel-item" data-interval="3000">
-                    <img src="/assets/img/Photo-main-big.png" class="d-block w-100" alt="...">
-                    <div class="carousel-caption  col-5 d-md-block">
-                        <img src="/assets/img/Logo.png" alt="">
-                        <h5 class="my-4">Banans Forest Ice Cream Cake 2 Super Cake</h5>
-                        <p>If you're looking for decadence, look no further — you've found the Holy Grail of
-                            desserts. Honestly, this cake makes us wonder why Bananas Foster hasn't always
-                            been served on top of ice cream cake.</p>
-                        <a mt-5 href="#" class="btn btn-s btn-outline-dark">Get it recipe</a>
-                    </div>
-                </div>
-                <div class="carousel-item" data-interval="3000">
-                    <img src="/assets/img/Photo-main-big.png" class="d-block w-100" alt="...">
-                    <div class="carousel-caption  col-5 d-md-block">
-                        <img src="/assets/img/Logo.png" alt="">
-                        <h5 class="my-4">Banans Forest Ice Cream Cake 3</h5>
-                        <p>If you're looking for decadence, look no further — you've found the Holy Grail of
-                            desserts. Honestly, this cake makes us wonder why Bananas Foster hasn't always
-                            been served on top of ice cream cake.</p>
-                        <a mt-5 href="#" class="btn btn-s btn-outline-dark">Get it recipe</a>
-                    </div>
-                </div>
-                <div class="carousel-item" data-interval="3000">
-                    <img src="/assets/img/Photo-main-big.png" class="d-block w-100" alt="...">
-                    <div class="carousel-caption  col-5 d-md-block">
-                        <img src="/assets/img/Logo.png" alt="">
-                        <h5 class="my-4">Banans Forest Ice Cream Cake 4</h5>
-                        <p>If you're looking for decadence, look no further — you've found the Holy Grail of
-                            desserts. Honestly, this cake makes us wonder why Bananas Foster hasn't always
-                            been served on top of ice cream cake.</p>
-                        <a mt-5 href="#" class="btn btn-s btn-outline-dark">Get it recipe</a>
-                    </div>
-                </div>
-                <div class="carousel-item" data-interval="3000">
-                    <img src="/assets/img/Photo-main-big.png" class="d-block w-100" alt="...">
-                    <div class="carousel-caption  col-5 d-md-block">
-                        <img src="/assets/img/Logo.png" alt="">
-                        <h5 class="my-4">Banans Forest Ice Cream Cake 5</h5>
-                        <p>If you're looking for decadence, look no further — you've found the Holy Grail of
-                            desserts. Honestly, this cake makes us wonder why Bananas Foster hasn't always
-                            been served on top of ice cream cake.</p>
-                        <a mt-5 href="#" class="btn btn-s btn-outline-dark">Get it recipe</a>
-                    </div>
-                </div>
                 <ol class="carousel-indicators indicators-style">
                     <li data-target="#carouselExampleCaptions" data-slide-to="0"></li>
                     <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
@@ -74,112 +43,89 @@
                 <span class="sr-only">Next</span>
             </a>
         </div>
-
     </div>
-    <div class="main__preview shadow__box">
+
+    <div class="main__preview mt-5 shadow__box">
         <div class="row pt-3">
             <div class="container d-flex justify-content-lg-around flex-wrap">
+                <?php foreach ($previews as $preview): ?>
                 <div class="card col-12 col-lg-4 d-inline-block px-4 pt-3 border-white" style="width: 18rem;">
-                    <a data-fancybox="gallery" href="/assets/img/big-image/Photo-mail-small1_photos_v2_x4.png">
-                        <img src="/assets/img/Photo-mail-small1.png" class="card-img-top" alt="preview">
+                    <a data-fancybox="gallery" href="/assets/img/big-image/<?=$preview['img_src']?>">
+                        <img src="/assets/img/<?=$preview['img_src']?>" class="card-img-top" alt="preview">
                     </a>
                     <div class="card-body px-0 pt-2">
-                        <a href="#" class="card-text text-decoration-none">Rasbery & Cream Frozen Yougurt
-                            Pie.</a>
-                        <p><i class="fa fa-clock-o" aria-hidden="true"></i> 20mins | <i class="fa fa-comment"
-                                aria-hidden="true"></i> 3 <i class="fa fa-eye" aria-hidden="true"></i> 465</p>
+                        <a class="views-update" data-id="<?=$preview['url'];?>"
+                            href="/main/article/?id=<?=$preview['url'];?>"
+                            class="card-text text-decoration-none"><?=$preview['title'];?></a>
+                        <p><i class="fa fa-clock-o" aria-hidden="true"></i> <?=$preview['read_time']?> mins | <i
+                                class="fa fa-comment" aria-hidden="true"></i>
+                            <?=$content->commentsAmount($preview['url']);?> <i class="fa fa-eye" aria-hidden="true"></i>
+                            <?=$content->viewsAmount($preview['url'])?></p>
                     </div>
                 </div>
-                <div class="card col-12 col-lg-4 d-inline-block px-4 pt-3 border-white" style="width: 18rem;">
-                    <a data-fancybox="gallery" href="/assets/img/big-image/Photo-mail-small2_photos_v2_x4.png">
-                        <img src="/assets/img/Photo-mail-small2.png" class="card-img-top" alt="preview">
-                    </a>
-                    <div class="card-body px-0 pt-2">
-                        <a href="#" class="card-text text-decoration-none">Gigant Ice Cream Sandwich</a>
-                        <p><i class="fa fa-clock-o" aria-hidden="true"></i> 20mins | <i class="fa fa-comment"
-                                aria-hidden="true"></i> 3 <i class="fa fa-eye" aria-hidden="true"></i> 465</p>
-                    </div>
-                </div>
-                <div class="card col-12 col-lg-4 d-inline-block px-4 pt-3 border-white" style="width: 18rem;">
-                    <a data-fancybox="gallery" href="/assets/img/big-image/Photo-mail-small3_photos_v2_x4.png">
-                        <img src="/assets/img/Photo-mail-small3.png" class="card-img-top" alt="preview">
-                    </a>
-                    <div class="card-body px-0 pt-2">
-                        <a href="#" class="card-text text-decoration-none">Dark Chocolate Crunch Ice Cream
-                            Sandwich Cake</a>
-                        <p> <i class="fa fa-clock-o" aria-hidden="true"></i> 20mins | <i class="fa fa-comment"
-                                aria-hidden="true"></i> 3 <i class="fa fa-eye" aria-hidden="true"></i> 465</p>
-                    </div>
-                </div>
+                <?php endforeach;?>
             </div>
         </div>
     </div>
+    <?php
+$main = $content->getHighlightId('main');
+$main = $content->getAllInfoById('posts', $main);
+?>
     <div class="main__article mb-5 d-flex flex-wrap shadow__box">
         <div class="main__article-image col-12 col-lg-6 bg-white pl-lg-0 position-relative">
-            <a data-fancybox="gallery" href="/assets/img/article-main.png" class="main_article">
-                <img src="/assets/img/article-main.png" alt="Торт" class="w-100 h-100">
+            <a data-fancybox="gallery" href="/assets/img/<?=$main['img']?>" class="main_article">
+                <img src="/assets/img/<?=$main['img']?>" alt="Торт" class="w-100 h-100">
             </a>
             <img src="/assets/img/Icon-fav.png" alt="favorite-icon" class="icon-favorite position-absolute"
                 id="favorite">
         </div>
         <div class="main__article-body col-12 col-lg-6 bg-white pl-3 pl-lg-0" style="height: 450px">
-            <h1 class="article-heading-string mt-4"><a href="#" class="article-heading">Bananas Foster Ice
-                    Cream Cake</a></h1>
+            <h1 class="article-heading-string mt-4"><a href="#" class="article-heading"><?=$main['title']?></a>
+            </h1>
             <div class="row d-flex justify-content-between align-items-baseline ml-1 mr-2 mr-lg-5 mt-3">
                 <p style="font-size: 18px; font-weight: 300; cursor: default;"><i class="fa fa-clock-o"
-                        aria-hidden="true"></i> 15mins <i class="fa fa-signal" aria-hidden="true"></i> Easy
+                        aria-hidden="true"></i> <?=$main['read_time']?>mins <i class="fa fa-signal"
+                        aria-hidden="true"></i> <?=$main['difficult']?>
                 </p>
                 <button class="btn btn-sm btn-outline-dark text-uppercase">Save Recipe</button>
             </div>
             <div class="inner-scrolling mt-4">
                 <p class=" mb-0">
-                    1 (8 ounce) container frozen whipped topping, thawed <br>
-                    20 chocolate round wafers, divided <br>
-                    1 (7 1/4 ounce) bottle Smucker's® Hot Dark Chocolate Microwaveable Topping, divide <br>
+                    <?=$main['summary'];?>
                 </p>
                 <h2 class="my-3">Directions</h2>
                 <p>
-                    ARRANGE 8 to 9 ice cream sandwiches in 9-inch square pan, cutting to form an even layer.
-                    Spread with half of whipped topping. Break or crush chocolate wafers and sprinkle over
-                    the whipped cream. Microwave 1 cup of chocolate topping into small microwave-safe bowl
-                    on HIGH for 30 seconds. Drizzle evenly over wafers.
-                    TOP with remaining 8 to 9 ice cream sandwiches to form an even layer. Spread with
-                    remaining whipped topping. Freeze 3 hours or overnight
-                    <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi dignissimos
-                        dolores quia laborum commodi quibusdam facere odio? Praesentium error, quasi at, eos
-                        voluptate provident placeat maiores eius, asperiores autem fugit.</span>
-                    <span>Facilis reprehenderit, tempore natus libero ducimus culpa odit nemo voluptatum
-                        quae quidem excepturi vitae repudiandae sequi sint hic molestias reiciendis incidunt
-                        a. Quibusdam enim ratione hic veritatis distinctio veniam quia!</span>
-                    <span>At assumenda a quos, ab eius quod voluptatibus voluptate et asperiores, quidem,
-                        omnis iste aperiam similique. Atque est odio quidem quas illo quibusdam ullam at,
-                        laboriosam animi provident, fuga totam?</span>
-                    <span>Fuga maxime, voluptates, quasi quod autem dolor soluta aspernatur. Molestiae
-                        blanditiis beatae dicta veritatis iusto odit ullam quae tempore quasi repudiandae!
-                        Distinctio asperiores quisquam laudantium fugiat nesciunt tenetur in commodi!</span>
-                    <span>Voluptatem quia non accusamus laborum libero voluptatum delectus quam illum nobis
-                        dolores, minus, molestiae numquam, possimus consectetur sed, optio repellendus quos
-                        autem sint voluptatibus tempore unde facilis deserunt. Nihil, inventore?</span>
+                    <?=$main['body'];?>
                 </p>
             </div>
         </div>
     </div>
 </main>
+<?php
+$chichi = $content->getHighlightId('chichi');
+$chichi = $content->getAllInfoById('posts', $chichi);
+?>
 <div class="modeles__group mb-4 d-flex justify-content-around flex-wrap">
     <div class="first__mcolum d-flex flex-column">
         <div class="articel__preview-modul modul__width shadow__box bg-white my-2 px-3 pt-4">
-            <a href="#">
+            <a href="/main/article?id=<?=$chichi['id']?>">
                 <h4 class="underline text-center font-weight-bold"
                     style="font-family: 'Playfair Display', serif; color: #055555;">Chi-Chi or Chichi</h4>
             </a>
             <div class="article__author">
                 <a href="#"><img src="/assets/img/comment-avatar.png" alt="" class="float-left ml-2"></a>
                 <div class="article__author-about row pl-3">
-                    <p class="m-0">Recipe by</p><br>
-                    <p class="float-left m-0"><strong>Smuckerger Toppings</strong></p><br>
+                    <p class="my-0 mr-2 ">Recipe by </p>
+                    <br>
+                    <p class="m-0">
+                        <strong><?=$content->getInfoById('login', $chichi['author_id']);?></strong>
+                    </p>
+                    <br>
                     <p class="m-0" style="cursor: default;"><i class="fa fa-clock-o" aria-hidden="true"></i>
-                        20mins | <i class="fa fa-comment" aria-hidden="true"></i> 3 <i class="fa fa-eye"
-                            aria-hidden="true"></i> 465</p>
+                        20mins | <i class="fa fa-comment" aria-hidden="true"></i>
+                        <? $content->commentsAmount($chichi['id'])?> <i class="fa fa-eye" aria-hidden="true"></i>
+                        <?=$chichi['views']?>
+                    </p>
                 </div>
             </div>
             <div class="mt-2 article__slide row">
@@ -264,6 +210,11 @@
         </div>
     </div>
     <div class="second__mcolum d-flex flex-column">
+        <?php
+$articlesEasy = $content->getArticleByDiff('Easy');
+$articlesMiddle = $content->getArticleByDiff('Middle');
+$articlesHard = $content->getArticleByDiff('Hard');
+?>
         <div class="recipe__modul modul__width shadow__box bg-white my-2 px-3 py-4">
             <div class="recepi__modul-title d-flex justify-content-between border-bottom">
                 <h6 class="font-italic" style="font-size: 1.3rem;">Recipe</h6>
@@ -289,139 +240,78 @@
                 </div>
             </div>
             <div class="recipe__preview-main tabcontent" id="easy">
+                <?php foreach ($articlesEasy as $easy): ?>
                 <div class="recipe__modul-inner mt-2 mb-4 d-flex">
                     <div class="col-3 p-0">
-                        <a data-fancybox="gallery" href="/assets/img/big-image/Photo-mail-small1_photos_v2_x4.png">
-                            <img src="/assets/img/Photo-mail-small1.png" class="w-100" alt="">
+                        <a data-fancybox="gallery" href="/assets/img/big-image/<?=$easy['img'];?>">
+                            <img src="/assets/img/<?=$easy['img'];?>" class="w-100" alt="">
                         </a>
                     </div>
                     <div class="article__modul-name px-2">
-                        <p class="mb-0"><span>by</span> <a href="#"
-                                style="font-size: 0.9rem; color: black;"><strong>Smuckerger
-                                    Toppings</strong></a></p>
+                        <p class="mb-0"><span>by</span>
+                            <a href="/main/author/?id=<?=$easy['author_id'];?>"
+                                style="font-size: 0.9rem; color: black;">
+                                <strong>
+                                    <?=$content->getInfoById('login', $easy['author_id']);?>
+                                </strong>
+                            </a>
+                        </p>
                         <p class="mb-0 font-weight-bold" style="letter-spacing: -1px; line-height: 1;"><a
-                                style="color: black;" href="#">Thank you for the Recipe Lorem ipsum dolor
-                                sit amet natus.</a></p>
+                                style="color: black;" class="views-update" data-id="<?=$easy['id']?>"
+                                href="/main/article/?id=<?=$easy['id'];?>"><?=$easy['title']?>.</a></p>
                     </div>
                 </div>
-                <div class="recipe__modul-inner mt-2 mb-4 d-flex">
-                    <div class="col-3 p-0">
-                        <a data-fancybox="gallery" href="/assets/img/big-image/Photo-mail-small2_photos_v2_x4.png">
-                            <img src="/assets/img/Photo-mail-small2.png" class="w-100" alt="">
-                        </a>
-                    </div>
-                    <div class="article__modul-name px-2">
-                        <p class="mb-0"><span>by</span> <a href="#"
-                                style="font-size: 0.9rem; color: black;"><strong>Smuckerger
-                                    Toppings</strong></a></p>
-                        <p class="mb-0 font-weight-bold" style="letter-spacing: -1px; line-height: 1;"><a
-                                style="color: black;" href="#">Thank you for the Recipe.</a></p>
-                    </div>
-                </div>
-                <div class="recipe__modul-inner mt-2 mb-4 d-flex">
-                    <div class="col-3 p-0">
-                        <a data-fancybox="gallery" href="/assets/img/big-image/Photo-mail-small3_photos_v2_x4.png">
-                            <img src="/assets/img/Photo-mail-small3.png" class="w-100" alt="">
-                        </a>
-                    </div>
-                    <div class="article__modul-name px-2">
-                        <p class="mb-0"><span>by</span> <a href="#"
-                                style="font-size: 0.9rem; color: black;"><strong>Smuckerger
-                                    Toppings</strong></a></p>
-                        <p class="mb-0 font-weight-bold" style="letter-spacing: -1px; line-height: 1;"><a
-                                style="color: black;" href="#">Thank you for the Recipe.</a></p>
-                    </div>
-                </div>
+                <?php endforeach;?>
             </div>
+
             <div class="recipe__preview-main tabcontent id" id="middle">
+                <?php foreach ($articlesMiddle as $middle): ?>
                 <div class="recipe__modul-inner mt-2 mb-4 d-flex">
                     <div class="col-3 p-0">
-                        <a data-fancybox="gallery" href="/assets/img/big-image/Photo-mail-small2_photos_v2_x4.png">
-                            <img src="/assets/img/Photo-mail-small2.png" class="w-100" alt="">
+                        <a data-fancybox="gallery" href="/assets/img/big-image/<?=$middle['img'];?>">
+                            <img src="/assets/img/<?=$middle['img'];?>" class="w-100" alt="">
                         </a>
                     </div>
                     <div class="article__modul-name px-2">
-                        <p class="mb-0"><span>by</span> <a href="#"
-                                style="font-size: 0.9rem; color: black;"><strong>Smuckerger
-                                    Toppings</strong></a></p>
+                        <p class="mb-0"><span>by</span>
+                            <a href="/main/author/?id=<?=$easy['author_id'];?>"
+                                style="font-size: 0.9rem; color: black;">
+                                <strong>
+                                    <?=$content->getInfoById('login', $middle['author_id']);?>
+                                </strong>
+                            </a>
+                        </p>
                         <p class="mb-0 font-weight-bold" style="letter-spacing: -1px; line-height: 1;"><a
-                                style="color: black;" href="#">Thank you for the Recipe Lorem ipsum dolor
-                                sit amet natus.</a></p>
+                                style="color: black;" class="views-update" data-id="<?=$middle['id']?>"
+                                href="/main/article/?id=<?=$middle['id'];?>"><?=$middle['title']?>.</a></p>
                     </div>
                 </div>
-                <div class="recipe__modul-inner mt-2 mb-4 d-flex">
-                    <div class="col-3 p-0">
-                        <a data-fancybox="gallery" href="/assets/img/big-image/Photo-mail-small2_photos_v2_x4.png">
-                            <img src="/assets/img/Photo-mail-small2.png" class="w-100" alt="">
-                        </a>
-                    </div>
-                    <div class="article__modul-name px-2">
-                        <p class="mb-0"><span>by</span> <a href="#"
-                                style="font-size: 0.9rem; color: black;"><strong>Smuckerger
-                                    Toppings</strong></a></p>
-                        <p class="mb-0 font-weight-bold" style="letter-spacing: -1px; line-height: 1;"><a
-                                style="color: black;" href="#">Thank you for the Recipe.</a></p>
-                    </div>
-                </div>
-                <div class="recipe__modul-inner mt-2 mb-4 d-flex">
-                    <div class="col-3 p-0">
-                        <a data-fancybox="gallery" href="/assets/img/big-image/Photo-mail-small2_photos_v2_x4.png">
-                            <img src="/assets/img/Photo-mail-small2.png" class="w-100" alt="">
-                        </a>
-                    </div>
-                    <div class="article__modul-name px-2">
-                        <p class="mb-0"><span>by</span> <a href="#"
-                                style="font-size: 0.9rem; color: black;"><strong>Smuckerger
-                                    Toppings</strong></a></p>
-                        <p class="mb-0 font-weight-bold" style="letter-spacing: -1px; line-height: 1;"><a
-                                style="color: black;" href="#">Thank you for the Recipe.</a></p>
-                    </div>
-                </div>
+                <?php endforeach;?>
+
             </div>
             <div class="recipe__preview-main tabcontent id" id="long">
+                <?php foreach ($articlesHard as $hard): ?>
                 <div class="recipe__modul-inner mt-2 mb-4 d-flex">
                     <div class="col-3 p-0">
-                        <a data-fancybox="gallery" href="/assets/img/big-image/Photo-mail-small3_photos_v2_x4.png">
-                            <img src="/assets/img/Photo-mail-small3.png" class="w-100" alt="">
+                        <a data-fancybox="gallery" href="/assets/img/big-image/<?=$hard['img'];?>">
+                            <img src="/assets/img/<?=$hard['img'];?>" class="w-100" alt="">
                         </a>
                     </div>
                     <div class="article__modul-name px-2">
-                        <p class="mb-0"><span>by</span> <a href="#"
-                                style="font-size: 0.9rem; color: black;"><strong>Smuckerger
-                                    Toppings</strong></a></p>
+                        <p class="mb-0"><span>by</span>
+                            <a href="/main/author/?id=<?=$easy['author_id'];?>"
+                                style="font-size: 0.9rem; color: black;">
+                                <strong>
+                                    <?=$content->getInfoById('login', $hard['author_id']);?>
+                                </strong>
+                            </a>
+                        </p>
                         <p class="mb-0 font-weight-bold" style="letter-spacing: -1px; line-height: 1;"><a
-                                style="color: black;" href="#">Thank you for the Recipe Lorem ipsum dolor
-                                sit amet natus.</a></p>
+                                style="color: black;" class="views-update" data-id="<?=$hard['id']?>"
+                                href="/main/article/?id=<?=$hard['id'];?>"><?=$hard['title']?>.</a></p>
                     </div>
                 </div>
-                <div class="recipe__modul-inner mt-2 mb-4 d-flex">
-                    <div class="col-3 p-0">
-                        <a data-fancybox="gallery" href="/assets/img/big-image/Photo-mail-small3_photos_v2_x4.png">
-                            <img src="/assets/img/Photo-mail-small3.png" class="w-100" alt="">
-                        </a>
-                    </div>
-                    <div class="article__modul-name px-2">
-                        <p class="mb-0"><span>by</span> <a href="#"
-                                style="font-size: 0.9rem; color: black;"><strong>Smuckerger
-                                    Toppings</strong></a></p>
-                        <p class="mb-0 font-weight-bold" style="letter-spacing: -1px; line-height: 1;"><a
-                                style="color: black;" href="#">Thank you for the Recipe.</a></p>
-                    </div>
-                </div>
-                <div class="recipe__modul-inner mt-2 mb-4 d-flex">
-                    <div class="col-3 p-0">
-                        <a data-fancybox="gallery" href="/assets/img/big-image/Photo-mail-small3_photos_v2_x4.png">
-                            <img src="/assets/img/Photo-mail-small3.png" class="w-100" alt="">
-                        </a>
-                    </div>
-                    <div class="article__modul-name px-2">
-                        <p class="mb-0"><span>by</span> <a href="#"
-                                style="font-size: 0.9rem; color: black;"><strong>Smuckerger
-                                    Toppings</strong></a></p>
-                        <p class="mb-0 font-weight-bold" style="letter-spacing: -1px; line-height: 1;"><a
-                                style="color: black;" href="#">Thank you for the Recipe.</a></p>
-                    </div>
-                </div>
+                <?php endforeach;?>
             </div>
             <button class="btn btn-sm btn-outline-dark text-uppercase float-right my-1">View More</button>
         </div>
@@ -430,17 +320,9 @@
                 <h6 class="font-italic" style="font-size: 1.3rem;">Tags</h6>
             </div>
             <div class="hashtags text-uppercase mt-3" style="font-size: .8rem; line-height: 2;">
-                <a href="#">#Yummy</a>
-                <a href="#">#Sweet</a>
-                <a href="#">#Dinner</a>
-                <a href="#">#Lunch</a>
-                <a href="#">#Breackfast</a>
-                <a href="#">#Fresh</a>
-                <a href="#">#Tasty</a>
-                <a href="#">#Deish</a>
-                <a href="#">#Delishious</a>
-                <a href="#">#Eating</a>
-                <a href="#">#Eating</a>
+                <?php foreach ($tags as $tag): ?>
+                <a href="/main/search/?search_string=<?=mb_strtolower($tag['tag']);?>">#<?=$tag['tag']?></a>
+                <?php endforeach;?>
             </div>
         </div>
         <div class="calendar__modul modul__width shadow__box bg-white my-2 px-3 py-4" style="min-height: 20rem">
@@ -462,23 +344,30 @@
             </div>
         </div>
     </div>
+    <?php
+$popular = $content->getHighlightId('popular');
+$popular = $content->getAllInfoById('posts', $popular);
+?>
     <div class="third__mcolum d-flex flex-column">
         <div class="popual__modul modul__width shadow__box bg-white my-2 px-3 py-4"
-            style="min-height: 21.9rem; background-image: url(/assets/img/popular_now.png); background-repeat: no-repeat; background: cover;">
+            style="min-height: 21.9rem; background-image: url(/assets/img/popular_now.png); background-repeat: no-repeat; background-size: cover;">
             <h3 class="text-left"
                 style="font-family: 'Playfair Display', serif; font-weight: 700; font-size: 2rem; color: #922323;">
                 Popular Now</h3>
             <h4 class="font-weight-bold mt-5" style="font-size: 1.25rem;">
-                <a href="#" style="color: black;">Vanila Frozen Coffee</a>
+                <a class="views-update" data-id="<?=$popular['id']?>" href="main/article/?id=<?=$popular['id']?>"
+                    style="color: black;"><?=$popular['title']?></a>
             </h4>
-            <p class="mb-0" style="line-height: 1.1;">Mix coffee, sugar and creamer. Pour into blender and
-                add ice cubes. Blend until smooth.</p>
+            <p class="mb-0" style="line-height: 1.1;"><?=$popular['preview_test']?></p>
             <div class="get__recipe-string d-flex justify-content-between">
-                <a style="height: 2rem;" href="#" class="btn btn-s btn-outline-dark pt-1 pb-2 mt-3">Get it
-                    recipe</a>
+                <a style="height: 2rem;" href="main/article/?id=<?=$popular['id']?>"
+                    class="btn btn-s btn-outline-dark pt-1 pb-2 mt-3 views-update" data-id="<?=$popular['id']?>">
+                    Get it recipe
+                </a>
                 <p class="mb-0 mt-4" style="font-size: .8rem; cursor: default;"><i class="fa fa-clock-o"
-                        aria-hidden="true"></i> 20mins | <i class="fa fa-comment" aria-hidden="true"></i> 3
-                    <i class="fa fa-eye" aria-hidden="true"></i> 465
+                        aria-hidden="true"></i> <?=$popular['read_time']?> mins | <i class="fa fa-comment"
+                        aria-hidden="true"></i> <?=$content->commentsAmount($popular['id']);?>
+                    <i class="fa fa-eye" aria-hidden="true"></i> <?=$popular['views'];?>
                 </p>
             </div>
         </div>
@@ -497,7 +386,7 @@
                 </ul>
             </div>
             <div class="target__modul-inner px-3">
-                <h4 class="mt-4" style=" font-family:'Playfair Display', serif; color: #055555; font-weight: 600;">Time
+                <h4 class="mt-4" style="font-family:'Playfair Display', serif; color: #055555; font-weight: 600;">Time
                     line</h4>
                 <div class="rotate__box border-left pl-3" style="transform: rotate(-90deg);">
                     <div class="time__graph mb-5">
@@ -529,6 +418,7 @@
         </div>
     </div>
 </div>
+<?php if (!\library\Auth::isGuest()): ?>
 <div class="comment__post bg-white my-1 py-3 py-lg-4 px-2 px-md-5 shadow__box">
     <div class="ahead__string d-flex justify-content-between">
         <h3 class="font-italic">Post a Comment</h3>
@@ -545,17 +435,31 @@
         </a>
         <form class="form" action="#" name="post__comment" method="POST">
             <div class="input-group-append w-100" style="margin-top: 0.3rem;">
-                <input type="text" class="comment__input-text px-2" style="min-height: 2.7rem;">
-                <input type="submit" value="Post" class="px-4 ml-1 bg-dark text-white text-uppercase"></input>
+                <input id="comment-input" name="body" type="text" class="comment__input-text px-2"
+                    style="min-height: 2.7rem;">
+                <input type="hidden" name="parent_id" id="parent_id" value="0">
+                <input type="hidden" name="author_id" value="<?=$_SESSION['user']['id']?>">
+                <input type="hidden" name="place_id" value="0">
+                <input type="submit" name="success" value="Post"
+                    class="px-4 ml-1 bg-dark text-white text-uppercase "></input>
             </div>
         </form>
     </div>
 </div>
+<?php endif;?>
 <div class="comments__view my-3 my-lg-5 bg-white shadow__box">
     <div class="comments__view-heading underline py-4 px-3 px-lg-5">
         <h3 class="font-italic">Comments</h3>
     </div>
-    <div class="comment__shell px-3 px-lg-5 pb-3 pb-lg-5">
+    <?php
+$comments = new Comments;
+$commentsMain = $comments->getComments(0, 0);
+if (count($commentsMain) == 0) {
+    echo "<h1 class=\"text-center\">There are no comments yet, be the first</h1>";
+}
+?>
+    <div class="comment__shell px-3 px-lg-5 pb-3 pb-lg-5 mb-3">
+        <?php foreach ($commentsMain as $comment): ?>
         <div class="comment__body row">
             <div class="avatar__place col-auto col-lg-1 ml-1 m-lg-0 pr-3 pr-lg-0 d-flex justify-content-end">
                 <a href="#">
@@ -566,90 +470,62 @@
                 <p class="m-0">post by</p>
                 <div class="name__info-string d-flex justify-content-between">
                     <div class="name__reply d-flex">
-                        <h4 class="font-weight-bold comment__name" style="font-size: 1.1rem;">Smuckerger
-                            Topping</h4>
-                        <button class="reply__btn btn-sm mx-2">Reply</button>
+                        <h4 class="font-weight-bold comment__name" style="font-size: 1.1rem;">
+                            <?=$content->getInfoById('login', $comment['author_id']);?></h4>
+                        <a href="#comment-input" class="reply__btn btn-sm mx-2">Reply</a>
+                        <p class="parent_id"><?=$comment['id']?></p>
                     </div>
-                    <p class="mr-3 d-inline-block"><i class="fa fa-share-alt" aria-hidden="true"
-                            style="cursor: pointer;"></i> 465 <i class="fa fa-thumbs-o-up" aria-hidden="true"
-                            style="cursor: pointer;"></i> 640</p>
+                    <p class="mr-3 d-inline-block"> <i
+                            class="fa fa-thumbs-o-up <?php $comments->isActiveLike($userId, $comment['id'], 'comment')?>"
+                            aria-hidden="true" style="cursor: pointer;" data-id="<?=$comment['id'];?>"
+                            data-type="comment"></i> <span
+                            class="like-amount"><?php $comments->likeAmount($comment['id'], 'comment');?></span> </p>
                 </div>
-                <data class="comment__data d-block">6/10/2014</data>
-                <div class="image__comment mt-3 mb-2 d-inline-block position-relative">
-                    <a data-fancybox="gallery" href="/assets/img/big-image/Photo-mail-small1_photos_v2_x4.png">
-                        <img src="/assets/img/Photo-mail-small1.png" alt="">
-                    </a>
-                    <div class="pintres__comment-link d-inline-block position-absolute">
-                        <a target="_blank" href="https://pinterest.com">
-                            <i class="fa fa-pinterest mx-2 my-2" aria-hidden="true"
-                                style="color: black; font-size: 23px;"></i>
-                        </a>
-                    </div>
-                </div>
-                <p class="comment-sense underline mb-1">Thank you for the recipe1!</p>
-                <div class="comment__body row">
-                    <div class="avatar__place col-auto col-lg-1 ml-1 m-lg-0 pr-3 pr-lg-0 d-flex justify-content-end">
-                        <a href="#">
-                            <img src="/assets/img/comment-avatar.png" class="mb-2" alt="">
-                        </a>
-                    </div>
-                    <div class="comment__body-place col-auto col-lg-11 pl-3 pl-lg-5">
-                        <p class="m-0">post by</p>
-                        <div class="name__info-string d-flex justify-content-between">
-                            <div class="name__reply d-flex">
-                                <h4 class="font-weight-bold comment__name" style="font-size: 1.1rem;">
-                                    Smuckerger Topping</h4>
-                                <button class="reply__btn btn-sm mx-2">Reply</button>
-                            </div>
-                            <p class="mr-3 d-inline-block"><i class="fa fa-share-alt" aria-hidden="true"
-                                    style="cursor: pointer;"></i> 465 <i class="fa fa-thumbs-o-up" aria-hidden="true"
-                                    style="cursor: pointer;"></i> 640</p>
+                <date class="comment__data d-block"><?=$comment['date']?></date>
+
+                <p class="comment-sense underline mb-1"><?=$comment['body']?></p>
+                <div class="answers">
+                    <?php $commentsNested = $comments->getComments($comment['id'], 0);?>
+                    <?php foreach ($commentsNested as $commentNested): ?>
+                    <div class="comment__body row comment-nested hide">
+                        <div
+                            class="avatar__place col-auto col-lg-1 ml-1 m-lg-0 pr-3 pr-lg-0 d-flex justify-content-end">
+                            <a href="#">
+                                <img src="/assets/img/comment-avatar.png" class="mb-2" alt="">
+                            </a>
                         </div>
-                        <data class="comment__data d-block">6/10/2014</data>
-                        <p class="comment-sense mb-1 font-weight-bold">Thank you for the recipe! Lorem ipsum
-                            dolor sit amet, consectetur adipisicing elit.</p>
+                        <div class="comment__body-place col-auto col-lg-11 pl-3 pl-lg-5">
+                            <p class="m-0">post by</p>
+                            <div class="name__info-string d-flex justify-content-between">
+                                <div class="name__reply d-flex">
+                                    <h4 class="font-weight-bold comment__name" style="font-size: 1.1rem;">
+                                        <?=$content->getInfoById('login', $commentNested['author_id']);?>
+                                    </h4>
+                                    <a href="#comment-input" class="reply__btn btn-sm mx-2">Reply</a>
+                                    <p class="parent_id"><?=$comment['id']?></p>
+                                </div>
+                                <p class="mr-3 d-inline-block"><i
+                                        class="fa fa-thumbs-o-up <?php $comments->isActiveLike($userId, $commentNested['id'], 'comment')?>"
+                                        aria-hidden="true" style="cursor: pointer;" data-id="<?=$commentNested['id']?>"
+                                        data-type="comment"></i> <span
+                                        class="like-amount"><?php $comments->likeAmount($commentNested['id'], 'comment');?></span>
+                                </p>
+                            </div>
+                            <date class="comment__data d-block"><?=$commentNested['date'];?></date>
+                            <p class="comment-sense mb-1 font-weight-bold"><?=$commentNested['body'];?></p>
+                        </div>
+
                     </div>
-                    <button class="w-100 border-0 font-weight-light underline my-1 my-lg-2"
-                        style="outline: none; background: none;">24 more comments</button>
+                    <?php endforeach;?>
+                    <!-- Второй уровень вложености -->
+                    <?php if (count($commentsNested) > 2): ?>
+                    <button class="more-btn w-100 border-0 font-weight-light underline my-1 my-lg-2"
+                        style="outline: none; background: none;">More comments</button>
+                    <?php endif;?>
                 </div>
             </div>
         </div>
-        <div class="comment__body row">
-            <div class="avatar__place col-auto col-lg-1 ml-1 m-lg-0 pr-3 pr-lg-0 d-flex justify-content-end">
-                <a href="#">
-                    <img src="/assets/img/comment-avatar.png" class="mb-2" alt="">
-                </a>
-            </div>
-            <div class="comment__body-place col-auto col-lg-11 pl-3 pl-lg-5">
-                <p class="m-0">post by</p>
-                <div class="name__info-string d-flex justify-content-between">
-                    <div class="name__reply d-flex">
-                        <h4 class="font-weight-bold comment__name" style="font-size: 1.1rem;">Smuckerger
-                            Topping</h4>
-                        <button class="reply__btn btn-sm mx-2">Reply</button>
-                    </div>
-                    <p class="mr-3 d-inline-block"><i class="fa fa-share-alt" aria-hidden="true"
-                            style="cursor: pointer;"></i> 465 <i class="fa fa-thumbs-o-up" aria-hidden="true"
-                            style="cursor: pointer;"></i> 640</p>
-                </div>
-                <data class="comment__data d-block">6/10/2014</data>
-                <p class="comment-sense mb-1">Thank you for the recipe!.</p>
-            </div>
-        </div>
+        <?php endforeach;?>
     </div>
 </div>
-<div class="page__navigation d-flex justify-content-center bg-white py-2 py-lg-4 shadow__box mb-5">
-    <div class="btn-group" role="group" aria-label="Basic example">
-        <button type="button" class="btn btn-white ">&#60;</button>
-        <button type="button" class="btn btn-white active_btn">1</button>
-        <button type="button" class="btn btn-white">2</button>
-        <button type="button" class="btn btn-white">3</button>
-        <button type="button" class="btn btn-white">4</button>
-        <button type="button" class="btn btn-white">5</button>
-        <button type="button" class="btn btn-white">6</button>
-        <button type="button" class="btn btn-white">&#62;</button>
-    </div>
-</div>
-
-
 </div>

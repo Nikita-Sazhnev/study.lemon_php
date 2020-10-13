@@ -6,6 +6,8 @@ class View
     public $basePath = __DIR__ . '/../views/templates/';
 
     protected $title;
+    protected $message = "Results: ";
+    protected $content;
     protected $seo = [];
     protected $css = [];
     protected $js = [];
@@ -19,6 +21,7 @@ class View
     public function render($tplName, $data)
     {
         $action = \library\Url::getSegmentByNumber(1);
+        $content = new \library\Content;
         include $this->_layout;
 
     }
@@ -26,6 +29,10 @@ class View
     public function setTitle($title)
     {
         $this->title = $title;
+    }
+    public function setMessage($message)
+    {
+        $this->message = $message;
     }
 
     public function setCss($css)

@@ -3,17 +3,25 @@ namespace controllers;
 
 use base\Controller;
 use library\Auth;
+use library\Content;
 use library\Request;
+use library\Search;
 use library\Validator;
 
 class ControllerMain extends Controller
 {
     public function actionIndex()
     {
+        if (!Auth::isGuest()) {
+            $model = new \models\CommentForm;
+            if (Request::isPost()) {
+                $model->load(Request::getPost());
+                $model->postComment();
+            }
+        }
 
         $this->view->setTitle('Lemon');
         $this->view->render('home', []);
-
     }
     public function actionLogin()
     {
@@ -28,6 +36,7 @@ class ControllerMain extends Controller
                     echo 'Wrong login or password';
                 }
             }
+
             $this->view->setTitle('login');
             $this->view->render('login', []);
         } else {
@@ -63,8 +72,61 @@ class ControllerMain extends Controller
             $this->view->setTitle('Registration');
             $this->view->render('reg', ['model' => $model]);
         } else {
-            header("Location: /");
+            throw new \Exception("Forbiden", 403);
         }
 
+    }
+    public function actionSearch()
+    {
+        if (!Request::isSearchEmpty()) {
+            $respond = Search::doSearch(Request::getSearch());
+            if (empty($respond)) {
+                $this->view->setMessage('No matches');
+            }
+        } else {
+            $this->view->setMessage('Enter your search request');
+        }
+        $this->view->setTitle('Search');
+        $this->view->render('search', ['search' => $respond]);
+    }
+
+    public function actionArticle()
+    {
+
+        if (!Request::isIdEmpty()) {
+            if (!Auth::isGuest()) {
+                $model = new \models\CommentForm;
+                if (Request::isPost()) {
+                    $model->load(Request::getPost());
+                    $model->postComment();
+                }
+            }
+            $content = new Content;
+            $post = $content->getAllInfoById('posts', Request::getArticleByUserId());
+            $this->view->setTitle("Blog");
+            $this->view->render('blog', ['post' => $post]);
+
+        } else {
+            header("Location: /main/404", 404);
+        }
+
+    }
+    public function actionAuthor()
+    {
+        if (!Request::isIdEmpty()) {
+            $content = new Content;
+            $author = $content->getAllInfoById('users', Request::getArticleByUserId());
+            $this->view->setTitle("Profile");
+            $this->view->render('author', ['author' => $author]);
+        } else {
+            header("Location: /main/404", 404);
+        }
+
+    }
+
+    public function action404()
+    {
+        $this->view->setTitle("404");
+        $this->view->render('404', []);
     }
 }
