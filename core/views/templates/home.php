@@ -5,8 +5,8 @@ use library\Comments;
 $previews = $content->getContent('previews', 3);
 $slider = $content->getContent('slider', 5);
 $tags = $content->getContent('tags', 30);
-$lastArticle = $content->getContent('posts', 1);
-$lastArticle = $lastArticle[0];
+$main = $content->getContent('posts', 1);
+$main = $main[0];
 
 ?>
 <main>
@@ -54,63 +54,78 @@ $lastArticle = $lastArticle[0];
                         <img src="/assets/img/<?=$preview['img_src']?>" class="card-img-top" alt="preview">
                     </a>
                     <div class="card-body px-0 pt-2">
-                        <a href="/main/article/?id=<?=$preview['url'];?>"
+                        <a class="views-update" data-id="<?=$preview['url'];?>"
+                            href="/main/article/?id=<?=$preview['url'];?>"
                             class="card-text text-decoration-none"><?=$preview['title'];?></a>
                         <p><i class="fa fa-clock-o" aria-hidden="true"></i> <?=$preview['read_time']?> mins | <i
-                                class="fa fa-comment" aria-hidden="true"></i> 3 <i class="fa fa-eye"
-                                aria-hidden="true"></i> <?=$preview['views']?></p>
+                                class="fa fa-comment" aria-hidden="true"></i>
+                            <?=$content->commentsAmount($preview['url']);?> <i class="fa fa-eye" aria-hidden="true"></i>
+                            <?=$content->viewsAmount($preview['url'])?></p>
                     </div>
                 </div>
                 <?php endforeach;?>
             </div>
         </div>
     </div>
-
+    <?php
+$main = $content->getHighlightId('main');
+$main = $content->getAllInfoById('posts', $main);
+?>
     <div class="main__article mb-5 d-flex flex-wrap shadow__box">
         <div class="main__article-image col-12 col-lg-6 bg-white pl-lg-0 position-relative">
-            <a data-fancybox="gallery" href="/assets/img/<?=$lastArticle['img']?>" class="main_article">
-                <img src="/assets/img/<?=$lastArticle['img']?>" alt="Торт" class="w-100 h-100">
+            <a data-fancybox="gallery" href="/assets/img/<?=$main['img']?>" class="main_article">
+                <img src="/assets/img/<?=$main['img']?>" alt="Торт" class="w-100 h-100">
             </a>
             <img src="/assets/img/Icon-fav.png" alt="favorite-icon" class="icon-favorite position-absolute"
                 id="favorite">
         </div>
         <div class="main__article-body col-12 col-lg-6 bg-white pl-3 pl-lg-0" style="height: 450px">
-            <h1 class="article-heading-string mt-4"><a href="#" class="article-heading"><?=$lastArticle['title']?></a>
+            <h1 class="article-heading-string mt-4"><a href="#" class="article-heading"><?=$main['title']?></a>
             </h1>
             <div class="row d-flex justify-content-between align-items-baseline ml-1 mr-2 mr-lg-5 mt-3">
                 <p style="font-size: 18px; font-weight: 300; cursor: default;"><i class="fa fa-clock-o"
-                        aria-hidden="true"></i> <?=$lastArticle['read_time']?>mins <i class="fa fa-signal"
-                        aria-hidden="true"></i> <?=$lastArticle['difficult']?>
+                        aria-hidden="true"></i> <?=$main['read_time']?>mins <i class="fa fa-signal"
+                        aria-hidden="true"></i> <?=$main['difficult']?>
                 </p>
                 <button class="btn btn-sm btn-outline-dark text-uppercase">Save Recipe</button>
             </div>
             <div class="inner-scrolling mt-4">
                 <p class=" mb-0">
-                    <?=$lastArticle['summary'];?>
+                    <?=$main['summary'];?>
                 </p>
                 <h2 class="my-3">Directions</h2>
                 <p>
-                    <?=$lastArticle['body'];?>
+                    <?=$main['body'];?>
                 </p>
             </div>
         </div>
     </div>
 </main>
+<?php
+$chichi = $content->getHighlightId('chichi');
+$chichi = $content->getAllInfoById('posts', $chichi);
+?>
 <div class="modeles__group mb-4 d-flex justify-content-around flex-wrap">
     <div class="first__mcolum d-flex flex-column">
         <div class="articel__preview-modul modul__width shadow__box bg-white my-2 px-3 pt-4">
-            <a href="#">
+            <a href="/main/article?id=<?=$chichi['id']?>">
                 <h4 class="underline text-center font-weight-bold"
                     style="font-family: 'Playfair Display', serif; color: #055555;">Chi-Chi or Chichi</h4>
             </a>
             <div class="article__author">
                 <a href="#"><img src="/assets/img/comment-avatar.png" alt="" class="float-left ml-2"></a>
                 <div class="article__author-about row pl-3">
-                    <p class="m-0">Recipe by</p><br>
-                    <p class="float-left m-0"><strong>Smuckerger Toppings</strong></p><br>
+                    <p class="my-0 mr-2 ">Recipe by </p>
+                    <br>
+                    <p class="m-0">
+                        <strong><?=$content->getInfoById('login', $chichi['author_id']);?></strong>
+                    </p>
+                    <br>
                     <p class="m-0" style="cursor: default;"><i class="fa fa-clock-o" aria-hidden="true"></i>
-                        20mins | <i class="fa fa-comment" aria-hidden="true"></i> 3 <i class="fa fa-eye"
-                            aria-hidden="true"></i> 465</p>
+                        20mins | <i class="fa fa-comment" aria-hidden="true"></i>
+                        <? $content->commentsAmount($chichi['id'])?> <i class="fa fa-eye" aria-hidden="true"></i>
+                        <?=$chichi['views']?>
+                    </p>
                 </div>
             </div>
             <div class="mt-2 article__slide row">
@@ -242,7 +257,7 @@ $articlesHard = $content->getArticleByDiff('Hard');
                             </a>
                         </p>
                         <p class="mb-0 font-weight-bold" style="letter-spacing: -1px; line-height: 1;"><a
-                                style="color: black;"
+                                style="color: black;" class="views-update" data-id="<?=$easy['id']?>"
                                 href="/main/article/?id=<?=$easy['id'];?>"><?=$easy['title']?>.</a></p>
                     </div>
                 </div>
@@ -267,7 +282,7 @@ $articlesHard = $content->getArticleByDiff('Hard');
                             </a>
                         </p>
                         <p class="mb-0 font-weight-bold" style="letter-spacing: -1px; line-height: 1;"><a
-                                style="color: black;"
+                                style="color: black;" class="views-update" data-id="<?=$middle['id']?>"
                                 href="/main/article/?id=<?=$middle['id'];?>"><?=$middle['title']?>.</a></p>
                     </div>
                 </div>
@@ -292,7 +307,7 @@ $articlesHard = $content->getArticleByDiff('Hard');
                             </a>
                         </p>
                         <p class="mb-0 font-weight-bold" style="letter-spacing: -1px; line-height: 1;"><a
-                                style="color: black;"
+                                style="color: black;" class="views-update" data-id="<?=$hard['id']?>"
                                 href="/main/article/?id=<?=$hard['id'];?>"><?=$hard['title']?>.</a></p>
                     </div>
                 </div>
@@ -329,23 +344,30 @@ $articlesHard = $content->getArticleByDiff('Hard');
             </div>
         </div>
     </div>
+    <?php
+$popular = $content->getHighlightId('popular');
+$popular = $content->getAllInfoById('posts', $popular);
+?>
     <div class="third__mcolum d-flex flex-column">
         <div class="popual__modul modul__width shadow__box bg-white my-2 px-3 py-4"
-            style="min-height: 21.9rem; background-image: url(/assets/img/popular_now.png); background-repeat: no-repeat; background: cover;">
+            style="min-height: 21.9rem; background-image: url(/assets/img/popular_now.png); background-repeat: no-repeat; background-size: cover;">
             <h3 class="text-left"
                 style="font-family: 'Playfair Display', serif; font-weight: 700; font-size: 2rem; color: #922323;">
                 Popular Now</h3>
             <h4 class="font-weight-bold mt-5" style="font-size: 1.25rem;">
-                <a href="#" style="color: black;">Vanila Frozen Coffee</a>
+                <a class="views-update" data-id="<?=$popular['id']?>" href="main/article/?id=<?=$popular['id']?>"
+                    style="color: black;"><?=$popular['title']?></a>
             </h4>
-            <p class="mb-0" style="line-height: 1.1;">Mix coffee, sugar and creamer. Pour into blender and
-                add ice cubes. Blend until smooth.</p>
+            <p class="mb-0" style="line-height: 1.1;"><?=$popular['preview_test']?></p>
             <div class="get__recipe-string d-flex justify-content-between">
-                <a style="height: 2rem;" href="#" class="btn btn-s btn-outline-dark pt-1 pb-2 mt-3">Get it
-                    recipe</a>
+                <a style="height: 2rem;" href="main/article/?id=<?=$popular['id']?>"
+                    class="btn btn-s btn-outline-dark pt-1 pb-2 mt-3 views-update" data-id="<?=$popular['id']?>">
+                    Get it recipe
+                </a>
                 <p class="mb-0 mt-4" style="font-size: .8rem; cursor: default;"><i class="fa fa-clock-o"
-                        aria-hidden="true"></i> 20mins | <i class="fa fa-comment" aria-hidden="true"></i> 3
-                    <i class="fa fa-eye" aria-hidden="true"></i> 465
+                        aria-hidden="true"></i> <?=$popular['read_time']?> mins | <i class="fa fa-comment"
+                        aria-hidden="true"></i> <?=$content->commentsAmount($popular['id']);?>
+                    <i class="fa fa-eye" aria-hidden="true"></i> <?=$popular['views'];?>
                 </p>
             </div>
         </div>
@@ -432,6 +454,9 @@ $articlesHard = $content->getArticleByDiff('Hard');
     <?php
 $comments = new Comments;
 $commentsMain = $comments->getComments(0, 0);
+if (count($commentsMain) == 0) {
+    echo "<h1 class=\"text-center\">There are no comments yet, be the first</h1>";
+}
 ?>
     <div class="comment__shell px-3 px-lg-5 pb-3 pb-lg-5 mb-3">
         <?php foreach ($commentsMain as $comment): ?>

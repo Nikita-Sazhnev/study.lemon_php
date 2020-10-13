@@ -264,15 +264,17 @@ footer {
 }
 
 .answers .comment-nested {
-  height: 84px;
+  transform: scaleY(1);
   overflow: hidden;
-  transition: all 0.3s ease-in;
+  transition: all 0.3s ease-in-out;
 }
 .hide:not(:nth-child(-n + 3)) {
-  height: 0 !important;
+  transform: scaleY(0) !important;
+  position: absolute;
+  transition: none;
 }
 .answers .comment-nested:nth-child(-n + 3) {
-  height: 84px;
+  transform: scaleY(1);
 }
 
 .btn-group button {

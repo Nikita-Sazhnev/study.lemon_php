@@ -22,24 +22,40 @@ $(document).ready(function () {
   });
 });
 
-$(".fa-thumbs-o-up").click(function () {
-  let userId = $("#userId").val();
-  let likeId = $(this).attr("data-id");
-  let dataType = $(this).attr("data-type");
-  let like = $(this);
-  let likeAmount = $(this).siblings(".like-amount");
-  $.ajax({
-    type: "POST",
-    url: "/Likes.php",
-    data: {
-      userId: userId, likeId: likeId, dataType: dataType,
-    },
-    success: function (res) {
-      like.toggleClass("active-like");
-      likeAmount.html(res);
-    },
+$(document).ready(function () {
+  $(".fa-thumbs-o-up").click(function () {
+    let userId = $("#userId").val();
+    let likeId = $(this).attr("data-id");
+    let dataType = $(this).attr("data-type");
+    let like = $(this);
+    let likeAmount = $(this).siblings(".like-amount");
+    $.ajax({
+      type: "POST",
+      url: "/Likes.php",
+      data: {
+        userId: userId, likeId: likeId, dataType: dataType,
+      },
+      success: function (res) {
+        like.toggleClass("active-like");
+        likeAmount.html(res);
+      },
+    });
   });
 });
+
+
+$(document).ready(function () {
+  $(".views-update").click(function () {
+    let id = $(this).attr("data-id");
+    $.ajax({
+      type: "POST",
+      url: "/Views.php",
+      data: { id: id }
+    })
+  })
+});
+
+
 // Get the element with id="defaultOpen" and click on it
 document.getElementById("defaultOpen").click();
 

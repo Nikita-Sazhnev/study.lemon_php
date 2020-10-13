@@ -14,7 +14,6 @@ class Content
         $sql = "SELECT * FROM `$table` ORDER BY `id` DESC LIMIT $limit";
         $result = $this->db->sendQuery($sql)->fetchAll();
         return $result;
-
     }
 
     public function getArticleByDiff($diff)
@@ -31,7 +30,7 @@ class Content
         return $result[$col];
     }
 
-    public function getAllInfoById($from, $id)
+    public function getAllInfoById($from, int $id)
     {
         $sql = "SELECT * FROM `$from` WHERE `id` = $id LIMIT 1";
         $result = $this->db->sendQuery($sql)->fetch();
@@ -41,6 +40,13 @@ class Content
             return $result;
         }
 
+    }
+
+    public function getHighlightId(string $type)
+    {
+        $sql = "SELECT * FROM `highlights` WHERE `type` = '$type' LIMIT 1";
+        $result = $this->db->sendQuery($sql)->fetch();
+        return (int) $result['post_id'];
     }
 
     public function isActiveLike($user, $id, $type)
@@ -58,5 +64,17 @@ class Content
         $sql = "SELECT * FROM `likes` WHERE `like_id` = $id AND `type` = '$type'";
         $result = $this->db->sendQuery($sql);
         echo $result->rowCount();
+    }
+    public function commentsAmount($id)
+    {
+        $sql = "SELECT * FROM `comments` WHERE `place_id` = $id";
+        $result = $this->db->sendQuery($sql);
+        echo $result->rowCount();
+    }
+    public function viewsAmount($id)
+    {
+        $sql = "SELECT * FROM `posts` WHERE `id` = $id";
+        $result = $this->db->sendQuery($sql)->fetch();
+        echo $result['views'];
     }
 }
