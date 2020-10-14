@@ -68,11 +68,6 @@ class ControllerAdmin extends \base\Controller
         $this->view->setTitle('Slider');
         $this->view->render('admin-home', []);
     }
-    public function actionTabs()
-    {
-        $this->view->setTitle('Tabs');
-        $this->view->render('admin-home', []);
-    }
     public function actionTags()
     {
         $this->view->setTitle('Tags');

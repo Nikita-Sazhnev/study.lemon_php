@@ -10,11 +10,6 @@
 </head>
 
 <body>
-    <header class="w-100">
-        <div class="test">
-            <h1 class="heading">Admin Panel</h1>
-        </div>
-    </header>
 
     <?php include $this->basePath . '//admin//' . $tplName . '.php';?>
 

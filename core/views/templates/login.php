@@ -10,15 +10,8 @@
             <input name="password" type="password" class="form-control form__input btn-outline-light"
                 id="exampleInputPassword" placeholder="password">
         </div>
-        <div class="form-group form-check">
-            <div class="forgot__sring d-flex justify-content-between">
-                <input type="checkbox" class="form-check-input mt-0" id="exampleCheck1">
-                <label class="form-check-label" for="exampleCheck1" style="font-size: 0.7rem; color: gray;">Remember
-                    me</label>
-                <a class="forgon__link" href="#">Forgot your password</a>
-            </div>
-        </div>
-        <div class="button__contein d-flex justify-content-center">
+
+        <div class="button__contein mt-2 d-flex justify-content-center">
             <button type="submit" class="btn btn-sm btn-outline-dark text-uppercase px-4 pt-2 pb-1 my-1"
                 style="border-radius: 0; border-color: lightgray; font-size: .9rem;">Login</button>
         </div>
@@ -27,7 +20,7 @@
             <a href="#"><i class="reg__gp fa fa-google-plus" aria-hidden="true"></i></a>
         </div>
         <div class="dont__have-acc d-flex justify-content-center mt-2">
-            <a href="#" class="m-0" style="font-size: 1rem; color: gray;">Don`t have an accont? Sing In</a>
+            <a href="/main/reg" class="m-0" style="font-size: 1rem; color: gray;">Don`t have an accont? Sing In</a>
         </div>
     </form>
 </div>

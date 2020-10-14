@@ -9,6 +9,11 @@ class Content
         $this->db = Db::getDb();
     }
 
+    /** Отправлет запрос к бд
+     * @param sting $table Имя талбицы mySQL
+     * @param int $limit Лимит полученых данных
+     * @return array
+     */
     public function getContent($table, $limit)
     {
         $sql = "SELECT * FROM `$table` ORDER BY `id` DESC LIMIT $limit";
