@@ -15,7 +15,8 @@
             <h1 class="heading">Admin Panel</h1>
         </div>
     </header>
-    <?php include $this->basePath . $tplName . '.php';?>
+
+    <?php include $this->basePath . '//admin//' . $tplName . '.php';?>
 
     <nav>
         <ul>
