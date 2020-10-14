@@ -1,6 +1,9 @@
 <?php
 namespace controllers;
 
+use Exception;
+use library\Auth;
+
 class ControllerAdmin extends \base\Controller
 {
     public function __construct()
@@ -9,9 +12,15 @@ class ControllerAdmin extends \base\Controller
         $this->view = new \base\View;
         $this->view->setLayout('admin');
     }
+
     public function actionIndex()
     {
-        $this->view->setTitle('Admin');
-        $this->view->render('admin-home', []);
+        if (Auth::canAccess('admin')) {
+            $this->view->setTitle('Admin');
+            $this->view->render('admin-home', []);
+        } else {
+            throw new Exception("Cannot access", 403);
+        }
+
     }
 }

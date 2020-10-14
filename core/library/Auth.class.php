@@ -12,10 +12,7 @@ class Auth
     }
     public static function canAccess($role)
     {
-        if ($_SESSION['user']['role'] == $role) {
-            return true;
-        }
-        return false;
+        return $_SESSION['user']['role'] == $role;
     }
     public static function login($id, $role)
     {
