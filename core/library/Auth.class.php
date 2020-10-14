@@ -12,7 +12,12 @@ class Auth
     }
     public static function canAccess($role)
     {
-        return $_SESSION['user']['role'] == $role;
+        if ($_SESSION['user']['role'] == $role) {
+            return true;
+        } else {
+            header('HTTP/1.2 403 Forbidden');
+            exit();
+        }
     }
     public static function login($id, $role)
     {
