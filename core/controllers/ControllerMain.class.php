@@ -23,6 +23,7 @@ class ControllerMain extends Controller
         $this->view->setTitle('Lemon');
         $this->view->render('home', []);
     }
+
     public function actionLogin()
     {
 
@@ -102,7 +103,7 @@ class ControllerMain extends Controller
                 }
             }
             $content = new Content;
-            $post = $content->getAllInfoById('posts', Request::getArticleByUserId());
+            $post = $content->getAllInfoById('posts', Request::getPageById());
             $this->view->setTitle("Blog");
             $this->view->render('blog', ['post' => $post]);
 
@@ -115,7 +116,7 @@ class ControllerMain extends Controller
     {
         if (!Request::isIdEmpty()) {
             $content = new Content;
-            $author = $content->getAllInfoById('users', Request::getArticleByUserId());
+            $author = $content->getAllInfoById('users', Request::getPageById());
             $this->view->setTitle("Profile");
             $this->view->render('author', ['author' => $author]);
         } else {
