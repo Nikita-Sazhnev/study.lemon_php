@@ -31,7 +31,7 @@ $(document).ready(function () {
     let likeAmount = $(this).siblings(".like-amount");
     $.ajax({
       type: "POST",
-      url: "/Likes.php",
+      url: "/ajax/Likes.php",
       data: {
         userId: userId, likeId: likeId, dataType: dataType,
       },
@@ -49,7 +49,7 @@ $(document).ready(function () {
     let id = $(this).attr("data-id");
     $.ajax({
       type: "POST",
-      url: "/Views.php",
+      url: "/ajax/Views.php",
       data: { id: id }
     })
   })

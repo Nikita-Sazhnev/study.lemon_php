@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/core/library/Db.class.php';
+require_once __DIR__ . '/../core/library/Db.class.php';
 $db = \library\Db::getDb();
 $params = [$_POST['userId'], $_POST['likeId'], $_POST['dataType']];
 

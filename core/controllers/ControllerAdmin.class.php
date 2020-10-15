@@ -5,10 +5,13 @@ use library\Auth;
 
 class ControllerAdmin extends \base\Controller
 {
+    public $content;
+
     public function __construct()
     {
         parent::__construct();
         Auth::canAccess('admin');
+        $this->content = new \library\Content;
         $this->view = new \base\View;
         $this->view->setLayout('admin');
     }
@@ -21,7 +24,7 @@ class ControllerAdmin extends \base\Controller
     public function actionPopular()
     {
         $this->view->setTitle('Popular Now');
-        $this->view->render('admin-home', []);
+        $this->view->render('popular', ['content' => $this->content]);
     }
     public function actionBig()
     {

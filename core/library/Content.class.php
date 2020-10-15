@@ -44,6 +44,13 @@ class Content
         return $result[$col];
     }
 
+    public function getColsFromPosts($cols)
+    {
+        $sql = "SELECT $cols FROM `posts` WHERE 1";
+        $result = $this->db->sendQuery($sql)->fetchAll();
+        return $result;
+    }
+
     /** Получает всю запись из бд, в случае отсутствия такой записи перенаправляет на страницу 404
      * @param string $from Имя таблицы
      * @param int $id Ид записи

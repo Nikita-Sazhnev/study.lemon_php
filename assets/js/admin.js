@@ -1,3 +1,18 @@
+$(document).ready(function () {
+    $(".btn").click(function () {
+        let id = $(this).attr("data-id");
+        $("#id").html(id);
+        $.ajax({
+            type: "POST",
+            url: "/ajax/Popular.php",
+            data: { id: id }
+        });
+    });
+});
+
+
+
+//bg
 var width, height
 var step = 0;
 var canvas = document.createElement('canvas')
