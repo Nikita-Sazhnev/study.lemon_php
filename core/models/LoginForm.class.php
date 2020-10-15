@@ -8,6 +8,9 @@ class LoginForm extends \base\BaseForm
     public $login;
     public $password;
 
+    /** Устанавливает правила валидации формы
+     * @return array
+     */
     public function getRules()
     {
         return [
@@ -15,7 +18,9 @@ class LoginForm extends \base\BaseForm
             'password' => ['requaired'],
         ];
     }
-
+    /** Залогинивает ползователя на сайте через сессию
+     * @return bool
+     */
     public function doLogin()
     {
         $password = md5($this->_data['password']);

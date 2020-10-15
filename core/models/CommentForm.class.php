@@ -10,6 +10,9 @@ class CommentForm extends BaseForm
     public $author_id;
     public $place_id;
 
+    /** Устанавливает правила валидации формы
+     * @return array
+     */
     public function getRules()
     {
         return [
@@ -18,7 +21,9 @@ class CommentForm extends BaseForm
             'comment_id' => ['requaired'],
         ];
     }
-
+    /** Записывает комментарий в бд
+     * @return void
+     */
     public function postComment()
     {
         $sql = "INSERT INTO `comments` (`body`,`author_id`,`parent_id`,`place_id`) VALUES (?,?,?,?)";

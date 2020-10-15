@@ -8,6 +8,9 @@ class RegisterForm extends \base\BaseForm
     public $password;
     public $password_confirm;
 
+    /** Устанавливает правила валидации формы
+     * @return array
+     */
     public function getRules()
     {
         return [
@@ -16,7 +19,9 @@ class RegisterForm extends \base\BaseForm
             'email' => ['required'],
         ];
     }
-
+    /** Производит запись данных нового пользователя в бд
+     * @return void
+     */
     public function doRegister()
     {
         $password = md5($this->_data['password']);
