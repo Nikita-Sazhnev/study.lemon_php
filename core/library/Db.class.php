@@ -19,6 +19,9 @@ class Db
         $this->_link = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $config['user'], $config['pass']);
     }
 
+    /** Возвращает новый объект класса Db с подключением бд(PDO)
+     * @return object
+     */
     public static function getDb()
     {
         if (is_null(self::$_db)) {
@@ -27,6 +30,10 @@ class Db
         return self::$_db;
     }
 
+    /** Запрос на получение данных бд
+     * @param sting $sql SQL запрос
+     * @return array
+     */
     public function sendQuery($sql)
     {
         $result = $this->_link->query($sql);
@@ -35,6 +42,10 @@ class Db
         }
         return $result;
     }
+    /** Запрос на изменение данных бд
+     * @param sting $sql SQL запрос
+     * @return array
+     */
 
     public function execPdo($sql, $data)
     {
@@ -44,6 +55,9 @@ class Db
         }
     }
 
+    /** Удаление не желательных символов, обрезка лишних пробелов, замена управляющих HTML конструкций
+     * @return string
+     */
     public static function getSafeData($data)
     {
         $data = htmlspecialchars(trim(preg_replace('/[\'\\\*\"\/]/', '', $data)));

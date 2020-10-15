@@ -1,0 +1,80 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  cursor: cell;
+}
+
+nav {
+  display: flex;
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+}
+nav li {
+  display: inline-block;
+  font-size: 1.5rem;
+}
+a {
+  text-decoration: none;
+}
+nav li + li a::before {
+  content: "| ";
+}
+nav li a:hover {
+  color: crimson;
+}
+
+header .test {
+  color: crimson;
+  margin-top: 2rem;
+  font-size: 5rem;
+  text-align: center;
+  font-family: fantasy;
+}
+.heading {
+  display: inline-block;
+  border: 0.3rem solid crimson;
+  padding: 0.5rem;
+  -webkit-text-stroke-color: white;
+  -webkit-text-stroke-width: thin;
+}
+.category {
+  display: flex;
+  justify-content: center;
+}
+canvas,
+body {
+  padding: 0;
+  margin: 0;
+  background-color: #3bf04059;
+}
+canvas {
+  z-index: -1;
+}
+.category {
+  margin-top: 2rem;
+  line-height: 2.2rem;
+  text-align: center;
+  list-style: none;
+  font-size: 2rem;
+}
+.category a:before {
+  content: "⇒";
+}
+.category a::after {
+  content: "⇐";
+}
+.category a::after,
+.category a::before {
+  display: none;
+}
+.category li:hover > a::before,
+.category li:hover > a::after {
+  display: inline-block;
+  color: crimson;
+  font-weight: bold;
+}
+a {
+  color: black;
+}

@@ -3,6 +3,10 @@ namespace library;
 
 class Search
 {
+    /** Производит поиск по постам
+     * @param string $search Поисковый запрос
+     * @return array
+     */
     public static function doSearch($search)
     {
         $db = Db::getDb();
