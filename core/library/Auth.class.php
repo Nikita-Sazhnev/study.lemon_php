@@ -8,6 +8,7 @@ class Auth
     {
         return empty($_SESSION['user']);
     }
+
     /**Проверка на право доступа к определеным разделам сайта*/
     public static function canAccess($role)
     {

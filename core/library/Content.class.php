@@ -31,6 +31,7 @@ class Content
         $result = $this->db->sendQuery($sql)->fetchAll();
         return $result;
     }
+
     /** Получает столбец из таблицы бд по ид пользователя
      * @param string $col Имя столбца
      * @param int $id Ид пользователя
@@ -86,6 +87,7 @@ class Content
                 echo "active-like";
             }}
     }
+
     /** Получает все лайки к записи и выводит их количество
      * @param int $id Ид записи для которой нужно вывести количсетво лайков
      * @param string $type Тип записи
