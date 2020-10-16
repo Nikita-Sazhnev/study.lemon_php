@@ -122,3 +122,9 @@ th {
   display: flex;
   justify-content: center;
 }
+.edit-link {
+  color: blue;
+}
+tr {
+  text-align: left;
+}

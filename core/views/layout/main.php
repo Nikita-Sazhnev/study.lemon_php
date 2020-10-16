@@ -48,7 +48,8 @@ $userId = $_SESSION['user']['id'];?>
                             <ul class="navbar-nav col-auto">
                                 <?php foreach ($navbar as $item): ?>
                                 <li class="nav-item">
-                                    <a href="<?=$item['url']?>" class="nav-link px-lg-0 px-xl-2"><?=$item['name'];?></a>
+                                    <a href="/main/<?=$item['url']?>"
+                                        class="nav-link px-lg-0 px-xl-2"><?=$item['name'];?></a>
                                 </li>
                                 <?php endforeach;?>
                             </ul>

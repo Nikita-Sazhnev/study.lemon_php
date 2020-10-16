@@ -10,6 +10,18 @@ $(document).ready(function () {
         });
     });
 });
+$(document).ready(function () {
+    $(".delete").click(function () {
+        $(this).parents('tr').remove();
+        let id = $(this).attr('data-id');
+        let table = $('#type').val();
+        $.ajax({
+            type: "POST",
+            url: "/ajax/Delete.php",
+            data: { id: id, table: table }
+        });
+    });
+});
 
 
 

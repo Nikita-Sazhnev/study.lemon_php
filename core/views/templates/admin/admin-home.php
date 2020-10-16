@@ -8,7 +8,7 @@
         <ul>
             <li><a href="/admin/popular">Popular Now</a></li>
             <li><a href="/admin/big">Big Preview</a></li>
-            <li><a href="/admin/">Navigation</a></li>
+            <li><a href="/admin/nav">Navigation</a></li>
             <li><a href="/admin/logo">Main Logo</a></li>
             <li><a href="/admin/">Comments</a></li>
             <li><a href="/admin/">Preview</a></li>

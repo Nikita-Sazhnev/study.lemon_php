@@ -40,8 +40,13 @@ class ControllerAdmin extends \base\Controller
     }
     public function actionNav()
     {
+        if (Request::isPost()) {
+            $model = new \models\NavbarForm;
+            $model->load(Request::getPost());
+            $model->insert();
+        }
         $this->view->setTitle('Nav');
-        $this->view->render('admin-home', []);
+        $this->view->render('nav', ['content' => $this->content]);
     }
     public function actionComments()
     {
