@@ -2,6 +2,7 @@
 namespace controllers;
 
 use library\Auth;
+use library\Request;
 
 class ControllerAdmin extends \base\Controller
 {
@@ -23,6 +24,11 @@ class ControllerAdmin extends \base\Controller
     }
     public function actionPopular()
     {
+        if (Request::isPost() && isset(Request::getPost()['popular'])) {
+            $model = new \models\UploadForm;
+            $image = Request::getFiles();
+            $model->uploadImage($image['file'], 'popular_now.png');
+        }
         $this->view->setTitle('Popular Now');
         $this->view->render('popular', ['content' => $this->content]);
     }

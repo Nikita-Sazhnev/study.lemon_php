@@ -18,6 +18,13 @@ class Request
     {
         return $_POST;
     }
+    /** Возвращает $_FILES
+     * @return array
+     */
+    public static function getFiles()
+    {
+        return $_FILES;
+    }
 
     /** Получает Поисковый запрос и делает его безопасным
      * @return string

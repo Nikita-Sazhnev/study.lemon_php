@@ -10,10 +10,11 @@ $table = $content->getColsFromPosts('`id`,`title`');
     </div>
 </header>
 <div class="form">
-    <form action="#" method="post">
+    <form action="#" enctype="multipart/form-data" method="post">
+
         <h2>Uplode picture</h2>
         <input type="file" name="file" accept="image/png">
-        <input type="submit" value="uplode">
+        <input type="submit" name="popular" value="uplode">
     </form>
 </div>
 <div class="tabel">
