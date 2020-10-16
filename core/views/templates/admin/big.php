@@ -1,22 +1,15 @@
 <?php $content = $data['content'];
-$id = $content->getHighlightId('popular');
+$id = $content->getHighlightId('main');
 $table = $content->getColsFromPosts('`id`,`title`');
 ?>
 <header class="w-100">
     <div class="test">
-        <h1 class="heading">Popular</h1>
+        <h1 class="heading">Big Preview</h1>
         <p>Current Popular Now id: <span id="id"><?=$id?></span></p>
-        <input type="hidden" id="type" value="popular">
+        <input type="hidden" id="type" value="main">
     </div>
 </header>
-<div class="form">
-    <form action="#" enctype="multipart/form-data" method="post">
 
-        <h2>Uplode picture</h2>
-        <input type="file" name="file" accept="image/png">
-        <input type="submit" name="popular" value="uplode">
-    </form>
-</div>
 <div class="tabel">
     <div class="row">
 

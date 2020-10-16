@@ -1,11 +1,12 @@
 $(document).ready(function () {
     $(".btn").click(function () {
+        let type = $('#type').val();
         let id = $(this).attr("data-id");
         $("#id").html(id);
         $.ajax({
             type: "POST",
-            url: "/ajax/Popular.php",
-            data: { id: id }
+            url: "/ajax/SetId.php",
+            data: { id: id, type: type }
         });
     });
 });

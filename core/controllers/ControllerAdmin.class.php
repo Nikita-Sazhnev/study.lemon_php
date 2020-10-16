@@ -34,8 +34,9 @@ class ControllerAdmin extends \base\Controller
     }
     public function actionBig()
     {
+
         $this->view->setTitle('Single');
-        $this->view->render('admin-home', []);
+        $this->view->render('big', ['content' => $this->content]);
     }
     public function actionNav()
     {
@@ -49,8 +50,13 @@ class ControllerAdmin extends \base\Controller
     }
     public function actionLogo()
     {
+        if (Request::isPost() && isset(Request::getPost()['logo'])) {
+            $model = new \models\UploadForm;
+            $image = Request::getFiles();
+            $model->uploadImage($image['file'], 'Logo copy.png');
+        }
         $this->view->setTitle('Main Logo');
-        $this->view->render('admin-home', []);
+        $this->view->render('logo', []);
     }
     public function actionPreview()
     {

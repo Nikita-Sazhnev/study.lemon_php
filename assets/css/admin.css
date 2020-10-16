@@ -117,3 +117,8 @@ th {
   text-align: center;
   font-size: 2rem;
 }
+.image-holder {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+}
