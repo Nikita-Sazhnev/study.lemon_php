@@ -27,14 +27,13 @@ class ControllerAdmin extends \base\Controller
         if (Request::isPost() && isset(Request::getPost()['popular'])) {
             $model = new \models\UploadForm;
             $image = Request::getFiles();
-            $model->uploadImage($image['file'], 'popular_now.png');
+            $model::uploadImage($image['file'], 'popular_now.png');
         }
         $this->view->setTitle('Popular Now');
         $this->view->render('popular', ['content' => $this->content]);
     }
     public function actionBig()
     {
-
         $this->view->setTitle('Single');
         $this->view->render('big', ['content' => $this->content]);
     }
@@ -74,20 +73,34 @@ class ControllerAdmin extends \base\Controller
         if (Request::isPost() && isset(Request::getPost()['logo'])) {
             $model = new \models\UploadForm;
             $image = Request::getFiles();
-            $model->uploadImage($image['file'], 'Logo copy.png');
+            $model::uploadImage($image['file'], 'Logo copy.png');
         }
         $this->view->setTitle('Main Logo');
         $this->view->render('logo', []);
     }
-    public function actionPreview()
+    public function actionPreviews()
     {
-        $this->view->setTitle('Preview');
-        $this->view->render('admin-home', []);
+        $model = new \models\PreviewForm;
+        if (Request::isPost() && isset(Request::getPost()['new'])) {
+
+            $model->load(Request::getPost());
+            $model->insert();
+        }
+        $this->view->setTitle('Previews');
+        if (Request::isIdEmpty()) {
+            $this->view->render('previews', ['content' => $this->content]);
+        } else {
+            if (Request::isPost() && isset(Request::getPost()['edit'])) {
+                $model->load(Request::getPost());
+                $model->update();
+            }
+            $this->view->render('preview-edition', ['content' => $this->content]);
+        }
     }
     public function actionChichi()
     {
         $this->view->setTitle('ChiChi');
-        $this->view->render('admin-home', []);
+        $this->view->render('chichi', ['content' => $this->content]);
     }
     public function actionAritcle()
     {
@@ -111,7 +124,7 @@ class ControllerAdmin extends \base\Controller
             $model->load(Request::getPost());
             $model->insert();
         }
-        $this->view->setTitle('Title');
+        $this->view->setTitle('Tags');
         if (Request::isIdEmpty()) {
             $this->view->render('tags', ['content' => $this->content]);
         } else {

@@ -2,7 +2,7 @@
 
 use library\Comments;
 
-$previews = $content->getContent('previews', 3);
+$previews = $content->getContent('previews', 6);
 $slider = $content->getContent('slider', 5);
 $tags = $content->getContent('tags', 30);
 $main = $content->getContent('posts', 1);

@@ -17,7 +17,7 @@ class UploadForm extends BaseForm
      * @param resourse $file
      * @param string $name
      */
-    public function uploadImage($file, $name)
+    public static function uploadImage($file, $name)
     {
         $finalePath = __DIR__ . '/../../assets/img/';
         move_uploaded_file($file['tmp_name'], $finalePath . $name);

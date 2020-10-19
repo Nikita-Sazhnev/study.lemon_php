@@ -11,8 +11,8 @@
             <li><a href="/admin/nav">Navigation</a></li>
             <li><a href="/admin/logo">Main Logo</a></li>
             <li><a href="/admin/comments">Comments</a></li>
-            <li><a href="/admin/">Preview</a></li>
-            <li><a href="/admin/">ChiChi</a></li>
+            <li><a href="/admin/previews">Preview</a></li>
+            <li><a href="/admin/chichi">ChiChi</a></li>
             <li><a href="/admin/">Article</a></li>
             <li><a href="/admin/">Author</a></li>
             <li><a href="/admin/">Slider</a></li>
