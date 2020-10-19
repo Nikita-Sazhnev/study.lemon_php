@@ -40,13 +40,23 @@ class ControllerAdmin extends \base\Controller
     }
     public function actionNav()
     {
-        if (Request::isPost()) {
+        if (Request::isPost() && isset(Request::getPost()['new'])) {
             $model = new \models\NavbarForm;
             $model->load(Request::getPost());
             $model->insert();
         }
         $this->view->setTitle('Nav');
-        $this->view->render('nav', ['content' => $this->content]);
+        if (Request::isIdEmpty()) {
+            $this->view->render('nav', ['content' => $this->content]);
+        } else {
+            if (Request::isPost() && isset(Request::getPost()['edit'])) {
+                $model = new \models\NavbarForm;
+                $model->load(Request::getPost());
+                $model->update();
+            }
+            $this->view->render('nav-editon', ['content' => $this->content]);
+        }
+
     }
     public function actionComments()
     {
@@ -90,7 +100,21 @@ class ControllerAdmin extends \base\Controller
     }
     public function actionTags()
     {
-        $this->view->setTitle('Tags');
-        $this->view->render('admin-home', []);
+        if (Request::isPost() && isset(Request::getPost()['new'])) {
+            $model = new \models\TagsForm;
+            $model->load(Request::getPost());
+            $model->insert();
+        }
+        $this->view->setTitle('Nav');
+        if (Request::isIdEmpty()) {
+            $this->view->render('tags', ['content' => $this->content]);
+        } else {
+            if (Request::isPost() && isset(Request::getPost()['edit'])) {
+                $model = new \models\TagsForm;
+                $model->load(Request::getPost());
+                $model->update();
+            }
+            $this->view->render('tag-edition', ['content' => $this->content]);
+        }
     }
 }

@@ -5,6 +5,8 @@ class NavbarForm extends \base\BaseForm
 {
     public $name;
     public $url;
+    public $id;
+
     public function getRules()
     {
         return [
@@ -14,10 +16,14 @@ class NavbarForm extends \base\BaseForm
     }
     public function insert()
     {
-        $name = $this->_data['name'];
-        $url = $this->_data['url'];
         $sql = "INSERT INTO `navbar` (`name`,`url`) VALUES (?,?)";
-        $exec = [$name, $url];
+        $exec = [$this->_data['name'], $this->_data['url']];
+        $this->_db->execPdo($sql, $exec);
+    }
+    public function update()
+    {
+        $sql = "UPDATE `navbar` SET `name`=?,`url`=? WHERE `id` =?";
+        $exec = [$this->_data['name'], $this->_data['url'], $this->_data['id']];
         $this->_db->execPdo($sql, $exec);
     }
 }

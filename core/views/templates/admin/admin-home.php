@@ -16,7 +16,7 @@
             <li><a href="/admin/">Article</a></li>
             <li><a href="/admin/">Author</a></li>
             <li><a href="/admin/">Slider</a></li>
-            <li><a href="/admin/">Tags</a></li>
+            <li><a href="/admin/tags">Tags</a></li>
         </ul>
     </div>
 </div>
