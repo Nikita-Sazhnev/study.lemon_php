@@ -40,11 +40,6 @@ class ControllerAdmin extends \base\Controller
     }
     public function actionNav()
     {
-        if (Request::isPost() && isset(Request::getPost()['new'])) {
-            $model = new \models\NavbarForm;
-            $model->load(Request::getPost());
-            $model->insert();
-        }
         $this->view->setTitle('Nav');
         if (Request::isIdEmpty()) {
             $this->view->render('nav', ['content' => $this->content]);
@@ -54,15 +49,26 @@ class ControllerAdmin extends \base\Controller
                 $model->load(Request::getPost());
                 $model->update();
             }
-            $this->view->render('nav-editon', ['content' => $this->content]);
+            $this->view->render('nav-edition', ['content' => $this->content]);
         }
-
     }
+
     public function actionComments()
     {
+
         $this->view->setTitle('Comments');
-        $this->view->render('admin-home', []);
+        if (Request::isIdEmpty()) {
+            $this->view->render('comments', ['content' => $this->content]);
+        } else {
+            if (Request::isPost() && isset(Request::getPost()['edit'])) {
+                $model = new \models\CommentForm;
+                $model->load(Request::getPost());
+                $model->update();
+            }
+            $this->view->render('comment-edition', ['content' => $this->content]);
+        }
     }
+
     public function actionLogo()
     {
         if (Request::isPost() && isset(Request::getPost()['logo'])) {
@@ -105,7 +111,7 @@ class ControllerAdmin extends \base\Controller
             $model->load(Request::getPost());
             $model->insert();
         }
-        $this->view->setTitle('Nav');
+        $this->view->setTitle('Title');
         if (Request::isIdEmpty()) {
             $this->view->render('tags', ['content' => $this->content]);
         } else {
