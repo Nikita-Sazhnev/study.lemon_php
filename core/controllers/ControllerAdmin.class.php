@@ -109,8 +109,22 @@ class ControllerAdmin extends \base\Controller
 
     public function actionArticle()
     {
+        $model = new \models\ArticleForm;
+        if (Request::isPost() && isset(Request::getPost()['new'])) {
+
+            $model->load(Request::getPost());
+            $model->insert();
+        }
         $this->view->setTitle('Article');
-        $this->view->render('admin-home', []);
+        if (Request::isIdEmpty()) {
+            $this->view->render('article', ['content' => $this->content]);
+        } else {
+            if (Request::isPost() && isset(Request::getPost()['edit'])) {
+                $model->load(Request::getPost());
+                $model->update();
+            }
+            $this->view->render('article-edition', ['content' => $this->content]);
+        }
     }
     public function actionAuthor()
     {
