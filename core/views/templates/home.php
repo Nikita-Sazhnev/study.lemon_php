@@ -3,7 +3,7 @@
 use library\Comments;
 
 $previews = $content->getContent('previews', 6);
-$slider = $content->getContent('slider', 5);
+$slider = $content->getContent('slider', 25);
 $tags = $content->getContent('tags', 30);
 $main = $content->getContent('posts', 1);
 $main = $main[0];
@@ -13,6 +13,7 @@ $main = $main[0];
     <div class="bd-example shadow__box ">
         <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
+                <?php $i = 0;?>
                 <?php foreach ($slider as $slide): ?>
                 <div class="carousel-item <?=$slide['active'];?>" data-interval="3000">
                     <img src="/assets/img/<?=$slide['img_src']?>" class="d-block w-100" alt="...">
@@ -26,13 +27,11 @@ $main = $main[0];
                     </div>
                 </div>
                 <?php endforeach;?>
-
                 <ol class="carousel-indicators indicators-style">
-                    <li data-target="#carouselExampleCaptions" data-slide-to="0"></li>
-                    <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
-                    <li data-target="#carouselExampleCaptions" data-slide-to="2" class="active"></li>
-                    <li data-target="#carouselExampleCaptions" data-slide-to="3"></li>
-                    <li data-target="#carouselExampleCaptions" data-slide-to="4"></li>
+                    <?php foreach ($slider as $slide): ?>
+                    <li data-target="#carouselExampleCaptions" data-slide-to="<?=$i;?>" class="<?=$slide['active'];?>">
+                    </li>
+                    <?php $i++;endforeach;?>
                 </ol>
 
             </div>
@@ -472,8 +471,8 @@ if (count($commentsMain) == 0) {
                 <div class="name__info-string d-flex justify-content-between">
                     <div class="name__reply d-flex">
                         <h4 class="font-weight-bold comment__name" style="font-size: 1.1rem;">
-                            <a
-                                href="/main/author?id=<?=$comment['author_id']?>"><?=$content->getInfoById('login', $comment['author_id']);?></a>
+                            <a href="/main/author?id=<?=$comment['author_id']?>"><?=$content->getInfoById('login', $comment['author_id']);?>
+                            </a>
                         </h4>
                         <a href="#comment-input" class="reply__btn btn-sm mx-2">Reply</a>
                         <p class="parent_id"><?=$comment['id']?></p>

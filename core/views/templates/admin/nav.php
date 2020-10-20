@@ -34,3 +34,12 @@ $table = $content->getContent('navbar', 100);
         </fieldset>
     </form>
 </div>
+<div class="form">
+    <form action="#" enctype="multipart/form-data" method="post">
+        <fieldset>
+            <legend>Small Logo</legend>
+            <input type="file" name="file" accept="image/png">
+            <input type="submit" name="small-logo" value="uplode">
+        </fieldset>
+    </form>
+</div>

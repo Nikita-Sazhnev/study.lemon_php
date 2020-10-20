@@ -41,4 +41,13 @@ class SliderForm extends BaseForm
 
         $this->_db->execPdo($sql, $exec);
     }
+
+    public function insert()
+    {
+        $imageName = $_FILES['img_src']['name'];
+        $sql = "INSERT INTO `slider` (`title`,`description`,`article_url`,`img_src`) VALUES (?,?,?,?)";
+        $exec = [$this->_data['title'], $this->_data['description'], $this->_data['article_url'], $imageName];
+        UploadForm::uploadImage($_FILES['img_src'], $imageName);
+        $this->_db->execPdo($sql, $exec);
+    }
 }
