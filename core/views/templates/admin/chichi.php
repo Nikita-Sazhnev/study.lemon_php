@@ -1,4 +1,5 @@
-<?php $content = $data['content'];
+<?php
+$content = $data['content'];
 $id = $content->getHighlightId('chichi');
 $table = $content->getColsFromPosts('`id`,`title`');
 ?>
@@ -22,5 +23,4 @@ $table = $content->getColsFromPosts('`id`,`title`');
             <?php endforeach;?>
         </table>
     </div>
-
 </div>

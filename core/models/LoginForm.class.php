@@ -7,6 +7,10 @@ class LoginForm extends \base\BaseForm
 {
     public $login;
     public $password;
+    public $email;
+    public $role;
+    public $id;
+    public $default_name;
 
     /** Устанавливает правила валидации формы
      * @return array
@@ -18,7 +22,7 @@ class LoginForm extends \base\BaseForm
             'password' => ['requaired'],
         ];
     }
-    /** Залогинивает ползователя на сайте через сессию
+    /** Логинит пользователя на сайте через сессию
      * @return bool
      */
     public function doLogin()
@@ -37,6 +41,20 @@ class LoginForm extends \base\BaseForm
             return false;
         }
 
+    }
+
+    public function update()
+    {
+        if (!empty($_FILES['img_src']['name'])) {
+            $imageName = $_FILES['img_src']['name'];
+            UploadForm::uploadImage($_FILES['img_src'], $imageName);
+        } else {
+            $imageName = $this->_data['default_name'];
+        }
+        $sql = "UPDATE `users` SET `login`=?, `email`=?, `role`=?, `avathar` =? WHERE `id` =?";
+        $exec = [$this->_data['login'], $this->_data['email'], $this->_data['role'], $imageName, $this->_data['id']];
+
+        $this->_db->execPdo($sql, $exec);
     }
 
 }

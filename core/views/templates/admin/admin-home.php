@@ -13,9 +13,9 @@
             <li><a href="/admin/comments">Comments</a></li>
             <li><a href="/admin/previews">Preview</a></li>
             <li><a href="/admin/chichi">ChiChi</a></li>
-            <li><a href="/admin/">Article</a></li>
-            <li><a href="/admin/">Author</a></li>
-            <li><a href="/admin/">Slider</a></li>
+            <li><a href="/admin/article">Article</a></li>
+            <li><a href="/admin/author">Author</a></li>
+            <li><a href="/admin/slider">Slider</a></li>
             <li><a href="/admin/tags">Tags</a></li>
         </ul>
     </div>

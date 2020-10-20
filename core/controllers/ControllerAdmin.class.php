@@ -39,12 +39,16 @@ class ControllerAdmin extends \base\Controller
     }
     public function actionNav()
     {
+        $model = new \models\NavbarForm;
+        if (Request::isPost() && isset(Request::getPost()['new'])) {
+            $model->load(Request::getPost());
+            $model->insert();
+        }
         $this->view->setTitle('Nav');
         if (Request::isIdEmpty()) {
             $this->view->render('nav', ['content' => $this->content]);
         } else {
             if (Request::isPost() && isset(Request::getPost()['edit'])) {
-                $model = new \models\NavbarForm;
                 $model->load(Request::getPost());
                 $model->update();
             }
@@ -102,21 +106,42 @@ class ControllerAdmin extends \base\Controller
         $this->view->setTitle('ChiChi');
         $this->view->render('chichi', ['content' => $this->content]);
     }
-    public function actionAritcle()
+
+    public function actionArticle()
     {
         $this->view->setTitle('Article');
         $this->view->render('admin-home', []);
     }
     public function actionAuthor()
     {
-        $this->view->setTitle('Author');
-        $this->view->render('admin-home', []);
+        $this->view->setTitle('Comments');
+        if (Request::isIdEmpty()) {
+            $this->view->render('author', ['content' => $this->content]);
+        } else {
+            if (Request::isPost() && isset(Request::getPost()['edit'])) {
+                $model = new \models\LoginForm;
+                $model->load(Request::getPost());
+                $model->update();
+            }
+            $this->view->render('author-edition', ['content' => $this->content]);
+        }
     }
+
     public function actionSlider()
     {
         $this->view->setTitle('Slider');
-        $this->view->render('admin-home', []);
+        if (Request::isIdEmpty()) {
+            $this->view->render('slider', ['content' => $this->content]);
+        } else {
+            if (Request::isPost() && isset(Request::getPost()['edit'])) {
+                $model = new \models\SliderForm;
+                $model->load(Request::getPost());
+                $model->update();
+            }
+            $this->view->render('slider-edition', ['content' => $this->content]);
+        }
     }
+
     public function actionTags()
     {
         if (Request::isPost() && isset(Request::getPost()['new'])) {

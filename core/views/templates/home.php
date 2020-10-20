@@ -15,9 +15,9 @@ $main = $main[0];
             <div class="carousel-inner">
                 <?php foreach ($slider as $slide): ?>
                 <div class="carousel-item <?=$slide['active'];?>" data-interval="3000">
-                    <img src="/assets/img/Photo-main-big.png" class="d-block w-100" alt="...">
+                    <img src="/assets/img/<?=$slide['img_src']?>" class="d-block w-100" alt="...">
                     <div class="carousel-caption col-5  d-md-block">
-                        <img class="" src="/assets/img/<?=$slide['img_src']?>" alt="">
+
                         <h5 class="my-4"><?=$slide['title'];?></h5>
                         <p><?=$slide['description'];?></p>
                         <a href="/main/article/?id=<?=$slide['article_url']?>" class="btn btn-s btn-outline-dark">Get
