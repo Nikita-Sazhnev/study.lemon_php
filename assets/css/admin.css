@@ -31,6 +31,13 @@ header .test {
   font-size: 5rem;
   text-align: center;
   font-family: fantasy;
+  line-height: 4.5rem;
+}
+.test p {
+  font-size: 2rem;
+}
+#id {
+  text-decoration: underline;
 }
 .heading {
   display: inline-block;
@@ -77,4 +84,51 @@ canvas {
 }
 a {
   color: black;
+}
+.row {
+  display: flex;
+  justify-content: center;
+  font-size: 2rem;
+}
+.row p {
+  margin-right: 3rem;
+}
+th {
+  margin-left: 2rem;
+}
+.title {
+  max-width: 400px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+button {
+  padding: 0.2rem 1rem;
+  margin-left: 1rem;
+}
+th {
+  padding: 0 0.2rem !important;
+}
+.form {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+.form h2 {
+  text-align: center;
+  font-size: 2rem;
+}
+.image-holder {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+}
+.edit-link {
+  color: blue;
+}
+tr {
+  text-align: left;
+}
+.post input[type="text"] {
+  width: 100%;
+  height: 2rem;
 }

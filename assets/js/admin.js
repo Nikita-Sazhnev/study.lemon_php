@@ -1,3 +1,31 @@
+$(document).ready(function () {
+    $(".btn").click(function () {
+        let type = $('#type').val();
+        let id = $(this).attr("data-id");
+        $("#id").html(id);
+        $.ajax({
+            type: "POST",
+            url: "/ajax/SetId.php",
+            data: { id: id, type: type }
+        });
+    });
+});
+$(document).ready(function () {
+    $(".delete").click(function () {
+        $(this).parents('tr').remove();
+        let id = $(this).attr('data-id');
+        let table = $('#type').val();
+        $.ajax({
+            type: "POST",
+            url: "/ajax/Delete.php",
+            data: { id: id, table: table }
+        });
+    });
+});
+
+
+
+//bg
 var width, height
 var step = 0;
 var canvas = document.createElement('canvas')

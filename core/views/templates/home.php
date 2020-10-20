@@ -2,7 +2,7 @@
 
 use library\Comments;
 
-$previews = $content->getContent('previews', 3);
+$previews = $content->getContent('previews', 6);
 $slider = $content->getContent('slider', 5);
 $tags = $content->getContent('tags', 30);
 $main = $content->getContent('posts', 1);
@@ -15,9 +15,9 @@ $main = $main[0];
             <div class="carousel-inner">
                 <?php foreach ($slider as $slide): ?>
                 <div class="carousel-item <?=$slide['active'];?>" data-interval="3000">
-                    <img src="/assets/img/Photo-main-big.png" class="d-block w-100" alt="...">
+                    <img src="/assets/img/<?=$slide['img_src']?>" class="d-block w-100" alt="...">
                     <div class="carousel-caption col-5  d-md-block">
-                        <img class="" src="/assets/img/<?=$slide['img_src']?>" alt="">
+
                         <h5 class="my-4"><?=$slide['title'];?></h5>
                         <p><?=$slide['description'];?></p>
                         <a href="/main/article/?id=<?=$slide['article_url']?>" class="btn btn-s btn-outline-dark">Get
@@ -80,7 +80,8 @@ $main = $content->getAllInfoById('posts', $main);
                 id="favorite">
         </div>
         <div class="main__article-body col-12 col-lg-6 bg-white pl-3 pl-lg-0" style="height: 450px">
-            <h1 class="article-heading-string mt-4"><a href="#" class="article-heading"><?=$main['title']?></a>
+            <h1 class="article-heading-string mt-4"><a href="/main/article?id=<?=$main['id']?>;"
+                    class="article-heading"><?=$main['title']?></a>
             </h1>
             <div class="row d-flex justify-content-between align-items-baseline ml-1 mr-2 mr-lg-5 mt-3">
                 <p style="font-size: 18px; font-weight: 300; cursor: default;"><i class="fa fa-clock-o"
@@ -471,7 +472,9 @@ if (count($commentsMain) == 0) {
                 <div class="name__info-string d-flex justify-content-between">
                     <div class="name__reply d-flex">
                         <h4 class="font-weight-bold comment__name" style="font-size: 1.1rem;">
-                            <?=$content->getInfoById('login', $comment['author_id']);?></h4>
+                            <a
+                                href="/main/author?id=<?=$comment['author_id']?>"><?=$content->getInfoById('login', $comment['author_id']);?></a>
+                        </h4>
                         <a href="#comment-input" class="reply__btn btn-sm mx-2">Reply</a>
                         <p class="parent_id"><?=$comment['id']?></p>
                     </div>
@@ -499,9 +502,10 @@ if (count($commentsMain) == 0) {
                             <div class="name__info-string d-flex justify-content-between">
                                 <div class="name__reply d-flex">
                                     <h4 class="font-weight-bold comment__name" style="font-size: 1.1rem;">
-                                        <?=$content->getInfoById('login', $commentNested['author_id']);?>
+                                        <a
+                                            href="/main/author?id=<?=$commentNested['author_id'];?>"><?=$content->getInfoById('login', $commentNested['author_id']);?></a>
                                     </h4>
-                                    <a href="#comment-input" class="reply__btn btn-sm mx-2">Reply</a>
+                                    <a href=" #comment-input" class="reply__btn btn-sm mx-2">Reply</a>
                                     <p class="parent_id"><?=$comment['id']?></p>
                                 </div>
                                 <p class="mr-3 d-inline-block"><i

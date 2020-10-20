@@ -58,7 +58,10 @@ if (count($commentsMain) == 0) {
                     <div class="name__info-string d-flex justify-content-between">
                         <div class="name__reply d-flex">
                             <h4 class="font-weight-bold comment__name" style="font-size: 1.1rem;">
-                                <?=$content->getInfoById('login', $comment['author_id']);?></h4>
+                                <a href="/main/author?id=<?=$comment['author_id'];?>">
+                                    <?=$content->getInfoById('login', $comment['author_id']);?>
+                                </a>
+                            </h4>
                             <a href="#comment-input" class="reply__btn btn-sm mx-2">Reply</a>
                             <p class="parent_id"><?=$comment['id']?></p>
                         </div>
@@ -87,7 +90,9 @@ if (count($commentsMain) == 0) {
                                 <div class="name__info-string d-flex justify-content-between">
                                     <div class="name__reply d-flex">
                                         <h4 class="font-weight-bold comment__name" style="font-size: 1.1rem;">
-                                            <?=$content->getInfoById('login', $commentNested['author_id']);?>
+                                            <a href="/main/author?id=<?=$commentNested['author_id'];?>">
+                                                <?=$content->getInfoById('login', $commentNested['author_id']);?>
+                                            </a>
                                         </h4>
                                         <a href="#comment-input" class="reply__btn btn-sm mx-2">Reply</a>
                                         <p class="parent_id"><?=$comment['id']?></p>

@@ -7,16 +7,16 @@
     <div class="category">
         <ul>
             <li><a href="/admin/popular">Popular Now</a></li>
-            <li><a href="/admin/">Big Preview</a></li>
-            <li><a href="/admin/">Navigation</a></li>
-            <li><a href="/admin/">Main Logo</a></li>
-            <li><a href="/admin/">Comments</a></li>
-            <li><a href="/admin/">Preview</a></li>
-            <li><a href="/admin/">ChiChi</a></li>
-            <li><a href="/admin/">Article</a></li>
-            <li><a href="/admin/">Author</a></li>
-            <li><a href="/admin/">Slider</a></li>
-            <li><a href="/admin/">Tags</a></li>
+            <li><a href="/admin/big">Big Preview</a></li>
+            <li><a href="/admin/nav">Navigation</a></li>
+            <li><a href="/admin/logo">Main Logo</a></li>
+            <li><a href="/admin/comments">Comments</a></li>
+            <li><a href="/admin/previews">Preview</a></li>
+            <li><a href="/admin/chichi">ChiChi</a></li>
+            <li><a href="/admin/article">Article</a></li>
+            <li><a href="/admin/author">Author</a></li>
+            <li><a href="/admin/slider">Slider</a></li>
+            <li><a href="/admin/tags">Tags</a></li>
         </ul>
     </div>
 </div>
