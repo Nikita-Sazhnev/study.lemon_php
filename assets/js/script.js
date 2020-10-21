@@ -4,7 +4,7 @@ $(() => {
 
 $(() => {
   $(".reply__btn").click(function () {
-    const name = $(this).siblings(".comment__name").html();
+    const name = $(this).siblings(".comment__name").children('a').html();
     const parent = $(this).siblings(".parent_id").html();
     $("#comment-input").val(name.trim() + ", ");
     $("#parent_id").val(parent);
@@ -46,6 +46,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $(".views-update").click(function () {
+
     let id = $(this).attr("data-id");
     $.ajax({
       type: "POST",

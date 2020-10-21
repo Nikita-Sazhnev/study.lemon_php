@@ -1,4 +1,6 @@
-<?php $navbar = $content->getContent('navbar', 5);
+<?php
+$navbar = $content->getContent('navbar', 6);
+$social = $content->getContent('social', 5);
 $userId = $_SESSION['user']['id'];?>
 
 <!DOCTYPE html>
@@ -70,20 +72,22 @@ $userId = $_SESSION['user']['id'];?>
         <footer class="mt-auto d-flex justify-content-center">
             <div class="row w-100 container p-0">
                 <div class="col-3 p-0">
-                    <a href="#" class="">
-                        <img src="/assets/img/Logo-footer.png" alt="Logo"
+                    <a href="/" class="">
+                        <img style="filter: invert(100%);" src="/assets/img/Lemon Logo small.png" alt="Logo"
                             class="footer__logo mt-0 ml-0 ml-md-3 ml-lg-5">
                     </a>
                 </div>
                 <div class="col-5">
                     <div class="footer-nav text-decoration-none d-flex justify-content-center flex-wrap">
                         <ul class="d-flex text-uppercase flex-wrap mt-2 ml-5 mt-sm-0 ml-sm-0 p-0">
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">Recipes</a></li>
-                            <li><a href="#">Photo Gallery</a></li>
-                            <li><a href="#">Videos</a></li>
-                            <li><a href="#">All Categories</a></li>
+                            <?php foreach ($navbar as $item): ?>
+                            <li class="nav-item">
+                                <a href="/main/<?=$item['url']?>"
+                                    class="nav-link px-lg-0 px-xl-2"><?=$item['name'];?></a>
+                            </li>
+                            <?php endforeach;?>
                         </ul>
+
                     </div>
                 </div>
                 <div class="footer__social col-4">
@@ -91,14 +95,13 @@ $userId = $_SESSION['user']['id'];?>
                         <p class="ml-0 ml-lg-5 mr-auto mr-lg-0 mb-0 copyrights text-center text-md-right">
                             &copy;2016-2017 Lemon all rights reserved</p>
                         <ul class="social__links list-unstyled d-flex justify-content-end">
-                            <li><a target="_blank" href="https://www.google.com"><i class="fa fa-google-plus mr-2"
-                                        aria-hidden="true"></i></a></li>
-                            <li><a target="_blank" href="https://twitter.com"><i class="fa fa-twitter mr-2"
-                                        aria-hidden="true"></i></a></li>
-                            <li><a target="_blank" href="https://facebook.com"><i class="fa fa-facebook mr-2"
-                                        aria-hidden="true"></i></a></li>
-                            <li><a target="_blank" href="https://pinterest.com"><i class="fa fa-pinterest"
-                                        aria-hidden="true"></i></a></li>
+                            <?php foreach ($social as $link): ?>
+                            <li>
+                                <a target="_blank" href="<?=$link['url'];?>">
+                                    <i class="fa <?=$link['icon'];?> mr-2" aria-hidden="true"></i>
+                                </a>
+                            </li>
+                            <?php endforeach;?>
                         </ul>
                     </div>
                 </div>

@@ -39,6 +39,11 @@ class ControllerAdmin extends \base\Controller
     }
     public function actionNav()
     {
+        if (Request::isPost() && isset(Request::getPost()['small-logo'])) {
+            $model = new \models\UploadForm;
+            $image = Request::getFiles();
+            $model::uploadImage($image['file'], 'Lemon Logo small.png');
+        }
         $model = new \models\NavbarForm;
         if (Request::isPost() && isset(Request::getPost()['new'])) {
             $model->load(Request::getPost());
@@ -143,12 +148,16 @@ class ControllerAdmin extends \base\Controller
 
     public function actionSlider()
     {
+        $model = new \models\SliderForm;
+        if (Request::isPost() && isset(Request::getPost()['new'])) {
+            $model->load(Request::getPost());
+            $model->insert();
+        }
         $this->view->setTitle('Slider');
         if (Request::isIdEmpty()) {
             $this->view->render('slider', ['content' => $this->content]);
         } else {
             if (Request::isPost() && isset(Request::getPost()['edit'])) {
-                $model = new \models\SliderForm;
                 $model->load(Request::getPost());
                 $model->update();
             }
@@ -175,4 +184,24 @@ class ControllerAdmin extends \base\Controller
             $this->view->render('tag-edition', ['content' => $this->content]);
         }
     }
+    public function actionSocial()
+    {
+
+        $model = new \models\SocialForm;
+        if (Request::isPost() && isset(Request::getPost()['new'])) {
+            $model->load(Request::getPost());
+            $model->insert();
+        }
+        $this->view->setTitle('Socail');
+        if (Request::isIdEmpty()) {
+            $this->view->render('social', ['content' => $this->content]);
+        } else {
+            if (Request::isPost() && isset(Request::getPost()['edit'])) {
+                $model->load(Request::getPost());
+                $model->update();
+            }
+            $this->view->render('social-edition', ['content' => $this->content]);
+        }
+    }
+
 }
