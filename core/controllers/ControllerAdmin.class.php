@@ -184,5 +184,24 @@ class ControllerAdmin extends \base\Controller
             $this->view->render('tag-edition', ['content' => $this->content]);
         }
     }
+    public function actionSocial()
+    {
+
+        $model = new \models\SocialForm;
+        if (Request::isPost() && isset(Request::getPost()['new'])) {
+            $model->load(Request::getPost());
+            $model->insert();
+        }
+        $this->view->setTitle('Socail');
+        if (Request::isIdEmpty()) {
+            $this->view->render('social', ['content' => $this->content]);
+        } else {
+            if (Request::isPost() && isset(Request::getPost()['edit'])) {
+                $model->load(Request::getPost());
+                $model->update();
+            }
+            $this->view->render('social-edition', ['content' => $this->content]);
+        }
+    }
 
 }
